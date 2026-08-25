@@ -16,7 +16,6 @@ import {
   CalendarCheck,
   FileText,
   ExternalLink,
-  Globe,
   Instagram,
   Check,
   AlertCircle,
@@ -83,39 +82,51 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
   const getLinkIcon = (link: EventLink) => {
     switch (link.type) {
       case 'ig': return <Instagram className="w-5 h-5 text-pink-400 shrink-0" />;
-      case 'web': return <Globe className="w-5 h-5 text-sky-400 shrink-0" />;
       case 'fb': return <Share2 className="w-5 h-5 text-blue-400 shrink-0" />;
       case 'x': return <span className="font-black text-base">𝕏</span>;
       default: return <ExternalLink className="w-5 h-5 text-indigo-400 shrink-0" />;
     }
   };
 
+  const photoUrl = getPlacePhotoUrl(event.id, event.title);
+
   const content = (
     <div className="flex flex-col h-full overflow-y-auto space-y-5 p-5 sm:p-7 text-slate-100 custom-scrollbar">
       {/* ========================================================================= */}
-      {/* 1. HEADER: Category Badge, Title, Time & What                             */}
+      {/* 1. HERO PHOTO BANNER                                                      */}
       {/* ========================================================================= */}
-      <div className="space-y-3">
-        {/* Top Badges & Close Button */}
-        <div className="flex items-center justify-between gap-2">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs sm:text-sm font-black uppercase tracking-wider bg-[#282e3e] text-slate-100 border border-slate-600">
-              {getTypeIcon(event.type)}
-              <span>{event.type}</span>
-            </span>
-          </div>
+      <div className="relative w-full h-44 sm:h-56 rounded-2xl overflow-hidden border border-slate-700/80 shadow-lg group shrink-0">
+        <img
+          src={photoUrl}
+          alt={event.title}
+          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1e2330] via-transparent to-black/30" />
 
-          {!isDesktopSidebar && (
-            <button
-              onClick={onClose}
-              className="p-2.5 rounded-full bg-[#282e3e] text-slate-300 hover:text-white hover:bg-[#31384b] transition border border-slate-700"
-              aria-label="Close"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          )}
+        {/* Category Badge Floating on Image */}
+        <div className="absolute top-3 left-3 flex items-center gap-2">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-[#1e2330]/85 backdrop-blur-md text-slate-100 border border-slate-600/80 shadow">
+            {getTypeIcon(event.type)}
+            <span>{event.type}</span>
+          </span>
         </div>
 
+        {!isDesktopSidebar && (
+          <button
+            onClick={onClose}
+            className="absolute top-3 right-3 p-2 rounded-full bg-[#1e2330]/85 backdrop-blur-md text-slate-300 hover:text-white transition border border-slate-600/80 shadow"
+            aria-label="Close"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        )}
+      </div>
+
+      {/* ========================================================================= */}
+      {/* 2. HEADER: Title, Time & What                                             */}
+      {/* ========================================================================= */}
+      <div className="space-y-3">
         {/* Title */}
         <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-white leading-tight">
           {event.title}
@@ -147,7 +158,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
       </div>
 
       {/* ========================================================================= */}
-      {/* 2. ACTIONS: Google Maps & Status                                          */}
+      {/* 3. ACTIONS: Google Maps & Status                                          */}
       {/* ========================================================================= */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
         {event.location && (
@@ -178,7 +189,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
       </div>
 
       {/* ========================================================================= */}
-      {/* 3. NARRATIVE & HIGHLIGHTS (Direct Content without cheesy headlines)        */}
+      {/* 4. NARRATIVE & HIGHLIGHTS                                                 */}
       {/* ========================================================================= */}
       {(event.why || (event.facts && event.facts.length > 0)) && (
         <div className="bg-[#242938] rounded-2xl p-5 sm:p-6 border border-slate-700/70 shadow-sm space-y-4">
@@ -281,7 +292,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
       )}
 
       {/* ========================================================================= */}
-      {/* 4. VISUALS & LINKS                                                        */}
+      {/* 5. VISUALS & LINKS                                                        */}
       {/* ========================================================================= */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
         {/* Instagram */}
@@ -369,15 +380,15 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
   if (isDesktopSidebar) {
     return (
       <div className="relative h-full bg-[#1e2330] rounded-3xl border border-slate-700/60 shadow-sm overflow-hidden flex flex-col">
-        {/* Stylized Monochromatic Place Photo Hero Backdrop */}
+        {/* Atmospheric Local Place Photo Hero Backdrop */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
           <img
-            src={getPlacePhotoUrl(event.id, event.title)}
+            src={photoUrl}
             alt=""
-            className="w-full h-full object-cover object-top opacity-20 mix-blend-luminosity grayscale contrast-125 [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.15)_65%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.15)_65%,transparent_100%)] select-none"
+            className="w-full h-full object-cover object-top opacity-30 mix-blend-luminosity grayscale contrast-125 [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.15)_65%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.15)_65%,transparent_100%)] select-none"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#1e2330]/65 via-[#1e2330]/85 to-[#1e2330]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1e2330]/60 via-[#1e2330]/85 to-[#1e2330]" />
         </div>
 
         <div className="relative z-10 h-full overflow-hidden flex flex-col">
@@ -398,15 +409,15 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
 
       {/* Bottom Sheet Container */}
       <div className="relative z-10 w-full max-h-[92vh] bg-[#1e2330] rounded-t-3xl border-t border-slate-700 shadow-sheet overflow-hidden animate-sheet-up flex flex-col">
-        {/* Stylized Monochromatic Place Photo Hero Backdrop */}
+        {/* Atmospheric Local Place Photo Hero Backdrop */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
           <img
-            src={getPlacePhotoUrl(event.id, event.title)}
+            src={photoUrl}
             alt=""
-            className="w-full h-full object-cover object-top opacity-20 mix-blend-luminosity grayscale contrast-125 [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.15)_65%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.15)_65%,transparent_100%)] select-none"
+            className="w-full h-full object-cover object-top opacity-30 mix-blend-luminosity grayscale contrast-125 [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.15)_65%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.15)_65%,transparent_100%)] select-none"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#1e2330]/65 via-[#1e2330]/85 to-[#1e2330]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1e2330]/60 via-[#1e2330]/85 to-[#1e2330]" />
         </div>
 
         {/* Drag Handle */}
