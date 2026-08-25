@@ -68,15 +68,15 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         {/* Title & Dates */}
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
+            <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white flex items-center gap-2">
               <span>Istanbul Trip Guide</span>
             </h1>
-            <span className="text-[11px] uppercase tracking-wider font-bold px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+            <span className="text-xs uppercase tracking-wider font-black px-2.5 py-0.5 rounded-full bg-indigo-500/25 text-indigo-200 border border-indigo-500/40">
               IST26
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-slate-400 font-medium mt-0.5">
+          <p className="text-sm sm:text-base text-slate-300 font-semibold mt-0.5">
             22–26 September 2026 • Europe/Istanbul
           </p>
         </div>

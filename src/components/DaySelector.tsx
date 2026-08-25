@@ -45,12 +45,12 @@ export const DaySelector: React.FC<DaySelectorProps> = ({
               }`}
             >
               {/* Day of Month */}
-              <span className={`text-xl sm:text-2xl font-black tracking-tight ${isSelected ? 'text-indigo-300' : 'text-slate-200'}`}>
+              <span className={`text-2xl sm:text-3xl font-black tracking-tight ${isSelected ? 'text-indigo-300' : 'text-white'}`}>
                 {day.dayOfMonth}
               </span>
 
               {/* Day of Week */}
-              <span className={`text-[11px] uppercase tracking-wider font-extrabold mt-0.5 ${isSelected ? 'text-white' : 'text-slate-400'}`}>
+              <span className={`text-xs sm:text-sm uppercase tracking-wider font-black mt-0.5 ${isSelected ? 'text-white' : 'text-slate-300'}`}>
                 {day.dayOfWeekShort}
               </span>
 
@@ -58,13 +58,13 @@ export const DaySelector: React.FC<DaySelectorProps> = ({
               {stats.total > 0 && (
                 <div className="mt-1 flex items-center gap-1">
                   {isAllDone ? (
-                    <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
                   ) : stats.done > 0 ? (
-                    <span className="text-[11px] text-indigo-300 font-bold font-mono">
+                    <span className="text-xs text-indigo-300 font-black font-mono">
                       {stats.done}/{stats.total}
                     </span>
                   ) : (
-                    <span className="w-1.5 h-1.5 rounded-full bg-slate-600"></span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
                   )}
                 </div>
               )}
