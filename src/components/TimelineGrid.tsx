@@ -94,8 +94,8 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
         className="relative flex"
         style={{ height: `${TIMELINE_TOTAL_HEIGHT_PX}px` }}
       >
-        {/* Left Time Axis (08 to 00) — Dense Architectural Ruler Style with Big 2-Digit Hours */}
-        <div className="w-10 sm:w-11 shrink-0 relative border-r border-slate-700/80 select-none">
+        {/* Left Time Axis (08 to 00) — Dense Architectural Ruler Style with Large 2-Digit Hours */}
+        <div className="w-11 sm:w-13 shrink-0 relative border-r border-slate-700/80 select-none">
           {hours.map((hour) => {
             const displayHour = hour === 24 ? '00' : String(hour).padStart(2, '0');
             const hourStartPx = (hour - TIMELINE_START_HOUR) * 60 * PIXELS_PER_MINUTE;
@@ -133,10 +133,10 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
                   />
                 )}
 
-                {/* Big 2-Digit Hour Numeral (09, 10, 11, 16) */}
+                {/* Large 2-Digit Hour Numeral (09, 10, 11, 16) */}
                 <div
                   style={{ top: `${hourStartPx}px` }}
-                  className="absolute right-2 sm:right-2.5 -translate-y-1/2 text-sm sm:text-base md:text-lg font-mono text-white font-black tracking-tight select-none pointer-events-none"
+                  className="absolute right-2 sm:right-2.5 -translate-y-1/2 text-base sm:text-lg md:text-xl font-mono text-white font-black tracking-tight select-none pointer-events-none"
                 >
                   {displayHour}
                 </div>
