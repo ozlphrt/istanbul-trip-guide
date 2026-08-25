@@ -200,12 +200,8 @@ export const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#1a1d26] text-slate-100 flex flex-col selection:bg-indigo-500 selection:text-white">
-      {/* Header */}
-      <Header
-        syncState={syncState}
-        onRefresh={() => loadEvents(true)}
-        onOpenSettings={() => setIsSettingsOpen(true)}
-      />
+      {/* Minimalist Header: Istanbul & Dates */}
+      <Header />
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-6xl w-full mx-auto p-3 sm:p-5 lg:p-6 pb-20">
