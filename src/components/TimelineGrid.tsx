@@ -88,51 +88,90 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
   }, [events]);
 
   return (
-    <div className="bg-[#222734] rounded-3xl border border-slate-700/60 shadow-sm p-4 sm:p-6 mb-8 select-none">
+    <div className="bg-[#1f2431] rounded-3xl border border-slate-700/70 shadow-inner p-4 sm:p-6 mb-8 select-none">
       {/* Scrollable Timeline Canvas */}
       <div
         className="relative flex"
         style={{ height: `${TIMELINE_TOTAL_HEIGHT_PX}px` }}
       >
         {/* Left Time Axis (08:00 to 00:00) */}
-        <div className="w-16 sm:w-20 shrink-0 relative border-r border-slate-700/60 select-none">
+        <div className="w-16 sm:w-20 shrink-0 relative border-r border-slate-700/70 select-none">
           {hours.map((hour) => {
             const displayHour = hour === 24 ? '00:00' : `${String(hour).padStart(2, '0')}:00`;
             const topOffsetPx = (hour - TIMELINE_START_HOUR) * 60 * PIXELS_PER_MINUTE;
+            const top15Px = topOffsetPx + 15 * PIXELS_PER_MINUTE;
+            const top30Px = topOffsetPx + 30 * PIXELS_PER_MINUTE;
+            const top45Px = topOffsetPx + 45 * PIXELS_PER_MINUTE;
 
             return (
-              <div
-                key={hour}
-                style={{ top: `${topOffsetPx}px` }}
-                className="absolute right-3 -translate-y-1/2 text-sm sm:text-base font-mono text-slate-400 font-bold tracking-tight"
-              >
-                {displayHour}
-              </div>
+              <React.Fragment key={`axis-${hour}`}>
+                {/* Major Hour Label */}
+                <div
+                  style={{ top: `${topOffsetPx}px` }}
+                  className="absolute right-3 -translate-y-1/2 text-sm sm:text-base font-mono text-slate-300 font-bold tracking-tight"
+                >
+                  {displayHour}
+                </div>
+
+                {/* Sub-hour Axis Tick Marks (15m, 30m, 45m) */}
+                {hour < TIMELINE_END_HOUR && (
+                  <>
+                    <div
+                      style={{ top: `${top15Px}px` }}
+                      className="absolute right-0 w-1.5 border-t border-slate-600/40"
+                    />
+                    <div
+                      style={{ top: `${top30Px}px` }}
+                      className="absolute right-0 w-2.5 border-t border-slate-500/60"
+                    />
+                    <div
+                      style={{ top: `${top45Px}px` }}
+                      className="absolute right-0 w-1.5 border-t border-slate-600/40"
+                    />
+                  </>
+                )}
+              </React.Fragment>
             );
           })}
         </div>
 
-        {/* Right Event Canvas with Hour Grid Lines */}
+        {/* Right Event Canvas with 15-Minute Grid Lines */}
         <div className="flex-1 relative ml-3 sm:ml-5">
-          {/* Horizontal Hour Lines & Half-Hour Lines */}
+          {/* Horizontal 15-Minute Grid Lines */}
           {hours.map((hour) => {
             const topOffsetPx = (hour - TIMELINE_START_HOUR) * 60 * PIXELS_PER_MINUTE;
-            const halfHourTopOffsetPx = topOffsetPx + 30 * PIXELS_PER_MINUTE;
+            const top15Px = topOffsetPx + 15 * PIXELS_PER_MINUTE;
+            const top30Px = topOffsetPx + 30 * PIXELS_PER_MINUTE;
+            const top45Px = topOffsetPx + 45 * PIXELS_PER_MINUTE;
 
             return (
               <React.Fragment key={`grid-${hour}`}>
-                {/* Major Hour Line */}
+                {/* Major Hour Solid Line (:00) */}
                 <div
                   style={{ top: `${topOffsetPx}px` }}
-                  className="absolute inset-x-0 border-t border-slate-700/50 pointer-events-none"
+                  className="absolute inset-x-0 border-t border-slate-700/80 pointer-events-none"
                 />
 
-                {/* Minor 30-min Dashed Line */}
                 {hour < TIMELINE_END_HOUR && (
-                  <div
-                    style={{ top: `${halfHourTopOffsetPx}px` }}
-                    className="absolute inset-x-0 border-t border-dashed border-slate-700/30 pointer-events-none"
-                  />
+                  <>
+                    {/* 15-Minute Dotted Line (:15) */}
+                    <div
+                      style={{ top: `${top15Px}px` }}
+                      className="absolute inset-x-0 border-t border-dotted border-slate-700/40 pointer-events-none"
+                    />
+
+                    {/* 30-Minute Dashed Line (:30) */}
+                    <div
+                      style={{ top: `${top30Px}px` }}
+                      className="absolute inset-x-0 border-t border-dashed border-slate-700/60 pointer-events-none"
+                    />
+
+                    {/* 45-Minute Dotted Line (:45) */}
+                    <div
+                      style={{ top: `${top45Px}px` }}
+                      className="absolute inset-x-0 border-t border-dotted border-slate-700/40 pointer-events-none"
+                    />
+                  </>
                 )}
               </React.Fragment>
             );
@@ -145,7 +184,7 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
               className="absolute inset-x-0 z-20 flex items-center pointer-events-none"
             >
               <div className="w-3.5 h-3.5 rounded-full bg-indigo-400 shadow-md -ml-1.5 ring-2 ring-indigo-300/40" />
-              <div className="flex-1 h-[2px] bg-indigo-400" />
+              <div className="flex-1 h-[2px] bg-indigo-400 shadow-[0_0_8px_rgba(129,140,248,0.8)]" />
             </div>
           )}
 

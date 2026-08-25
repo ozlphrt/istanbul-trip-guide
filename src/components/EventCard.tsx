@@ -69,13 +69,13 @@ export const EventCard: React.FC<EventCardProps> = ({
       }}
       className={`absolute rounded-2xl border p-3.5 sm:p-4 transition-all duration-150 cursor-pointer overflow-hidden flex flex-col justify-between select-none ${
         event.status === 'done'
-          ? 'bg-[#1e2330]/60 border-emerald-800/40 text-emerald-300/80 opacity-60'
+          ? 'bg-[#1e2330]/80 border-emerald-800/40 text-emerald-300/80 opacity-60 shadow-md shadow-black/25'
           : event.status === 'skipped'
-          ? 'bg-[#181b24]/40 border-slate-800 text-slate-500 opacity-40 line-through'
-          : 'bg-[#282e3e] border-slate-700/70 hover:border-slate-600 hover:bg-[#31384b] shadow-sm'
+          ? 'bg-[#181b24]/50 border-slate-800 text-slate-500 opacity-40 line-through'
+          : 'bg-[#282e3e] border-slate-700/90 hover:border-slate-500 hover:bg-[#31384b] shadow-[0_6px_20px_-3px_rgba(0,0,0,0.5),0_2px_6px_rgba(0,0,0,0.3)] hover:shadow-[0_10px_28px_-4px_rgba(0,0,0,0.65),0_3px_8px_rgba(0,0,0,0.4)]'
       } ${
         isSelected
-          ? 'ring-2 ring-indigo-400 border-indigo-400 bg-[#31384b] z-20 shadow-md'
+          ? 'ring-2 ring-indigo-400 border-indigo-400 bg-[#31384b] z-20 shadow-[0_0_0_2px_rgba(129,140,248,0.8),0_12px_32px_-4px_rgba(0,0,0,0.7)]'
           : 'z-10'
       } ${event.hasCollisionWithFixed ? 'ring-2 ring-rose-500 animate-pulse' : ''}`}
     >
