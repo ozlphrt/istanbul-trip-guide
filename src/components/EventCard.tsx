@@ -36,33 +36,47 @@ export const EventCard: React.FC<EventCardProps> = ({
     : event.startMinutesFromDayStart;
 
   const topPx = effectiveStartMinutes * PIXELS_PER_MINUTE;
-  const heightPx = Math.max(54, (event.durationMinutes * PIXELS_PER_MINUTE) - 6);
+  const heightPx = Math.max(56, (event.durationMinutes * PIXELS_PER_MINUTE) - 6);
 
   const getTypeIcon = (type: EventType) => {
     switch (type) {
-      case 'visit': return <Landmark className="w-4 h-4 sm:w-5 sm:h-5 text-sky-400 shrink-0" />;
-      case 'food': return <Utensils className="w-4 h-4 sm:w-5 sm:h-5 text-rose-400 shrink-0" />;
-      case 'drink': return <Wine className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300 shrink-0" />;
-      case 'walk': return <Footprints className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 shrink-0" />;
-      case 'transport': return <Ship className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400 shrink-0" />;
-      case 'concert': return <Music className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-400 shrink-0" />;
-      case 'rest': return <BedDouble className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 shrink-0" />;
-      case 'optional': return <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 shrink-0" />;
-      default: return <Landmark className="w-4 h-4 sm:w-5 sm:h-5 text-sky-400 shrink-0" />;
+      case 'visit': return <Landmark className="w-4 h-4 text-sky-400 shrink-0" />;
+      case 'food': return <Utensils className="w-4 h-4 text-rose-400 shrink-0" />;
+      case 'drink': return <Wine className="w-4 h-4 text-amber-300 shrink-0" />;
+      case 'walk': return <Footprints className="w-4 h-4 text-emerald-400 shrink-0" />;
+      case 'transport': return <Ship className="w-4 h-4 text-cyan-400 shrink-0" />;
+      case 'concert': return <Music className="w-4 h-4 text-indigo-400 shrink-0" />;
+      case 'rest': return <BedDouble className="w-4 h-4 text-slate-400 shrink-0" />;
+      case 'optional': return <HelpCircle className="w-4 h-4 text-slate-400 shrink-0" />;
+      default: return <Landmark className="w-4 h-4 text-sky-400 shrink-0" />;
     }
   };
 
   const getTypeBorderClass = (type: EventType) => {
     switch (type) {
-      case 'visit': return 'border-[1.5px] border-sky-400/90 hover:border-sky-300 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.6)]';
-      case 'food': return 'border-[1.5px] border-rose-400/90 hover:border-rose-300 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.6)]';
-      case 'drink': return 'border-[1.5px] border-amber-400/90 hover:border-amber-300 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.6)]';
-      case 'walk': return 'border-[1.5px] border-emerald-400/90 hover:border-emerald-300 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.6)]';
-      case 'transport': return 'border-[1.5px] border-cyan-400/90 hover:border-cyan-300 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.6)]';
-      case 'concert': return 'border-[1.5px] border-indigo-400/90 hover:border-indigo-300 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.6)]';
-      case 'rest': return 'border-[1.5px] border-slate-600/90 hover:border-slate-500 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.6)]';
-      case 'optional': return 'border-[1.5px] border-slate-600/90 hover:border-slate-500 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.6)]';
-      default: return 'border-[1.5px] border-sky-400/90 hover:border-sky-300 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.6)]';
+      case 'visit': return 'border-sky-400/90 hover:border-sky-300';
+      case 'food': return 'border-rose-400/90 hover:border-rose-300';
+      case 'drink': return 'border-amber-400/90 hover:border-amber-300';
+      case 'walk': return 'border-emerald-400/90 hover:border-emerald-300';
+      case 'transport': return 'border-cyan-400/90 hover:border-cyan-300';
+      case 'concert': return 'border-indigo-400/90 hover:border-indigo-300';
+      case 'rest': return 'border-slate-600/90 hover:border-slate-500';
+      case 'optional': return 'border-slate-600/90 hover:border-slate-500';
+      default: return 'border-sky-400/90 hover:border-sky-300';
+    }
+  };
+
+  const getTypeSpineClass = (type: EventType) => {
+    switch (type) {
+      case 'visit': return 'bg-sky-500/15 border-r border-sky-500/30 text-sky-200';
+      case 'food': return 'bg-rose-500/15 border-r border-rose-500/30 text-rose-200';
+      case 'drink': return 'bg-amber-500/15 border-r border-amber-500/30 text-amber-200';
+      case 'walk': return 'bg-emerald-500/15 border-r border-emerald-500/30 text-emerald-200';
+      case 'transport': return 'bg-cyan-500/15 border-r border-cyan-500/30 text-cyan-200';
+      case 'concert': return 'bg-indigo-500/15 border-r border-indigo-500/30 text-indigo-200';
+      case 'rest': return 'bg-slate-700/20 border-r border-slate-700/40 text-slate-300';
+      case 'optional': return 'bg-slate-700/20 border-r border-slate-700/40 text-slate-300';
+      default: return 'bg-sky-500/15 border-r border-sky-500/30 text-sky-200';
     }
   };
 
@@ -82,121 +96,100 @@ export const EventCard: React.FC<EventCardProps> = ({
         left: leftOffset,
         width: width,
       }}
-      className={`absolute rounded-[20px] sm:rounded-[22px] p-3 sm:p-4 transition-all duration-150 cursor-pointer overflow-hidden flex flex-col justify-between select-none ${
+      className={`absolute rounded-[20px] sm:rounded-[22px] border-[1.5px] transition-all duration-150 cursor-pointer overflow-hidden flex select-none ${
         event.status === 'done'
-          ? 'bg-[#1e2330]/80 border-[1.5px] border-emerald-800/50 text-emerald-300/80 opacity-60 shadow-md shadow-black/25'
+          ? 'bg-[#1e2330]/80 border-emerald-800/50 text-emerald-300/80 opacity-60 shadow-md'
           : event.status === 'skipped'
-          ? 'bg-[#181b24]/50 border-[1.5px] border-slate-800 text-slate-500 opacity-40 line-through'
-          : `bg-gradient-to-br from-[#272e3d] to-[#1c212e] ${getTypeBorderClass(event.type)} hover:brightness-110`
+          ? 'bg-[#181b24]/50 border-slate-800 text-slate-500 opacity-40 line-through'
+          : `bg-gradient-to-br from-[#272e3d] to-[#1c212e] ${getTypeBorderClass(event.type)} hover:brightness-110 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.6)]`
       } ${
         isSelected
           ? 'ring-2 ring-indigo-400 !border-indigo-400 bg-[#31384b] z-20 shadow-[0_0_0_2px_rgba(129,140,248,0.8),0_12px_32px_-4px_rgba(0,0,0,0.7)]'
           : 'z-10'
       } ${event.hasCollisionWithFixed ? 'ring-2 ring-rose-500 animate-pulse' : ''}`}
     >
-      {/* 1. Compact View (< 70px: 15–25 min stops) */}
-      {isCompact ? (
-        <div className="flex flex-col justify-between h-full relative z-10">
-          <div className="flex items-center justify-between gap-2 min-w-0">
-            <div className="flex items-center gap-2 min-w-0 truncate">
-              {getTypeIcon(event.type)}
-              <h3 className="font-black text-base sm:text-lg text-white truncate tracking-tight">
-                {event.title}
-              </h3>
-            </div>
-            <div className="flex items-center gap-1.5 shrink-0">
-              <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-[#131722]/90 border border-slate-700/80 text-sky-300 font-mono">
-                {formatDuration(event.durationMinutes)}
-              </span>
-            </div>
+      {/* Left Integrated Time Spine Ribbon (Concept 5) */}
+      <div className={`w-20 sm:w-24 shrink-0 p-2 sm:p-2.5 flex flex-col justify-between items-center text-center select-none ${getTypeSpineClass(event.type)}`}>
+        {/* Start Time */}
+        <span className="text-sm sm:text-base md:text-lg font-black font-mono tracking-tight leading-none text-white">
+          {event.isSimulatedShifted && event.simulatedStartTime ? (
+            <span className="text-indigo-300 font-black">
+              {formatEventTime(event.simulatedStartTime)}
+            </span>
+          ) : (
+            formatEventTime(event.startTime)
+          )}
+        </span>
+
+        {/* Duration Badge */}
+        <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider opacity-85 py-0.5">
+          {formatDuration(event.durationMinutes)}
+        </span>
+
+        {/* End Time */}
+        <span className="text-xs sm:text-sm font-black font-mono tracking-tight leading-none text-slate-300">
+          {formatEventTime(event.endTime)}
+        </span>
+      </div>
+
+      {/* Right Main Card Content */}
+      <div className="flex-1 p-3 sm:p-3.5 flex flex-col justify-between min-w-0 overflow-hidden">
+        {/* Top Meta Row: Icon + Location on Left, Badges on Right */}
+        <div className="flex items-center justify-between gap-2 leading-none">
+          <div className="flex items-center gap-1.5 min-w-0 truncate text-xs font-bold text-slate-300">
+            {getTypeIcon(event.type)}
+            {locationShort && (
+              <span className="truncate font-semibold text-slate-300">{locationShort}</span>
+            )}
           </div>
 
-          <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-300 pt-0.5 truncate">
-            <span className="font-mono text-white font-black shrink-0">
-              {formatEventTime(event.startTime)}–{formatEventTime(event.endTime)}
-            </span>
-            {locationShort && (
-              <>
-                <span className="text-slate-500">•</span>
-                <span className="truncate text-slate-300 font-semibold">
-                  {locationShort}
-                </span>
-              </>
+          {/* Right Status / Booking Badges */}
+          <div className="flex items-center gap-1.5 shrink-0">
+            {event.hasCollisionWithFixed && (
+              <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 text-xs font-bold border border-rose-500/30">
+                <AlertTriangle className="w-3 h-3" /> Conflict
+              </span>
+            )}
+
+            {event.reservation && (
+              <span className="px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-200 border border-rose-500/30 text-xs font-bold shrink-0">
+                Reserved
+              </span>
+            )}
+
+            {event.ticket && (
+              <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-200 border border-emerald-500/30 text-xs font-bold shrink-0">
+                Ticketed
+              </span>
+            )}
+
+            {event.status === 'done' && (
+              <span className="text-emerald-400">
+                <CheckCircle className="w-4 h-4" />
+              </span>
+            )}
+
+            {event.status === 'skipped' && (
+              <span className="text-slate-500">
+                <XCircle className="w-4 h-4" />
+              </span>
             )}
           </div>
         </div>
-      ) : (
-        /* 2. Standard & Tall View (>= 70px) — Concept 1 Style */
-        <div className="flex flex-col justify-between h-full relative z-10">
-          {/* Top Header Row: Icon on Left, Duration Pill & Badges on Right */}
-          <div className="flex items-center justify-between gap-2 leading-none">
-            <div className="flex items-center gap-2 min-w-0">
-              {getTypeIcon(event.type)}
-              <span className="text-xs font-mono font-bold text-slate-400">
-                {formatEventTime(event.startTime)}–{formatEventTime(event.endTime)}
-              </span>
-            </div>
 
-            {/* Right: Badges & Duration Pill */}
-            <div className="flex items-center gap-1.5 shrink-0">
-              {event.hasCollisionWithFixed && (
-                <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 text-xs font-bold border border-rose-500/30">
-                  <AlertTriangle className="w-3 h-3" /> Conflict
-                </span>
-              )}
+        {/* Title & Subtitle */}
+        <div className="my-auto py-0.5 min-w-0">
+          <h3 className={`font-black tracking-tight leading-snug text-white ${isCompact ? 'text-sm sm:text-base line-clamp-1' : isMedium ? 'text-base sm:text-lg line-clamp-1' : 'text-base sm:text-lg lg:text-xl line-clamp-2'}`}>
+            {event.title}
+          </h3>
 
-              {event.reservation && (
-                <span className="px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-200 border border-rose-500/30 text-xs font-bold shrink-0">
-                  Reserved
-                </span>
-              )}
-
-              {event.ticket && (
-                <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-200 border border-emerald-500/30 text-xs font-bold shrink-0">
-                  Ticketed
-                </span>
-              )}
-
-              {/* Capsule Duration Pill */}
-              <span className="text-xs sm:text-sm font-bold px-3 py-0.5 rounded-full bg-[#131722]/90 border border-slate-700/80 text-sky-300 shrink-0 font-mono shadow-sm">
-                {formatDuration(event.durationMinutes)}
-              </span>
-
-              {event.status === 'done' && (
-                <span className="text-emerald-400">
-                  <CheckCircle className="w-4 h-4" />
-                </span>
-              )}
-
-              {event.status === 'skipped' && (
-                <span className="text-slate-500">
-                  <XCircle className="w-4 h-4" />
-                </span>
-              )}
-            </div>
-          </div>
-
-          {/* Main Title & Subtitle / Location */}
-          <div className="my-auto py-1 min-w-0">
-            <h3 className={`font-black tracking-tight leading-snug text-white ${isMedium ? 'text-base sm:text-lg line-clamp-1' : 'text-lg sm:text-xl line-clamp-2'}`}>
-              {event.title}
-            </h3>
-
-            {/* Simple Description & Location below (Concept 1 style) */}
-            <p className={`text-xs sm:text-sm text-slate-300 font-medium mt-0.5 ${isTall ? 'line-clamp-2' : 'line-clamp-1'}`}>
-              {subtitle ? (
-                <>
-                  <span>{subtitle}</span>
-                  {locationShort && <span className="text-slate-500 mx-1.5">•</span>}
-                  <span className="text-slate-400">{locationShort}</span>
-                </>
-              ) : (
-                <span>{locationShort}</span>
-              )}
+          {subtitle && !isCompact && (
+            <p className={`text-xs sm:text-sm text-slate-300 font-medium mt-0.5 leading-tight ${isTall ? 'line-clamp-2' : 'line-clamp-1'}`}>
+              {subtitle}
             </p>
-          </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };
