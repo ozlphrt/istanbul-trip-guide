@@ -281,22 +281,18 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
       )}
 
       {/* ========================================================================= */}
-      {/* 4. VISUALS & LINKS                                                        */}
+      {/* 4. VISUALS & LINKS (Only genuine verified links)                           */}
       {/* ========================================================================= */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-        {/* Instagram */}
+        {/* Verified Instagram Profile (Render ONLY if genuine verified IG account is configured) */}
         {(() => {
           const igLink = event.links?.find(l => l.type === 'ig');
-          const igUrl = igLink
-            ? igLink.url
-            : `https://www.instagram.com/explore/tags/${encodeURIComponent(event.title.toLowerCase().replace(/[^a-z0-9]/g, ''))}/`;
-          const igLabel = igLink
-            ? `@${igLink.url.replace(/\/$/, '').split('/').pop() || 'Instagram'}`
-            : 'Instagram Photos';
+          if (!igLink) return null;
+          const igLabel = `@${igLink.url.replace(/\/$/, '').split('/').pop() || 'Instagram'}`;
 
           return (
             <a
-              href={igUrl}
+              href={igLink.url}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#242938]/90 hover:bg-[#2e3447] border border-slate-700 hover:border-pink-500/50 text-slate-100 hover:text-white transition group shadow-sm backdrop-blur-sm"
@@ -309,7 +305,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
                   <div className="text-sm sm:text-base font-bold text-white group-hover:text-pink-300 transition truncate">
                     {igLabel}
                   </div>
-                  <div className="text-xs text-slate-400">Photos & stories</div>
+                  <div className="text-xs text-slate-400">Official Instagram</div>
                 </div>
               </div>
               <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-white transition shrink-0" />
@@ -338,7 +334,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
           <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-white transition shrink-0" />
         </a>
 
-        {/* Other Specific Links */}
+        {/* Other Specific Verified Links (Websites, Tickets, etc.) */}
         {event.links && event.links.filter(l => l.type !== 'ig').map((link, idx) => (
           <a
             key={idx}
