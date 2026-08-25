@@ -94,10 +94,10 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
         className="relative flex"
         style={{ height: `${TIMELINE_TOTAL_HEIGHT_PX}px` }}
       >
-        {/* Left Time Axis (08 to 00) with Clean 2-Digit Numerals & Ruler Ticks */}
-        <div className="w-9 sm:w-11 shrink-0 relative border-r border-slate-700/80 select-none">
+        {/* Left Time Axis (08:00 to 00:00) — Concept 1 Precision Architectural Style */}
+        <div className="w-14 sm:w-16 shrink-0 relative border-r border-slate-700/80 select-none">
           {hours.map((hour) => {
-            const displayHour = hour === 24 ? '00' : String(hour).padStart(2, '0');
+            const displayHour = hour === 24 ? '00:00' : `${String(hour).padStart(2, '0')}:00`;
             const hourStartPx = (hour - TIMELINE_START_HOUR) * 60 * PIXELS_PER_MINUTE;
             const top15Px = hourStartPx + 15 * PIXELS_PER_MINUTE;
             const top30Px = hourStartPx + 30 * PIXELS_PER_MINUTE;
@@ -111,10 +111,10 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
                   className="absolute right-0 w-2.5 sm:w-3.5 h-[2px] bg-slate-300 pointer-events-none"
                 />
 
-                {/* Clean 2-Digit Hour Numeral (e.g. 09, 10, 16) */}
+                {/* Concept 1 Bold Hour Numeral (09:00, 10:00, 11:00) */}
                 <div
                   style={{ top: `${hourStartPx}px` }}
-                  className="absolute right-2 sm:right-3 -translate-y-1/2 text-sm sm:text-base lg:text-lg font-mono text-white font-black tracking-tight select-none pointer-events-none"
+                  className="absolute right-2 sm:right-3 -translate-y-1/2 text-xs sm:text-sm font-mono text-white font-extrabold tracking-tight select-none pointer-events-none"
                 >
                   {displayHour}
                 </div>
@@ -130,7 +130,7 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
                     {/* 30m Tick */}
                     <div
                       style={{ top: `${top30Px}px` }}
-                      className="absolute right-0 w-2 sm:w-2.5 h-[1.5px] bg-slate-400/90 pointer-events-none"
+                      className="absolute right-0 w-2.5 sm:w-3 h-[1.5px] bg-slate-400/90 pointer-events-none"
                     />
                     {/* 45m Tick */}
                     <div
@@ -145,7 +145,7 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
         </div>
 
         {/* Right Event Canvas with 15-Minute Grid Lines */}
-        <div className="flex-1 relative ml-1.5 sm:ml-2">
+        <div className="flex-1 relative ml-2 sm:ml-3">
           {/* Horizontal 15-Minute Grid Lines */}
           {hours.map((hour) => {
             const topOffsetPx = (hour - TIMELINE_START_HOUR) * 60 * PIXELS_PER_MINUTE;
