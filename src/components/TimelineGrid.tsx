@@ -94,58 +94,59 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
         className="relative flex"
         style={{ height: `${TIMELINE_TOTAL_HEIGHT_PX}px` }}
       >
-        {/* Left Time Axis (08:00 to 00:00) — Concept 1 Precision Architectural Style */}
-        <div className="w-14 sm:w-16 shrink-0 relative border-r border-slate-700/80 select-none">
+        {/* Left Time Axis (08:00 to 00:00) — Dense Architectural Ruler Style */}
+        <div className="w-11 sm:w-12 shrink-0 relative border-r border-slate-700/80 select-none">
           {hours.map((hour) => {
             const displayHour = hour === 24 ? '00:00' : `${String(hour).padStart(2, '0')}:00`;
             const hourStartPx = (hour - TIMELINE_START_HOUR) * 60 * PIXELS_PER_MINUTE;
-            const top15Px = hourStartPx + 15 * PIXELS_PER_MINUTE;
-            const top30Px = hourStartPx + 30 * PIXELS_PER_MINUTE;
-            const top45Px = hourStartPx + 45 * PIXELS_PER_MINUTE;
+
+            // Generate 10-minute graduated ticks (:00, :10, :20, :30, :40, :50)
+            const tickMinutes = [0, 10, 20, 30, 40, 50];
 
             return (
               <React.Fragment key={`axis-${hour}`}>
-                {/* Major Tick Mark (:00) */}
-                <div
-                  style={{ top: `${hourStartPx}px` }}
-                  className="absolute right-0 w-2.5 sm:w-3.5 h-[2px] bg-slate-300 pointer-events-none"
-                />
+                {/* Dense Graduated Ruler Ticks */}
+                {hour < TIMELINE_END_HOUR ? (
+                  tickMinutes.map((m) => {
+                    const tickTopPx = hourStartPx + m * PIXELS_PER_MINUTE;
+                    const isMajor = m === 0;
+                    const isHalf = m === 30;
 
-                {/* Concept 1 Bold Hour Numeral (09:00, 10:00, 11:00) */}
+                    return (
+                      <div
+                        key={`tick-${hour}-${m}`}
+                        style={{ top: `${tickTopPx}px` }}
+                        className={`absolute right-0 pointer-events-none ${
+                          isMajor
+                            ? 'w-2.5 sm:w-3.5 h-[2px] bg-slate-300'
+                            : isHalf
+                            ? 'w-2 sm:w-2.5 h-[1.5px] bg-slate-400'
+                            : 'w-1.5 h-[1px] bg-slate-600/80'
+                        }`}
+                      />
+                    );
+                  })
+                ) : (
+                  <div
+                    style={{ top: `${hourStartPx}px` }}
+                    className="absolute right-0 w-2.5 sm:w-3.5 h-[2px] bg-slate-300 pointer-events-none"
+                  />
+                )}
+
+                {/* Bold Hour Numeral (09:00, 10:00, 11:00) */}
                 <div
                   style={{ top: `${hourStartPx}px` }}
-                  className="absolute right-2 sm:right-3 -translate-y-1/2 text-xs sm:text-sm font-mono text-white font-extrabold tracking-tight select-none pointer-events-none"
+                  className="absolute right-1.5 sm:right-2 -translate-y-1/2 text-xs sm:text-sm font-mono text-white font-black tracking-tight select-none pointer-events-none"
                 >
                   {displayHour}
                 </div>
-
-                {/* Sub-hour Graduated Ticks (15m, 30m, 45m) */}
-                {hour < TIMELINE_END_HOUR && (
-                  <>
-                    {/* 15m Tick */}
-                    <div
-                      style={{ top: `${top15Px}px` }}
-                      className="absolute right-0 w-1.5 sm:w-2 h-[1px] bg-slate-600/90 pointer-events-none"
-                    />
-                    {/* 30m Tick */}
-                    <div
-                      style={{ top: `${top30Px}px` }}
-                      className="absolute right-0 w-2.5 sm:w-3 h-[1.5px] bg-slate-400/90 pointer-events-none"
-                    />
-                    {/* 45m Tick */}
-                    <div
-                      style={{ top: `${top45Px}px` }}
-                      className="absolute right-0 w-1.5 sm:w-2 h-[1px] bg-slate-600/90 pointer-events-none"
-                    />
-                  </>
-                )}
               </React.Fragment>
             );
           })}
         </div>
 
         {/* Right Event Canvas with 15-Minute Grid Lines */}
-        <div className="flex-1 relative ml-2 sm:ml-3">
+        <div className="flex-1 relative ml-1.5 sm:ml-2">
           {/* Horizontal 15-Minute Grid Lines */}
           {hours.map((hour) => {
             const topOffsetPx = (hour - TIMELINE_START_HOUR) * 60 * PIXELS_PER_MINUTE;
