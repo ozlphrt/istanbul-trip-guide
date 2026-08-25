@@ -108,10 +108,10 @@ export const EventCard: React.FC<EventCardProps> = ({
           : 'z-10'
       } ${event.hasCollisionWithFixed ? 'ring-2 ring-rose-500 animate-pulse' : ''}`}
     >
-      {/* Left Integrated Time Spine Ribbon (Concept 5 — Big Bold Numbers) */}
-      <div className={`w-24 sm:w-28 md:w-32 shrink-0 p-2 sm:p-3 flex flex-col justify-between items-center text-center select-none ${getTypeSpineClass(event.type)}`}>
-        {/* Big Start Time */}
-        <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-black font-mono tracking-tight leading-none text-white drop-shadow-sm">
+      {/* Left Integrated Time Spine Ribbon (Concept 5 — Ultra Bold Big Numbers) */}
+      <div className={`w-28 sm:w-32 md:w-36 shrink-0 p-2.5 sm:p-3.5 flex flex-col justify-between items-center text-center select-none ${getTypeSpineClass(event.type)}`}>
+        {/* Big Ultra-Bold Start Time */}
+        <span className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight leading-none text-white drop-shadow">
           {event.isSimulatedShifted && event.simulatedStartTime ? (
             <span className="text-indigo-300 font-black">
               {formatEventTime(event.simulatedStartTime)}
@@ -122,12 +122,12 @@ export const EventCard: React.FC<EventCardProps> = ({
         </span>
 
         {/* Duration Badge */}
-        <span className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-black/30 text-white/90 border border-white/10 my-1">
+        <span className="text-xs sm:text-sm font-black font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-black/40 text-white border border-white/20 my-auto shadow-inner">
           {formatDuration(event.durationMinutes)}
         </span>
 
-        {/* End Time */}
-        <span className="text-sm sm:text-base md:text-lg font-black font-mono tracking-tight leading-none text-slate-300">
+        {/* Big Bold End Time */}
+        <span className="text-base sm:text-lg md:text-xl font-black tracking-tight leading-none text-slate-200">
           {formatEventTime(event.endTime)}
         </span>
       </div>
