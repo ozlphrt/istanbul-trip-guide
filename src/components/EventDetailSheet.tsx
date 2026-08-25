@@ -90,32 +90,31 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
           <span>{typeBadge.label}</span>
         </div>
 
-        {/* Top Action Cluster (Identical height, matching styling & crisp fonts) */}
+        {/* Top Action Cluster (Pure Icon Buttons: Maps, Images, Close) */}
         <div className="flex items-center gap-2">
           {event.location && (
             <a
               href={getDirectionsUrl(event.location)}
               target="_blank"
               rel="noopener noreferrer"
-              className="h-9 px-3.5 rounded-xl bg-[#2a3147] hover:bg-[#343e5a] active:scale-95 text-slate-100 hover:text-white border border-slate-700 hover:border-slate-600 font-bold text-xs flex items-center gap-1.5 transition shadow-sm backdrop-blur-sm"
+              className="w-9 h-9 rounded-xl bg-[#2a3147] hover:bg-[#343e5a] active:scale-95 text-slate-200 hover:text-white border border-slate-700 hover:border-slate-600 flex items-center justify-center transition shadow-sm backdrop-blur-sm shrink-0"
               title="Open directions in Google Maps"
+              aria-label="Open in Google Maps"
             >
-              <Navigation className="w-4 h-4 text-sky-400 shrink-0" />
-              <span>Maps</span>
+              <Navigation className="w-4 h-4 text-sky-400" />
             </a>
           )}
 
-          {/* Google Images Button (Same height, matching styling) */}
+          {/* Google Images Icon Button */}
           <a
             href={getGoogleImagesUrl(event.title, event.location)}
             target="_blank"
             rel="noopener noreferrer"
-            className="h-9 px-3.5 rounded-xl bg-[#2a3147] hover:bg-[#343e5a] active:scale-95 text-slate-100 hover:text-white border border-slate-700 hover:border-slate-600 font-bold text-xs flex items-center gap-1.5 transition shadow-sm backdrop-blur-sm"
+            className="w-9 h-9 rounded-xl bg-[#2a3147] hover:bg-[#343e5a] active:scale-95 text-slate-200 hover:text-white border border-slate-700 hover:border-slate-600 flex items-center justify-center transition shadow-sm backdrop-blur-sm shrink-0"
             title="Browse photo galleries on Google Images"
+            aria-label="Search photos on Google Images"
           >
-            <ImageIcon className="w-4 h-4 text-indigo-400 shrink-0" />
-            <span>Images</span>
-            <ExternalLink className="w-3.5 h-3.5 text-slate-400 opacity-60" />
+            <ImageIcon className="w-4 h-4 text-indigo-400" />
           </a>
 
           {!isDesktopSidebar && (
