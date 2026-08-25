@@ -134,14 +134,14 @@ export const EventCard: React.FC<EventCardProps> = ({
         </span>
       </div>
 
-      {/* Authentic Local Place Photo Backdrop on the Right */}
-      <div className="absolute right-0 top-0 bottom-0 w-3/5 pointer-events-none overflow-hidden rounded-r-[20px] sm:rounded-r-[22px] z-0">
+      {/* Dedicated 1-to-1 Event Photo Backdrop on Right (100% Mobile & iPhone Safari Compatible) */}
+      <div className="absolute right-0 top-0 bottom-0 w-1/2 sm:w-3/5 pointer-events-none overflow-hidden rounded-r-[20px] sm:rounded-r-[22px] z-0">
         <img
           src={photoUrl}
           alt=""
-          className="w-full h-full object-cover object-center opacity-30 mix-blend-luminosity grayscale contrast-125 [mask-image:linear-gradient(to_left,rgba(0,0,0,0.85)_10%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_left,rgba(0,0,0,0.85)_10%,transparent_100%)] select-none"
-          loading="lazy"
+          className="w-full h-full object-cover object-center opacity-30 filter grayscale contrast-125 select-none"
         />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#212635] via-[#212635]/65 to-transparent pointer-events-none" />
       </div>
 
       {/* Right Main Card Content */}
