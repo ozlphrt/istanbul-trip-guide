@@ -24,11 +24,11 @@ import {
   Check,
   AlertCircle,
   MapPin,
-  Share2
+  Share2,
+  Image as ImageIcon
 } from 'lucide-react';
 import { EventLink, EventStatus, EventType, ItineraryEvent } from '../types/calendar';
 import { formatDuration, formatEventTime } from '../utils/time';
-import { PhotoGallery } from './PhotoGallery';
 
 interface EventDetailSheetProps {
   event: ItineraryEvent | null;
@@ -76,13 +76,19 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
     return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(location)}`;
   };
 
+  const getGoogleImagesUrl = (title: string, location?: string) => {
+    return `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(
+      location ? `${title} ${location}` : `${title} Istanbul`
+    )}`;
+  };
+
   const getLinkIcon = (link: EventLink) => {
     switch (link.type) {
-      case 'ig': return <Instagram className="w-4 h-4 text-pink-400" />;
-      case 'web': return <Globe className="w-4 h-4 text-sky-400" />;
-      case 'fb': return <Share2 className="w-4 h-4 text-blue-400" />;
-      case 'x': return <span className="font-bold text-sm">𝕏</span>;
-      default: return <ExternalLink className="w-4 h-4 text-indigo-400" />;
+      case 'ig': return <Instagram className="w-5 h-5 text-pink-400 shrink-0" />;
+      case 'web': return <Globe className="w-5 h-5 text-sky-400 shrink-0" />;
+      case 'fb': return <Share2 className="w-5 h-5 text-blue-400 shrink-0" />;
+      case 'x': return <span className="font-black text-base">𝕏</span>;
+      default: return <ExternalLink className="w-5 h-5 text-indigo-400 shrink-0" />;
     }
   };
 
@@ -322,35 +328,83 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
       </div>
 
       {/* ========================================================================= */}
-      {/* 5. SECTION 3: AUTHENTIC VISUALS & EXTERNAL LINKS                          */}
+      {/* 5. SECTION 3: VISUALS, SOCIAL & WEB LINKS                                  */}
       {/* ========================================================================= */}
-      <div className="space-y-3.5 pt-1">
-        {/* Verified Wikimedia Photos Gallery */}
-        <PhotoGallery eventId={event.id} title={event.title} location={event.location} />
+      <div className="bg-[#242938] rounded-2xl p-5 sm:p-6 border border-slate-700/70 shadow-sm space-y-4">
+        <div className="flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-wider text-sky-400 border-b border-slate-700/60 pb-3">
+          <Globe className="w-4 h-4 text-sky-400" />
+          <span>Photos, Social & Web Links</span>
+        </div>
 
-        {/* External Portals & Links */}
-        {event.links && event.links.length > 0 && (
-          <div className="space-y-2 pt-1">
-            <div className="text-xs sm:text-sm font-black uppercase tracking-wider text-slate-400">
-              Official Links & Portals
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {/* Google Images Direct Search Button */}
+          <a
+            href={getGoogleImagesUrl(event.title, event.location)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#1d222e] hover:bg-[#282e3e] border border-slate-700 hover:border-sky-500/50 text-slate-100 hover:text-white transition group shadow-sm"
+          >
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="p-2 rounded-lg bg-sky-500/15 text-sky-400">
+                <ImageIcon className="w-5 h-5" />
+              </div>
+              <div className="min-w-0">
+                <div className="text-sm sm:text-base font-bold text-white group-hover:text-sky-300 transition">
+                  Google Images
+                </div>
+                <div className="text-xs text-slate-400">Photos & visual galleries</div>
+              </div>
             </div>
-            <div className="flex flex-wrap gap-2">
-              {event.links.map((link, idx) => (
-                <a
-                  key={idx}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#282e3e] hover:bg-[#31384b] border border-slate-600 text-xs sm:text-sm font-bold text-slate-200 hover:text-white transition group"
-                >
+            <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-white transition shrink-0" />
+          </a>
+
+          {/* Google Maps / Street View */}
+          {event.location && (
+            <a
+              href={getDirectionsUrl(event.location)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#1d222e] hover:bg-[#282e3e] border border-slate-700 hover:border-indigo-500/50 text-slate-100 hover:text-white transition group shadow-sm"
+            >
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="p-2 rounded-lg bg-indigo-500/15 text-indigo-400">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div className="min-w-0">
+                  <div className="text-sm sm:text-base font-bold text-white group-hover:text-indigo-300 transition">
+                    Google Maps
+                  </div>
+                  <div className="text-xs text-slate-400">Directions & location</div>
+                </div>
+              </div>
+              <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-white transition shrink-0" />
+            </a>
+          )}
+
+          {/* Parsed Event Links (Web, Instagram, Menus, Portals) */}
+          {event.links && event.links.map((link, idx) => (
+            <a
+              key={idx}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#1d222e] hover:bg-[#282e3e] border border-slate-700 hover:border-slate-500 text-slate-100 hover:text-white transition group shadow-sm"
+            >
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="p-2 rounded-lg bg-white/[0.06] text-slate-300">
                   {getLinkIcon(link)}
-                  <span>{link.label}</span>
-                  <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-white transition" />
-                </a>
-              ))}
-            </div>
-          </div>
-        )}
+                </div>
+                <div className="min-w-0">
+                  <div className="text-sm sm:text-base font-bold text-white group-hover:text-indigo-300 transition truncate">
+                    {link.label}
+                  </div>
+                  <div className="text-xs text-slate-400 uppercase font-mono">{link.type} link</div>
+                </div>
+              </div>
+              <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-white transition shrink-0" />
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   );
