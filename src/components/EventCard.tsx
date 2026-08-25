@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  MapPin,
   Utensils,
   Wine,
   Footprints,
@@ -96,7 +95,7 @@ export const EventCard: React.FC<EventCardProps> = ({
       {isCompact ? (
         <div className="flex flex-col justify-between h-full">
           <div className="flex items-center justify-between gap-2 min-w-0">
-            <div className="flex items-center gap-2 min-w-0">
+            <div className="flex items-center gap-2 min-w-0 truncate">
               {getTypeIcon(event.type)}
               <h3 className="font-black text-base sm:text-lg text-white truncate tracking-tight">
                 {event.title}
@@ -109,23 +108,26 @@ export const EventCard: React.FC<EventCardProps> = ({
             </div>
           </div>
 
-          <div className="flex items-center justify-between text-xs sm:text-sm font-bold text-slate-300 pt-0.5">
-            <span className="font-mono text-white font-black">
+          <div className="flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-300 pt-0.5 truncate">
+            <span className="font-mono text-white font-black shrink-0">
               {formatEventTime(event.startTime)}–{formatEventTime(event.endTime)}
             </span>
             {event.location && (
-              <span className="truncate max-w-[160px] text-slate-300 font-semibold">
-                {event.location.split(',')[0]}
-              </span>
+              <>
+                <span className="text-slate-500">•</span>
+                <span className="truncate text-slate-300 font-bold">
+                  {event.location.split(',')[0]}
+                </span>
+              </>
             )}
           </div>
         </div>
       ) : (
         /* 2. Standard & Tall View (>= 70px) */
         <>
-          {/* Top Header Row */}
+          {/* Top Header Row: Icon, Time Range, Location & Duration Badge */}
           <div className="flex items-center justify-between gap-2 text-sm sm:text-base font-bold leading-none">
-            <div className="flex items-center gap-2 min-w-0">
+            <div className="flex items-center gap-2 min-w-0 truncate">
               {getTypeIcon(event.type)}
 
               {/* Time */}
@@ -145,13 +147,35 @@ export const EventCard: React.FC<EventCardProps> = ({
                   </span>
                 )}
               </span>
+
+              {/* Location moved right next to start-finish time */}
+              {event.location && (
+                <>
+                  <span className="text-slate-500 shrink-0">•</span>
+                  <span className="truncate text-slate-300 font-bold text-xs sm:text-sm">
+                    {event.location.split(',')[0]}
+                  </span>
+                </>
+              )}
             </div>
 
-            {/* Right: Duration & Status Badges */}
+            {/* Right: Status, Reservation/Ticket & Duration Badges */}
             <div className="flex items-center gap-1.5 shrink-0">
               {event.hasCollisionWithFixed && (
                 <span className="flex items-center gap-1 px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 text-xs font-bold border border-rose-500/30">
                   <AlertTriangle className="w-3.5 h-3.5" /> Conflict
+                </span>
+              )}
+
+              {event.reservation && (
+                <span className="px-2 py-0.5 rounded bg-rose-500/20 text-rose-200 border border-rose-500/30 text-xs font-black shrink-0">
+                  Reserved
+                </span>
+              )}
+
+              {event.ticket && (
+                <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-200 border border-emerald-500/30 text-xs font-black shrink-0">
+                  Ticketed
                 </span>
               )}
 
@@ -185,28 +209,6 @@ export const EventCard: React.FC<EventCardProps> = ({
                 {event.what || event.why}
               </p>
             )}
-          </div>
-
-          {/* Footer / Location */}
-          <div className="flex items-center justify-between text-xs sm:text-sm font-bold pt-1.5 border-t border-slate-700/60">
-            <div className="flex items-center gap-1.5 truncate text-slate-200 font-semibold">
-              {event.location && (
-                <>
-                  <MapPin className="w-4 h-4 shrink-0 text-slate-400" />
-                  <span className="truncate">{event.location.split(',')[0]}</span>
-                </>
-              )}
-            </div>
-
-            {event.reservation ? (
-              <span className="px-2.5 py-0.5 rounded bg-rose-500/20 text-rose-200 border border-rose-500/30 text-xs sm:text-sm font-black shrink-0 ml-1">
-                Reserved
-              </span>
-            ) : event.ticket ? (
-              <span className="px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-200 border border-emerald-500/30 text-xs sm:text-sm font-black shrink-0 ml-1">
-                Ticketed
-              </span>
-            ) : null}
           </div>
         </>
       )}
