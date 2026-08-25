@@ -94,8 +94,8 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
         className="relative flex"
         style={{ height: `${TIMELINE_TOTAL_HEIGHT_PX}px` }}
       >
-        {/* Left Time Axis (08:00 to 00:00) with 90° CCW Rotated Numerals */}
-        <div className="w-8 sm:w-10 shrink-0 relative border-r border-slate-700/70 select-none">
+        {/* Left Time Axis (08:00 to 00:00) with 90° CCW Rotated Numerals & Precision Ticks */}
+        <div className="w-9 sm:w-11 shrink-0 relative border-r border-slate-700/70 select-none">
           {hours.map((hour) => {
             const displayHour = hour === 24 ? '00:00' : `${String(hour).padStart(2, '0')}:00`;
             const topOffsetPx = (hour - TIMELINE_START_HOUR) * 60 * PIXELS_PER_MINUTE;
@@ -105,10 +105,16 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
 
             return (
               <React.Fragment key={`axis-${hour}`}>
-                {/* Major Hour Label (Rotated 90° CCW) */}
+                {/* Major Tick Mark (:00) */}
                 <div
                   style={{ top: `${topOffsetPx}px` }}
-                  className="absolute right-0.5 -translate-y-1/2 origin-center -rotate-90 text-xs sm:text-sm font-mono text-white font-black tracking-wider whitespace-nowrap"
+                  className="absolute right-0 w-2.5 sm:w-3.5 h-[2px] bg-slate-300 pointer-events-none"
+                />
+
+                {/* Major Hour Label (Large & Rotated 90° CCW) */}
+                <div
+                  style={{ top: `${topOffsetPx}px` }}
+                  className="absolute right-1 sm:right-1.5 -translate-y-1/2 origin-center -rotate-90 text-sm sm:text-base font-mono text-white font-black tracking-widest whitespace-nowrap"
                 >
                   {displayHour}
                 </div>
@@ -116,17 +122,20 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
                 {/* Sub-hour Axis Tick Marks (15m, 30m, 45m) */}
                 {hour < TIMELINE_END_HOUR && (
                   <>
+                    {/* 15m Minor Tick */}
                     <div
                       style={{ top: `${top15Px}px` }}
-                      className="absolute right-0 w-1 sm:w-1.5 h-[1px] bg-slate-700/60"
+                      className="absolute right-0 w-1.5 sm:w-2 h-[1px] bg-slate-600/90"
                     />
+                    {/* 30m Medium Tick */}
                     <div
                       style={{ top: `${top30Px}px` }}
-                      className="absolute right-0 w-2 sm:w-2.5 h-[1px] bg-slate-600/80"
+                      className="absolute right-0 w-2.5 sm:w-3 h-[1.5px] bg-slate-400/90"
                     />
+                    {/* 45m Minor Tick */}
                     <div
                       style={{ top: `${top45Px}px` }}
-                      className="absolute right-0 w-1 sm:w-1.5 h-[1px] bg-slate-700/60"
+                      className="absolute right-0 w-1.5 sm:w-2 h-[1px] bg-slate-600/90"
                     />
                   </>
                 )}
