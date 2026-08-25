@@ -94,8 +94,8 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
         className="relative flex"
         style={{ height: `${TIMELINE_TOTAL_HEIGHT_PX}px` }}
       >
-        {/* Left Time Axis (08:00 to 00:00) with Giant 90° CCW Rotated Numerals & 5-Min Ruler Ticks */}
-        <div className="w-12 sm:w-16 shrink-0 relative border-r border-slate-700/80 select-none">
+        {/* Left Time Axis (08:00 to 00:00) with Overlapping Massive 90° CCW Numerals & 5-Min Ruler Ticks */}
+        <div className="w-7 sm:w-8 shrink-0 relative border-r border-slate-700/80 select-none">
           {hours.map((hour) => {
             const displayHour = hour === 24 ? '00:00' : `${String(hour).padStart(2, '0')}:00`;
             const hourStartPx = (hour - TIMELINE_START_HOUR) * 60 * PIXELS_PER_MINUTE;
@@ -112,14 +112,6 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
 
             return (
               <React.Fragment key={`axis-${hour}`}>
-                {/* Giant Hour Label (Rotated 90° CCW) */}
-                <div
-                  style={{ top: `${hourStartPx}px` }}
-                  className="absolute right-4 sm:right-6 -translate-y-1/2 origin-center -rotate-90 text-base sm:text-lg md:text-xl font-mono text-white font-black tracking-widest whitespace-nowrap select-none"
-                >
-                  {displayHour}
-                </div>
-
                 {/* 5-Minute Graduated Precision Ruler Ticks */}
                 {minuteTicks.map((m) => {
                   const tickTopPx = hourStartPx + m * PIXELS_PER_MINUTE;
@@ -133,23 +125,31 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
                       style={{ top: `${tickTopPx}px` }}
                       className={`absolute right-0 pointer-events-none ${
                         isMajor
-                          ? 'w-4 sm:w-5 h-[2.5px] bg-white rounded-l-full'
+                          ? 'w-full h-[2.5px] bg-white/80'
                           : isHalf
-                          ? 'w-3 sm:w-4 h-[2px] bg-slate-300 rounded-l-full'
+                          ? 'w-4 h-[2px] bg-slate-400'
                           : isQuarter
-                          ? 'w-2 sm:w-3 h-[1.5px] bg-slate-400 rounded-l-full'
-                          : 'w-1.5 sm:w-2 h-[1px] bg-slate-600/90'
+                          ? 'w-3 h-[1.5px] bg-slate-500'
+                          : 'w-1.5 h-[1px] bg-slate-700/80'
                       }`}
                     />
                   );
                 })}
+
+                {/* Massive 90° CCW Hour Label Overlapping Ticks */}
+                <div
+                  style={{ top: `${hourStartPx}px`, left: '50%' }}
+                  className="absolute -translate-x-1/2 -translate-y-1/2 origin-center -rotate-90 text-lg sm:text-xl md:text-2xl font-mono text-white font-black tracking-widest whitespace-nowrap z-10 select-none pointer-events-none drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]"
+                >
+                  {displayHour}
+                </div>
               </React.Fragment>
             );
           })}
         </div>
 
         {/* Right Event Canvas with 15-Minute Grid Lines */}
-        <div className="flex-1 relative ml-2 sm:ml-3">
+        <div className="flex-1 relative ml-1 sm:ml-1.5">
           {/* Horizontal 15-Minute Grid Lines */}
           {hours.map((hour) => {
             const topOffsetPx = (hour - TIMELINE_START_HOUR) * 60 * PIXELS_PER_MINUTE;
