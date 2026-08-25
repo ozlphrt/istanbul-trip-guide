@@ -94,8 +94,8 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
         className="relative flex"
         style={{ height: `${TIMELINE_TOTAL_HEIGHT_PX}px` }}
       >
-        {/* Compact Left Time Axis (08:00 to 00:00) */}
-        <div className="w-10 sm:w-11 shrink-0 relative border-r border-slate-700/70 select-none">
+        {/* Left Time Axis (08:00 to 00:00) */}
+        <div className="w-12 sm:w-14 shrink-0 relative border-r border-slate-700/70 select-none">
           {hours.map((hour) => {
             const displayHour = hour === 24 ? '00:00' : `${String(hour).padStart(2, '0')}:00`;
             const topOffsetPx = (hour - TIMELINE_START_HOUR) * 60 * PIXELS_PER_MINUTE;
@@ -105,10 +105,10 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
 
             return (
               <React.Fragment key={`axis-${hour}`}>
-                {/* Major Hour Label */}
+                {/* Major Hour Label (Large & Highly Legible) */}
                 <div
                   style={{ top: `${topOffsetPx}px` }}
-                  className="absolute right-1 -translate-y-1/2 text-[11px] sm:text-xs font-mono text-slate-400 font-bold tracking-tight"
+                  className="absolute right-1.5 -translate-y-1/2 text-xs sm:text-sm font-mono text-slate-200 font-extrabold tracking-tight"
                 >
                   {displayHour}
                 </div>

@@ -38,7 +38,7 @@ export const EventCard: React.FC<EventCardProps> = ({
     : event.startMinutesFromDayStart;
 
   const topPx = effectiveStartMinutes * PIXELS_PER_MINUTE;
-  const heightPx = Math.max(56, event.durationMinutes * PIXELS_PER_MINUTE);
+  const heightPx = Math.max(54, (event.durationMinutes * PIXELS_PER_MINUTE) - 6);
 
   const getTypeIcon = (type: EventType) => {
     switch (type) {

@@ -15,8 +15,8 @@ export const TRIP_DATES = [
 export const TIMELINE_START_HOUR = 8; // 08:00
 export const TIMELINE_END_HOUR = 24;  // 24:00 (00:00)
 export const TOTAL_TIMELINE_HOURS = TIMELINE_END_HOUR - TIMELINE_START_HOUR; // 16 hours
-export const PIXELS_PER_MINUTE = 2.25; // 135px per hour so every 20-30 min event has plenty of vertical space
-export const TIMELINE_TOTAL_HEIGHT_PX = TOTAL_TIMELINE_HOURS * 60 * PIXELS_PER_MINUTE; // ~2160px
+export const PIXELS_PER_MINUTE = 3.5; // 210px per hour so every 15-20 min stop has ample vertical room without overlaps
+export const TIMELINE_TOTAL_HEIGHT_PX = TOTAL_TIMELINE_HOURS * 60 * PIXELS_PER_MINUTE; // 3360px
 
 /**
  * Converts a date or ISO string to Istanbul timezone Date object
