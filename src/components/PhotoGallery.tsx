@@ -74,18 +74,18 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
     <div className="space-y-3">
       {/* Gallery Header */}
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sky-400">
-          <ImageIcon className="w-4 h-4" />
+        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-700">
+          <ImageIcon className="w-4 h-4 text-blue-600" />
           <span>Authentic Visuals ({photos.length} Verified Photos)</span>
-          <span className="hidden sm:inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-sky-500/15 text-sky-300 font-semibold">
-            <CheckCircle2 className="w-3 h-3 text-sky-400" /> Wikimedia Verified
+          <span className="hidden sm:inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 font-semibold border border-blue-200">
+            <CheckCircle2 className="w-3 h-3 text-blue-600" /> Wikimedia Verified
           </span>
         </div>
         <a
           href={googleImagesUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs font-bold text-zinc-400 hover:text-sky-300 transition flex items-center gap-1"
+          className="text-xs font-bold text-slate-500 hover:text-blue-600 transition flex items-center gap-1"
         >
           <span>More on Google</span>
           <ExternalLink className="w-3 h-3" />
@@ -94,8 +94,8 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
 
       {/* Loading State */}
       {isLoading && (
-        <div className="h-28 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center gap-2.5 text-zinc-400 text-xs font-medium animate-pulse">
-          <Loader2 className="w-4 h-4 animate-spin text-sky-400" />
+        <div className="h-28 rounded-2xl bg-slate-100 border border-slate-200 flex items-center justify-center gap-2.5 text-slate-500 text-xs font-medium animate-pulse">
+          <Loader2 className="w-4 h-4 animate-spin text-blue-600" />
           <span>Loading verified photos of {title}...</span>
         </div>
       )}
@@ -107,7 +107,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
             <div
               key={idx}
               onClick={() => openLightbox(idx)}
-              className="group relative flex-shrink-0 w-36 h-28 sm:w-44 sm:h-32 rounded-2xl overflow-hidden cursor-pointer border border-zinc-800 bg-zinc-950 snap-start transition transform hover:scale-[1.03] active:scale-[0.98] shadow-subtle"
+              className="group relative flex-shrink-0 w-36 h-28 sm:w-44 sm:h-32 rounded-2xl overflow-hidden cursor-pointer border border-slate-200 bg-slate-100 snap-start transition transform hover:scale-[1.03] active:scale-[0.98] shadow-sm"
             >
               <img
                 src={photo.url}
@@ -130,7 +130,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
       )}
 
       {!isLoading && photos.length === 0 && (
-        <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-800 text-xs text-zinc-400 text-center">
+        <div className="p-4 rounded-2xl bg-slate-100 border border-slate-200 text-xs text-slate-500 text-center">
           <p>Tap below to view full photo galleries and street views on Google.</p>
         </div>
       )}

@@ -25,7 +25,7 @@ export const Header: React.FC<HeaderProps> = ({
     }
     if (syncState.status === 'syncing') {
       return (
-        <span className="flex items-center gap-1.5 text-zinc-400 text-xs font-medium">
+        <span className="flex items-center gap-1.5 text-slate-300 text-xs font-medium">
           <RotateCw className="w-3.5 h-3.5 animate-spin text-indigo-400" />
           <span>Syncing...</span>
         </span>
@@ -33,7 +33,7 @@ export const Header: React.FC<HeaderProps> = ({
     }
     if (syncState.status === 'offline') {
       return (
-        <span className="flex items-center gap-1.5 text-zinc-500 text-xs font-medium">
+        <span className="flex items-center gap-1.5 text-slate-400 text-xs font-medium">
           <CloudOff className="w-3.5 h-3.5" />
           <span>Offline</span>
         </span>
@@ -64,19 +64,19 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-30 bg-[#0c0d12]/90 backdrop-blur-xl border-b border-white/[0.06] px-4 py-3.5 safe-top">
+    <header className="sticky top-0 z-30 bg-[#1e2330]/90 backdrop-blur-xl border-b border-slate-700/60 px-4 py-3.5 safe-top shadow-sm">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         {/* Title & Dates */}
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-100 flex items-center gap-2">
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
               <span>Istanbul Trip Guide</span>
             </h1>
-            <span className="text-[11px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full bg-white/[0.06] text-zinc-300 border border-white/[0.08]">
+            <span className="text-[11px] uppercase tracking-wider font-bold px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
               IST26
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-zinc-400 font-normal mt-0.5">
+          <p className="text-xs sm:text-sm text-slate-400 font-medium mt-0.5">
             22–26 September 2026 • Europe/Istanbul
           </p>
         </div>
@@ -88,7 +88,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={onRefresh}
             role="button"
             tabIndex={0}
-            className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.08] transition cursor-pointer"
+            className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#282e3e] border border-slate-700/70 hover:bg-[#31384b] transition cursor-pointer"
             title="Click to refresh from Google Calendar"
           >
             {getSyncLabel()}
@@ -98,7 +98,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={onRefresh}
             disabled={syncState.status === 'syncing'}
-            className="p-2 rounded-full bg-white/[0.04] border border-white/[0.06] text-zinc-300 hover:text-white hover:bg-white/[0.08] active:scale-95 transition disabled:opacity-50"
+            className="p-2 rounded-full bg-[#282e3e] border border-slate-700/70 text-slate-200 hover:text-white hover:bg-[#31384b] active:scale-95 transition disabled:opacity-50"
             aria-label="Refresh calendar"
             title="Refresh itinerary"
           >
@@ -108,7 +108,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Settings Button */}
           <button
             onClick={onOpenSettings}
-            className="p-2 rounded-full bg-white/[0.04] border border-white/[0.06] text-zinc-300 hover:text-white hover:bg-white/[0.08] active:scale-95 transition"
+            className="p-2 rounded-full bg-[#282e3e] border border-slate-700/70 text-slate-200 hover:text-white hover:bg-[#31384b] active:scale-95 transition"
             aria-label="Settings"
             title="Configure Google OAuth & Data Source"
           >

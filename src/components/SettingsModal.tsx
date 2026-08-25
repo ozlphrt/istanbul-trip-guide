@@ -69,26 +69,26 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
-      <div className="bg-zinc-900 border border-zinc-800 rounded-3xl w-full max-w-lg overflow-hidden shadow-elevated flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-fadeIn">
+      <div className="bg-[#1e2330] border border-slate-700/80 rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
         {/* Header */}
-        <div className="flex items-center justify-between p-5 border-b border-zinc-800">
+        <div className="flex items-center justify-between p-5 border-b border-slate-700/80">
           <div className="flex items-center gap-2.5">
             <h2 className="text-lg font-bold text-white">Settings & Data Source</h2>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-full bg-zinc-800 text-zinc-400 hover:text-white transition"
+            className="p-2 rounded-full bg-[#282e3e] text-slate-400 hover:text-white hover:bg-[#31384b] transition"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Content */}
-        <div className="p-5 sm:p-6 space-y-6 overflow-y-auto custom-scrollbar text-sm text-zinc-300">
+        <div className="p-5 sm:p-6 space-y-6 overflow-y-auto custom-scrollbar text-sm text-slate-300">
           {/* Data Source Selector */}
           <div className="space-y-3">
-            <label className="text-xs font-bold uppercase tracking-wider text-zinc-400 flex items-center gap-2">
+            <label className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
               <Database className="w-4 h-4 text-indigo-400" />
               <span>Data Source</span>
             </label>
@@ -99,19 +99,22 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 onClick={() => onToggleMockMode(true)}
                 className={`p-4 rounded-2xl border text-left transition flex flex-col justify-between ${
                   isMockMode
-                    ? 'bg-sky-500/15 border-sky-500/50 text-sky-200 shadow-sm'
-                    : 'bg-zinc-950 border-zinc-800 text-zinc-400 hover:bg-zinc-850'
+                    ? 'bg-[#282e3e] border-indigo-400/80 text-white ring-1 ring-indigo-400/40 shadow-sm'
+                    : 'bg-[#181b24] border-slate-700/60 text-slate-400 hover:bg-[#282e3e]'
                 }`}
               >
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-sm flex items-center gap-1.5">
-                    <Sparkles className="w-4 h-4 text-sky-400" /> Demo Mode
-                  </span>
-                  {isMockMode && <span className="w-2.5 h-2.5 rounded-full bg-sky-400" />}
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="font-bold text-sm text-white flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-sky-400" />
+                      Built-in Program
+                    </span>
+                    {isMockMode && <CheckCircle2 className="w-4 h-4 text-emerald-400" />}
+                  </div>
+                  <p className="text-xs text-slate-400 mt-1">
+                    Full 5-day private curated Istanbul itinerary (offline-ready).
+                  </p>
                 </div>
-                <p className="text-xs text-zinc-400 mt-2">
-                  5 full days of rich sample events (Sep 22–26, 2026).
-                </p>
               </button>
 
               <button
@@ -119,135 +122,103 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 onClick={() => onToggleMockMode(false)}
                 className={`p-4 rounded-2xl border text-left transition flex flex-col justify-between ${
                   !isMockMode
-                    ? 'bg-indigo-500/15 border-indigo-500/50 text-indigo-200 shadow-sm'
-                    : 'bg-zinc-950 border-zinc-800 text-zinc-400 hover:bg-zinc-850'
+                    ? 'bg-[#282e3e] border-indigo-400/80 text-white ring-1 ring-indigo-400/40 shadow-sm'
+                    : 'bg-[#181b24] border-slate-700/60 text-slate-400 hover:bg-[#282e3e]'
                 }`}
               >
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-sm flex items-center gap-1.5">
-                    <Cloud className="w-4 h-4 text-indigo-400" /> Live Calendar
-                  </span>
-                  {!isMockMode && <span className="w-2.5 h-2.5 rounded-full bg-indigo-400" />}
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="font-bold text-sm text-white flex items-center gap-1.5">
+                      <Cloud className="w-3.5 h-3.5 text-indigo-400" />
+                      Google Calendar
+                    </span>
+                    {!isMockMode && <CheckCircle2 className="w-4 h-4 text-emerald-400" />}
+                  </div>
+                  <p className="text-xs text-slate-400 mt-1">
+                    Direct sync with [IST26] events in your primary calendar.
+                  </p>
                 </div>
-                <p className="text-xs text-zinc-400 mt-2">
-                  Direct sync from Google Calendar API.
-                </p>
               </button>
             </div>
           </div>
 
-          {/* Google OAuth Setup */}
-          <div className="space-y-3.5 pt-4 border-t border-zinc-800">
-            <label className="text-xs font-bold uppercase tracking-wider text-zinc-400 flex items-center gap-2">
-              <Key className="w-4 h-4 text-indigo-400" />
-              <span>Google OAuth 2.0 Client ID</span>
-            </label>
+          {/* Google OAuth Configuration */}
+          {!isMockMode && (
+            <div className="space-y-4 p-4 rounded-2xl bg-[#181b24] border border-slate-700/60">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-white flex items-center gap-2">
+                  <Key className="w-4 h-4 text-indigo-400" />
+                  Google OAuth Client ID
+                </span>
+                <span className="text-[11px] text-slate-400 flex items-center gap-1">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> Read-Only
+                </span>
+              </div>
 
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              To read your live Google Calendar, provide a Web OAuth Client ID. Only read-only permission (<code className="text-zinc-200 bg-zinc-800 px-1 py-0.5 rounded">calendar.readonly</code>) is requested. No client secret is required.
-            </p>
-
-            <div className="space-y-2.5">
-              <div className="flex gap-2">
+              <div className="space-y-2">
                 <input
                   type="text"
-                  placeholder="e.g. 123456789-xxxx.apps.googleusercontent.com"
                   value={clientId}
                   onChange={(e) => setClientId(e.target.value)}
-                  className="flex-1 px-3.5 py-2.5 bg-zinc-950 border border-zinc-800 rounded-xl text-zinc-100 text-xs focus:outline-none focus:border-indigo-500 font-mono"
+                  placeholder="e.g. 123456789-abcdef.apps.googleusercontent.com"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#222734] border border-slate-700 text-white placeholder:text-slate-500 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
                 <button
                   type="button"
                   onClick={handleSaveClientId}
-                  className="px-4 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-bold rounded-xl text-xs transition shrink-0"
+                  className="w-full py-2 px-3 rounded-xl bg-[#282e3e] hover:bg-[#31384b] text-white text-xs font-bold transition border border-slate-700"
                 >
-                  Save
+                  {saveSuccess ? 'Saved to Local Device!' : 'Save Client ID'}
                 </button>
               </div>
 
-              {saveSuccess && (
-                <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-semibold">
-                  <CheckCircle2 className="w-4 h-4" /> Client ID saved to browser storage.
+              {authError && (
+                <div className="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 text-rose-300 text-xs flex items-start gap-2">
+                  <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                  <span>{authError}</span>
                 </div>
               )}
-            </div>
 
-            {/* Connect Button */}
-            <div className="pt-2">
               <button
                 type="button"
                 onClick={handleGoogleConnect}
                 disabled={isAuthenticating}
-                className="w-full flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl bg-white hover:bg-zinc-100 text-zinc-950 font-black text-sm transition active:scale-[0.98] disabled:opacity-50"
+                className="w-full py-3 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 disabled:opacity-50 shadow-sm"
               >
-                <ShieldCheck className="w-5 h-5 text-emerald-600" />
-                <span>{isAuthenticating ? 'Connecting...' : 'Authorize & Connect Google Calendar'}</span>
+                <RefreshCw className={`w-4 h-4 ${isAuthenticating ? 'animate-spin' : ''}`} />
+                <span>{isAuthenticating ? 'Authorizing with Google...' : 'Sign in with Google & Sync'}</span>
               </button>
             </div>
+          )}
 
-            {authError && (
-              <div className="flex items-start gap-2 p-3 bg-rose-950/50 border border-rose-900/80 rounded-xl text-rose-300 text-xs">
-                <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-                <span>{authError}</span>
+          {/* Cache Status & Actions */}
+          <div className="space-y-3 pt-2 border-t border-slate-700/60">
+            <div className="flex items-center justify-between text-xs text-slate-400">
+              <span>Cached offline events:</span>
+              <span className="font-mono font-bold text-slate-200">{cachedEventsCount} activities</span>
+            </div>
+
+            {lastSyncedAt && (
+              <div className="flex items-center justify-between text-xs text-slate-400">
+                <span>Last updated:</span>
+                <span className="font-mono font-bold text-slate-200">{new Date(lastSyncedAt).toLocaleString()}</span>
               </div>
             )}
-          </div>
 
-          {/* Calendar Prefix Guideline */}
-          <div className="bg-zinc-950 rounded-2xl p-4 border border-zinc-800 space-y-2">
-            <div className="font-bold text-white text-sm flex items-center gap-2">
-              <span className="text-indigo-400 font-black">[IST26]</span>
-              <span>Event Title Prefix Rule</span>
-            </div>
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              The application filters your Google Calendar and only displays events whose summary begins with <strong className="text-zinc-200">[IST26]</strong> (e.g. <em>[IST26] Topkapı Palace</em>).
-            </p>
-          </div>
-
-          {/* Offline Cache & State */}
-          <div className="space-y-2.5 pt-4 border-t border-zinc-800">
-            <div className="flex items-center justify-between text-xs text-zinc-400">
-              <span className="font-medium">Offline Cached Events:</span>
-              <span className="font-mono text-zinc-200 font-bold">{cachedEventsCount} events</span>
-            </div>
-            <div className="flex items-center justify-between text-xs text-zinc-400">
-              <span className="font-medium">Last Synchronized:</span>
-              <span className="font-mono text-zinc-200 font-bold">
-                {lastSyncedAt ? lastSyncedAt.toLocaleTimeString() : 'Never'}
-              </span>
-            </div>
-
-            <div className="pt-2 flex gap-2.5">
+            <div className="pt-2">
               <button
                 type="button"
-                onClick={onForceSync}
-                className="flex-1 flex items-center justify-center gap-2 py-2.5 px-3.5 bg-zinc-800 hover:bg-zinc-750 text-zinc-200 font-bold rounded-xl text-xs transition"
+                onClick={() => {
+                  onClearCache();
+                  onClose();
+                }}
+                className="w-full py-2.5 px-3 rounded-xl bg-rose-950/30 hover:bg-rose-900/40 text-rose-300 border border-rose-800/40 text-xs font-bold transition flex items-center justify-center gap-2"
               >
-                <RefreshCw className="w-4 h-4" />
-                <span>Sync Now</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={onClearCache}
-                className="flex items-center justify-center gap-2 py-2.5 px-3.5 bg-rose-950/30 hover:bg-rose-950/60 border border-rose-900/40 text-rose-300 font-bold rounded-xl text-xs transition"
-              >
-                <Trash2 className="w-4 h-4" />
-                <span>Reset Cache</span>
+                <Trash2 className="w-3.5 h-3.5" />
+                <span>Clear Cache & Reset Data</span>
               </button>
             </div>
           </div>
-        </div>
-
-        {/* Footer */}
-        <div className="p-4 bg-zinc-950 border-t border-zinc-800 flex justify-between items-center text-xs text-zinc-500">
-          <span>Istanbul Trip Guide 2026 • PWA</span>
-          <button
-            onClick={onClose}
-            className="px-5 py-2 bg-zinc-800 hover:bg-zinc-750 text-white font-bold rounded-xl text-xs transition"
-          >
-            Done
-          </button>
         </div>
       </div>
     </div>

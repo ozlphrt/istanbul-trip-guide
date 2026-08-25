@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { Header } from './components/Header';
 import { DaySelector } from './components/DaySelector';
-import { NowNextWidget } from './components/NowNextWidget';
 import { Toolbar } from './components/Toolbar';
 import { TimelineGrid } from './components/TimelineGrid';
 import { EventDetailSheet } from './components/EventDetailSheet';
@@ -219,7 +218,7 @@ export const App: React.FC = () => {
   }, [selectedEventId, currentDisplayDayEvents, events]);
 
   return (
-    <div className="min-h-screen bg-[#0b0c10] text-zinc-200 flex flex-col selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen bg-[#1a1d26] text-slate-100 flex flex-col selection:bg-indigo-500 selection:text-white">
       {/* Header */}
       <Header
         syncState={syncState}
@@ -232,15 +231,8 @@ export const App: React.FC = () => {
         {/* Desktop 2-Column Split View / Mobile Single Column */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
-          {/* Left Column: Timeline, Controls & Live Guide */}
+          {/* Left Column: Timeline, Controls & Day Selector */}
           <div className="lg:col-span-7 xl:col-span-7 space-y-4">
-            {/* Live "Now & Next" Trip Companion */}
-            <NowNextWidget
-              events={currentDisplayDayEvents}
-              selectedDate={selectedDate}
-              onSelectEvent={(ev) => setSelectedEventId(ev.id)}
-            />
-
             {/* Day Selector (22 Tue to 26 Sat) */}
             <DaySelector
               selectedDate={selectedDate}

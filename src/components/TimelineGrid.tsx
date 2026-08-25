@@ -31,7 +31,7 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
     return arr;
   }, []);
 
-  // Compute current time position for the "Now" red/indigo line if viewing today
+  // Compute current time position for the "Now" line if viewing today
   const istanbulNow = getIstanbulDate();
   const todayStr = `${istanbulNow.getFullYear()}-${String(istanbulNow.getMonth() + 1).padStart(2, '0')}-${String(istanbulNow.getDate()).padStart(2, '0')}`;
   const isToday = selectedDate === todayStr;
@@ -52,7 +52,6 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
       const start = event.simulatedStartMinutes !== undefined ? event.simulatedStartMinutes : event.startMinutesFromDayStart;
       const end = start + event.durationMinutes;
 
-      // Find first column where this event does not overlap
       let placedCol = -1;
       for (let i = 0; i < columns.length; i++) {
         const lastInCol = columns[i][columns[i].length - 1];
@@ -68,7 +67,6 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
         columns.push([{ event, end }]);
       }
 
-      // Check how many concurrent events overlap with this one
       const overlappingCols = columns.filter(col =>
         col.some(item => {
           const itemStart = item.event.simulatedStartMinutes !== undefined ? item.event.simulatedStartMinutes : item.event.startMinutesFromDayStart;
@@ -90,14 +88,14 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
   }, [events]);
 
   return (
-    <div className="bg-[#0b0d16]/80 backdrop-blur-xl rounded-3xl border border-white/[0.08] shadow-elevated p-4 sm:p-6 mb-8 select-none">
+    <div className="bg-[#222734] rounded-3xl border border-slate-700/60 shadow-sm p-4 sm:p-6 mb-8 select-none">
       {/* Scrollable Timeline Canvas */}
       <div
         className="relative flex"
         style={{ height: `${TIMELINE_TOTAL_HEIGHT_PX}px` }}
       >
         {/* Left Time Axis (08:00 to 00:00) */}
-        <div className="w-16 sm:w-20 shrink-0 relative border-r border-white/[0.08] select-none">
+        <div className="w-16 sm:w-20 shrink-0 relative border-r border-slate-700/60 select-none">
           {hours.map((hour) => {
             const displayHour = hour === 24 ? '00:00' : `${String(hour).padStart(2, '0')}:00`;
             const topOffsetPx = (hour - TIMELINE_START_HOUR) * 60 * PIXELS_PER_MINUTE;
@@ -106,7 +104,7 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
               <div
                 key={hour}
                 style={{ top: `${topOffsetPx}px` }}
-                className="absolute right-3 -translate-y-1/2 text-sm sm:text-base font-mono text-zinc-300 font-black tracking-tight"
+                className="absolute right-3 -translate-y-1/2 text-sm sm:text-base font-mono text-slate-400 font-bold tracking-tight"
               >
                 {displayHour}
               </div>
@@ -126,14 +124,14 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
                 {/* Major Hour Line */}
                 <div
                   style={{ top: `${topOffsetPx}px` }}
-                  className="absolute inset-x-0 border-t border-white/[0.07] pointer-events-none"
+                  className="absolute inset-x-0 border-t border-slate-700/50 pointer-events-none"
                 />
 
                 {/* Minor 30-min Dashed Line */}
                 {hour < TIMELINE_END_HOUR && (
                   <div
                     style={{ top: `${halfHourTopOffsetPx}px` }}
-                    className="absolute inset-x-0 border-t border-dashed border-white/[0.03] pointer-events-none"
+                    className="absolute inset-x-0 border-t border-dashed border-slate-700/30 pointer-events-none"
                   />
                 )}
               </React.Fragment>
@@ -146,8 +144,8 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
               style={{ top: `${currentMinutesFromStart * PIXELS_PER_MINUTE}px` }}
               className="absolute inset-x-0 z-20 flex items-center pointer-events-none"
             >
-              <div className="w-3.5 h-3.5 rounded-full bg-indigo-400 shadow-lg shadow-indigo-400/80 -ml-1.5 animate-pulse ring-2 ring-indigo-300/40" />
-              <div className="flex-1 h-[2px] bg-gradient-to-r from-indigo-400 to-transparent shadow-sm shadow-indigo-500/50" />
+              <div className="w-3.5 h-3.5 rounded-full bg-indigo-400 shadow-md -ml-1.5 ring-2 ring-indigo-300/40" />
+              <div className="flex-1 h-[2px] bg-indigo-400" />
             </div>
           )}
 
@@ -165,7 +163,7 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
 
           {/* Empty state hint if no events on this day */}
           {events.length === 0 && (
-            <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-base font-medium italic">
+            <div className="absolute inset-0 flex items-center justify-center text-slate-400 text-base font-medium italic">
               No events scheduled for this day
             </div>
           )}

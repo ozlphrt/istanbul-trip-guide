@@ -24,21 +24,21 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   const lateOptions: RunningLateMinutes[] = [15, 30, 45, 60];
 
   return (
-    <div className="bg-[#12141c] border border-white/[0.07] rounded-2xl p-4 sm:p-5 mb-5 space-y-4 shadow-subtle">
+    <div className="bg-[#222734] border border-slate-700/60 rounded-2xl p-4 sm:p-5 mb-5 space-y-4 shadow-sm">
       {/* Top Row: Progress + Simplify Today Toggle */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         {/* Progress Counter */}
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <div className="p-2 rounded-xl bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
             <CheckCircle2 className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-sm sm:text-base font-bold text-zinc-200">
+            <div className="text-sm sm:text-base font-bold text-slate-100">
               {completedCount} of {totalCount} stops completed
             </div>
-            <div className="w-36 sm:w-44 bg-zinc-800 h-1.5 rounded-full overflow-hidden mt-1.5">
+            <div className="w-36 sm:w-44 bg-[#1a1d26] h-1.5 rounded-full overflow-hidden mt-1.5 border border-slate-700/40">
               <div
-                className="bg-emerald-500 h-full rounded-full transition-all duration-300"
+                className="bg-emerald-400 h-full rounded-full transition-all duration-300"
                 style={{ width: `${totalCount > 0 ? (completedCount / totalCount) * 100 : 0}%` }}
               />
             </div>
@@ -50,8 +50,8 @@ export const Toolbar: React.FC<ToolbarProps> = ({
           onClick={onToggleSimplify}
           className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border transition-all ${
             isSimplified
-              ? 'bg-indigo-500/15 border-indigo-500/30 text-indigo-300'
-              : 'bg-white/[0.03] border-white/[0.08] text-zinc-300 hover:bg-white/[0.06] hover:text-white'
+              ? 'bg-indigo-500/20 border-indigo-500/40 text-indigo-300 shadow-sm'
+              : 'bg-[#282e3e] border-slate-700/70 text-slate-300 hover:bg-[#31384b] hover:text-white'
           }`}
           title="Hides optional events to make schedule more relaxed"
         >
@@ -62,7 +62,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
             </>
           ) : (
             <>
-              <Eye className="w-4 h-4 text-zinc-400" />
+              <Eye className="w-4 h-4 text-slate-400" />
               <span>Simplify Today</span>
             </>
           )}
@@ -70,11 +70,11 @@ export const Toolbar: React.FC<ToolbarProps> = ({
       </div>
 
       {/* Bottom Row: Running Late Simulation */}
-      <div className="pt-3 border-t border-white/[0.05] flex flex-wrap items-center justify-between gap-3 text-sm">
-        <div className="flex items-center gap-2 text-zinc-300 font-semibold text-xs sm:text-sm">
+      <div className="pt-3 border-t border-slate-700/50 flex flex-wrap items-center justify-between gap-3 text-sm">
+        <div className="flex items-center gap-2 text-slate-300 font-semibold text-xs sm:text-sm">
           <FastForward className="w-4 h-4 text-indigo-400" />
           <span>Running Late?</span>
-          <span className="text-xs text-zinc-500 font-normal">(Simulation)</span>
+          <span className="text-xs text-slate-400 font-normal">(Simulation)</span>
         </div>
 
         {/* Delay Pills */}
@@ -85,10 +85,10 @@ export const Toolbar: React.FC<ToolbarProps> = ({
               <button
                 key={minutes}
                 onClick={() => onSelectRunningLate(isActive ? 0 : minutes)}
-                className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold font-mono transition ${
+                className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold font-mono transition shadow-sm ${
                   isActive
-                    ? 'bg-indigo-600 text-white shadow-sm ring-1 ring-indigo-400'
-                    : 'bg-white/[0.04] text-zinc-300 hover:bg-white/[0.08] hover:text-white border border-white/[0.06]'
+                    ? 'bg-indigo-600 text-white shadow-md ring-2 ring-indigo-400'
+                    : 'bg-[#282e3e] text-slate-300 hover:bg-[#31384b] hover:text-white border border-slate-700/70'
                 }`}
               >
                 +{minutes}m
@@ -99,7 +99,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
           {runningLateShift > 0 && (
             <button
               onClick={() => onSelectRunningLate(0)}
-              className="p-1.5 rounded-xl text-zinc-400 hover:text-white hover:bg-white/[0.08] transition ml-1 border border-white/[0.06]"
+              className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-[#282e3e] transition ml-1 border border-slate-700/70"
               title="Reset simulation"
             >
               <RotateCcw className="w-4 h-4" />
