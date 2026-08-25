@@ -94,58 +94,62 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
         className="relative flex"
         style={{ height: `${TIMELINE_TOTAL_HEIGHT_PX}px` }}
       >
-        {/* Left Time Axis (08:00 to 00:00) with 90° CCW Rotated Numerals & Precision Ticks */}
-        <div className="w-9 sm:w-11 shrink-0 relative border-r border-slate-700/70 select-none">
+        {/* Left Time Axis (08:00 to 00:00) with Giant 90° CCW Rotated Numerals & 5-Min Ruler Ticks */}
+        <div className="w-12 sm:w-16 shrink-0 relative border-r border-slate-700/80 select-none">
           {hours.map((hour) => {
             const displayHour = hour === 24 ? '00:00' : `${String(hour).padStart(2, '0')}:00`;
-            const topOffsetPx = (hour - TIMELINE_START_HOUR) * 60 * PIXELS_PER_MINUTE;
-            const top15Px = topOffsetPx + 15 * PIXELS_PER_MINUTE;
-            const top30Px = topOffsetPx + 30 * PIXELS_PER_MINUTE;
-            const top45Px = topOffsetPx + 45 * PIXELS_PER_MINUTE;
+            const hourStartPx = (hour - TIMELINE_START_HOUR) * 60 * PIXELS_PER_MINUTE;
+
+            // Generate 5-minute graduated ticks (0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55)
+            const minuteTicks: number[] = [];
+            if (hour < TIMELINE_END_HOUR) {
+              for (let m = 0; m < 60; m += 5) {
+                minuteTicks.push(m);
+              }
+            } else {
+              minuteTicks.push(0);
+            }
 
             return (
               <React.Fragment key={`axis-${hour}`}>
-                {/* Major Tick Mark (:00) */}
+                {/* Giant Hour Label (Rotated 90° CCW) */}
                 <div
-                  style={{ top: `${topOffsetPx}px` }}
-                  className="absolute right-0 w-2.5 sm:w-3.5 h-[2px] bg-slate-300 pointer-events-none"
-                />
-
-                {/* Major Hour Label (Large & Rotated 90° CCW) */}
-                <div
-                  style={{ top: `${topOffsetPx}px` }}
-                  className="absolute right-1 sm:right-1.5 -translate-y-1/2 origin-center -rotate-90 text-sm sm:text-base font-mono text-white font-black tracking-widest whitespace-nowrap"
+                  style={{ top: `${hourStartPx}px` }}
+                  className="absolute right-4 sm:right-6 -translate-y-1/2 origin-center -rotate-90 text-base sm:text-lg md:text-xl font-mono text-white font-black tracking-widest whitespace-nowrap select-none"
                 >
                   {displayHour}
                 </div>
 
-                {/* Sub-hour Axis Tick Marks (15m, 30m, 45m) */}
-                {hour < TIMELINE_END_HOUR && (
-                  <>
-                    {/* 15m Minor Tick */}
+                {/* 5-Minute Graduated Precision Ruler Ticks */}
+                {minuteTicks.map((m) => {
+                  const tickTopPx = hourStartPx + m * PIXELS_PER_MINUTE;
+                  const isMajor = m === 0;
+                  const isHalf = m === 30;
+                  const isQuarter = m === 15 || m === 45;
+
+                  return (
                     <div
-                      style={{ top: `${top15Px}px` }}
-                      className="absolute right-0 w-1.5 sm:w-2 h-[1px] bg-slate-600/90"
+                      key={`tick-${hour}-${m}`}
+                      style={{ top: `${tickTopPx}px` }}
+                      className={`absolute right-0 pointer-events-none ${
+                        isMajor
+                          ? 'w-4 sm:w-5 h-[2.5px] bg-white rounded-l-full'
+                          : isHalf
+                          ? 'w-3 sm:w-4 h-[2px] bg-slate-300 rounded-l-full'
+                          : isQuarter
+                          ? 'w-2 sm:w-3 h-[1.5px] bg-slate-400 rounded-l-full'
+                          : 'w-1.5 sm:w-2 h-[1px] bg-slate-600/90'
+                      }`}
                     />
-                    {/* 30m Medium Tick */}
-                    <div
-                      style={{ top: `${top30Px}px` }}
-                      className="absolute right-0 w-2.5 sm:w-3 h-[1.5px] bg-slate-400/90"
-                    />
-                    {/* 45m Minor Tick */}
-                    <div
-                      style={{ top: `${top45Px}px` }}
-                      className="absolute right-0 w-1.5 sm:w-2 h-[1px] bg-slate-600/90"
-                    />
-                  </>
-                )}
+                  );
+                })}
               </React.Fragment>
             );
           })}
         </div>
 
         {/* Right Event Canvas with 15-Minute Grid Lines */}
-        <div className="flex-1 relative ml-1.5 sm:ml-2">
+        <div className="flex-1 relative ml-2 sm:ml-3">
           {/* Horizontal 15-Minute Grid Lines */}
           {hours.map((hour) => {
             const topOffsetPx = (hour - TIMELINE_START_HOUR) * 60 * PIXELS_PER_MINUTE;
