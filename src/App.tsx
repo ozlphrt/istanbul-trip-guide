@@ -98,8 +98,15 @@ export const App: React.FC = () => {
     loadEvents();
   }, [loadEvents]);
 
+  const [slideAnimation, setSlideAnimation] = useState<'left' | 'right'>('left');
+
   // Handle Day Selection
   const handleSelectDay = (dateString: string) => {
+    const currentIndex = TRIP_DATES.findIndex(d => d.dateString === selectedDate);
+    const targetIndex = TRIP_DATES.findIndex(d => d.dateString === dateString);
+    if (targetIndex !== -1 && currentIndex !== -1 && targetIndex !== currentIndex) {
+      setSlideAnimation(targetIndex > currentIndex ? 'left' : 'right');
+    }
     setSelectedDate(dateString);
     setStoredSelectedDay(dateString);
   };
@@ -226,13 +233,18 @@ export const App: React.FC = () => {
               optionalCount={optionalCount}
             />
 
-            {/* Vertical Proportional Daily Timeline */}
-            <TimelineGrid
-              events={displayDayEvents}
-              selectedEventId={selectedEventId}
-              onSelectEvent={(ev) => setSelectedEventId(ev.id)}
-              selectedDate={selectedDate}
-            />
+            {/* Vertical Proportional Daily Timeline with Page Sliding Animation */}
+            <div
+              key={selectedDate}
+              className={slideAnimation === 'left' ? 'animate-page-slide-left' : 'animate-page-slide-right'}
+            >
+              <TimelineGrid
+                events={displayDayEvents}
+                selectedEventId={selectedEventId}
+                onSelectEvent={(ev) => setSelectedEventId(ev.id)}
+                selectedDate={selectedDate}
+              />
+            </div>
           </div>
 
           {/* Right Column: Desktop Selected Event Details Panel */}

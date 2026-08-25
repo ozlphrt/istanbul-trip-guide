@@ -27,7 +27,7 @@ export const DaySelector: React.FC<DaySelectorProps> = ({
       {/* Day Selector Segmented Bar */}
       <div 
         ref={containerRef}
-        className="flex items-center justify-between gap-2 p-1.5 bg-zinc-900 rounded-2xl border border-zinc-800 shadow-subtle overflow-x-auto no-scrollbar"
+        className="flex items-center justify-between gap-2 p-2 bg-zinc-900 rounded-2xl border border-zinc-800 shadow-subtle overflow-x-auto no-scrollbar"
       >
         {TRIP_DATES.map((day) => {
           const isSelected = selectedDate === day.dateString;
@@ -38,19 +38,19 @@ export const DaySelector: React.FC<DaySelectorProps> = ({
             <button
               key={day.dateString}
               onClick={() => onSelectDate(day.dateString)}
-              className={`flex-1 min-w-[64px] py-2.5 px-2 rounded-xl flex flex-col items-center justify-center transition-all duration-200 relative ${
+              className={`flex-1 min-w-[64px] py-3 px-2 rounded-xl flex flex-col items-center justify-center transition-all duration-200 relative ${
                 isSelected
-                  ? 'bg-zinc-800 text-white shadow-elevated border border-zinc-700 ring-1 ring-indigo-500/40'
+                  ? 'bg-zinc-800 text-white shadow-elevated border border-zinc-700 ring-2 ring-indigo-500/50'
                   : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-850'
               }`}
             >
               {/* Day of Month */}
-              <span className={`text-xl sm:text-2xl font-black tracking-tight ${isSelected ? 'text-indigo-400' : 'text-zinc-200'}`}>
+              <span className={`text-2xl sm:text-3xl font-black tracking-tight ${isSelected ? 'text-indigo-400' : 'text-white'}`}>
                 {day.dayOfMonth}
               </span>
 
               {/* Day of Week */}
-              <span className={`text-xs sm:text-sm uppercase tracking-wider font-bold ${isSelected ? 'text-white' : 'text-zinc-400'}`}>
+              <span className={`text-xs sm:text-sm uppercase tracking-wider font-extrabold ${isSelected ? 'text-white' : 'text-zinc-400'}`}>
                 {day.dayOfWeekShort}
               </span>
 
@@ -58,13 +58,13 @@ export const DaySelector: React.FC<DaySelectorProps> = ({
               {stats.total > 0 && (
                 <div className="mt-1 flex items-center gap-1">
                   {isAllDone ? (
-                    <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
                   ) : stats.done > 0 ? (
-                    <span className="text-[11px] text-indigo-300 font-bold">
+                    <span className="text-xs text-indigo-300 font-extrabold font-mono">
                       {stats.done}/{stats.total}
                     </span>
                   ) : (
-                    <span className="w-1.5 h-1.5 rounded-full bg-zinc-700"></span>
+                    <span className="w-2 h-2 rounded-full bg-zinc-700"></span>
                   )}
                 </div>
               )}

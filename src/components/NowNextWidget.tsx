@@ -83,31 +83,31 @@ export const NowNextWidget: React.FC<NowNextWidgetProps> = ({
       {/* Header Bar */}
       <div className="flex items-center justify-between mb-3.5">
         <div className="flex items-center gap-2 font-bold text-zinc-300">
-          <Compass className="w-4 h-4 text-indigo-400" />
-          <span className="tracking-wider uppercase text-xs font-bold text-zinc-400">Live Trip Companion</span>
+          <Compass className="w-5 h-5 text-indigo-400" />
+          <span className="tracking-wider uppercase text-xs sm:text-sm font-extrabold text-zinc-300">Live Trip Companion</span>
         </div>
         <button
           onClick={() => setShowSimControls(!showSimControls)}
-          className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold transition ${
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition ${
             simulatedHour !== null
               ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/40'
-              : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800'
+              : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 border border-zinc-750'
           }`}
           title="Simulate time of day"
         >
-          <SlidersHorizontal className="w-3.5 h-3.5" />
+          <SlidersHorizontal className="w-4 h-4" />
           <span>{simulatedHour !== null ? `Simulating ${Math.floor(simulatedHour)}:${String(Math.round((simulatedHour % 1) * 60)).padStart(2, '0')}` : 'Preview Clock'}</span>
         </button>
       </div>
 
       {/* Simulation Slider Drawer */}
       {showSimControls && (
-        <div className="mb-4 p-4 bg-zinc-950 border border-zinc-750 rounded-xl space-y-3 text-sm">
+        <div className="mb-4 p-4 bg-zinc-950 border border-zinc-750 rounded-2xl space-y-3 text-sm">
           <div className="flex justify-between items-center text-zinc-200">
-            <span className="font-semibold">Time of Day Simulator:</span>
+            <span className="font-bold">Time of Day Simulator:</span>
             <button
               onClick={() => { setSimulatedHour(null); }}
-              className="text-xs text-indigo-400 font-semibold hover:underline"
+              className="text-xs sm:text-sm text-indigo-400 font-bold hover:underline"
             >
               Reset (10:15)
             </button>
@@ -121,7 +121,7 @@ export const NowNextWidget: React.FC<NowNextWidgetProps> = ({
             onChange={(e) => setSimulatedHour(parseFloat(e.target.value))}
             className="w-full accent-indigo-500 cursor-pointer h-2 bg-zinc-800 rounded-lg"
           />
-          <div className="flex justify-between text-xs text-zinc-400 font-mono">
+          <div className="flex justify-between text-xs sm:text-sm text-zinc-400 font-mono font-bold">
             <span>08:00</span>
             <span>12:00</span>
             <span>16:00</span>
@@ -136,48 +136,48 @@ export const NowNextWidget: React.FC<NowNextWidgetProps> = ({
         {/* NOW Block */}
         <div
           onClick={() => currentEvent && onSelectEvent(currentEvent)}
-          className={`p-4 rounded-xl border transition cursor-pointer flex flex-col justify-between ${
+          className={`p-4 sm:p-5 rounded-2xl border transition cursor-pointer flex flex-col justify-between ${
             currentEvent
-              ? 'bg-zinc-950 border-indigo-500/50 hover:border-indigo-400'
+              ? 'bg-zinc-950 border-indigo-500/50 hover:border-indigo-400 shadow-md'
               : 'bg-zinc-950/60 border-zinc-800/80 text-zinc-500'
           }`}
         >
           <div>
-            <div className="flex items-center justify-between text-xs font-bold tracking-wider text-indigo-400 uppercase mb-1.5">
+            <div className="flex items-center justify-between text-xs sm:text-sm font-extrabold tracking-wider text-indigo-400 uppercase mb-2">
               <span className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-pulse"></span>
                 NOW
               </span>
               {currentEvent && (
-                <span className="text-zinc-300 font-semibold text-xs">
+                <span className="text-zinc-200 font-bold font-mono text-xs sm:text-sm">
                   {formatEventTime(currentEvent.startTime)}–{formatEventTime(currentEvent.endTime)}
                 </span>
               )}
             </div>
 
             {currentEvent ? (
-              <div className="font-bold text-white text-base sm:text-lg leading-snug line-clamp-1">
+              <div className="font-black text-white text-lg sm:text-xl leading-snug line-clamp-1">
                 {currentEvent.title}
               </div>
             ) : (
-              <div className="text-sm text-zinc-400 italic py-1">
+              <div className="text-sm sm:text-base text-zinc-400 italic py-1">
                 No active activity (Free time)
               </div>
             )}
           </div>
 
           {currentEvent && (
-            <div className="mt-3.5 space-y-1.5">
-              <div className="w-full bg-zinc-800 h-2 rounded-full overflow-hidden">
+            <div className="mt-4 space-y-2">
+              <div className="w-full bg-zinc-800 h-2.5 rounded-full overflow-hidden border border-zinc-750">
                 <div
                   className="bg-indigo-500 h-full rounded-full transition-all duration-500"
                   style={{ width: `${getProgressPercentage(currentEvent)}%` }}
                 />
               </div>
-              <div className="flex items-center justify-between text-xs text-zinc-400">
-                <span className="truncate">{currentEvent.location ? currentEvent.location.split(',')[0] : 'In progress'}</span>
-                <span className="flex items-center gap-0.5 text-indigo-400 font-semibold shrink-0 ml-1">
-                  View <ChevronRight className="w-3.5 h-3.5" />
+              <div className="flex items-center justify-between text-xs sm:text-sm text-zinc-300">
+                <span className="truncate font-medium">{currentEvent.location ? currentEvent.location.split(',')[0] : 'In progress'}</span>
+                <span className="flex items-center gap-0.5 text-indigo-400 font-bold shrink-0 ml-1">
+                  View <ChevronRight className="w-4 h-4" />
                 </span>
               </div>
             </div>
@@ -187,44 +187,44 @@ export const NowNextWidget: React.FC<NowNextWidgetProps> = ({
         {/* NEXT Block */}
         <div
           onClick={() => nextEvent && onSelectEvent(nextEvent)}
-          className={`p-4 rounded-xl border transition cursor-pointer flex flex-col justify-between ${
+          className={`p-4 sm:p-5 rounded-2xl border transition cursor-pointer flex flex-col justify-between ${
             nextEvent
-              ? 'bg-zinc-950 border-zinc-750 hover:border-zinc-600'
+              ? 'bg-zinc-950 border-zinc-750 hover:border-zinc-600 shadow-md'
               : 'bg-zinc-950/60 border-zinc-800/80 text-zinc-500'
           }`}
         >
           <div>
-            <div className="flex items-center justify-between text-xs font-bold tracking-wider text-zinc-400 uppercase mb-1.5">
+            <div className="flex items-center justify-between text-xs sm:text-sm font-extrabold tracking-wider text-zinc-300 uppercase mb-2">
               <span className="flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-zinc-400" />
+                <Clock className="w-4 h-4 text-zinc-400" />
                 NEXT
               </span>
               {nextEvent && (
-                <span className="text-zinc-200 font-bold text-sm">
+                <span className="text-zinc-200 font-extrabold font-mono text-xs sm:text-sm">
                   {formatEventTime(nextEvent.startTime)}
                 </span>
               )}
             </div>
 
             {nextEvent ? (
-              <div className="font-bold text-white text-base sm:text-lg leading-snug line-clamp-1">
+              <div className="font-black text-white text-lg sm:text-xl leading-snug line-clamp-1">
                 {nextEvent.title}
               </div>
             ) : (
-              <div className="text-sm text-zinc-400 italic py-1">
+              <div className="text-sm sm:text-base text-zinc-400 italic py-1">
                 Schedule complete for today
               </div>
             )}
           </div>
 
           {nextEvent && (
-            <div className="mt-3.5 flex items-center justify-between text-xs">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-zinc-800 text-sky-300 font-bold text-xs border border-sky-500/30">
-                <Navigation className="w-3.5 h-3.5 text-sky-400" />
+            <div className="mt-4 flex items-center justify-between text-xs sm:text-sm">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-800 text-sky-300 font-extrabold text-xs sm:text-sm border border-sky-500/30">
+                <Navigation className="w-4 h-4 text-sky-400" />
                 {getLeaveText(minutesToNext)}
               </span>
-              <span className="flex items-center gap-0.5 text-zinc-400 text-xs font-semibold">
-                Details <ChevronRight className="w-3.5 h-3.5" />
+              <span className="flex items-center gap-0.5 text-zinc-300 text-xs sm:text-sm font-bold">
+                Details <ChevronRight className="w-4 h-4" />
               </span>
             </div>
           )}

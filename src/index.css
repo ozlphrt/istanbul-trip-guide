@@ -56,6 +56,37 @@ body {
   animation: sheetSlideUp 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Day page swipe & switch animations */
+@keyframes pageSlideFromRight {
+  from {
+    opacity: 0.2;
+    transform: translateX(48px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pageSlideFromLeft {
+  from {
+    opacity: 0.2;
+    transform: translateX(-48px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-page-slide-left {
+  animation: pageSlideFromRight 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-page-slide-right {
+  animation: pageSlideFromLeft 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 .overscroll-contain {
   overscroll-behavior: contain;
 }
