@@ -54,6 +54,20 @@ export const EventCard: React.FC<EventCardProps> = ({
     }
   };
 
+  const getTypeBorderClass = (type: EventType) => {
+    switch (type) {
+      case 'visit': return 'border-sky-500/60 hover:border-sky-400';
+      case 'food': return 'border-rose-500/60 hover:border-rose-400';
+      case 'drink': return 'border-amber-400/60 hover:border-amber-300';
+      case 'walk': return 'border-emerald-500/60 hover:border-emerald-400';
+      case 'transport': return 'border-cyan-400/60 hover:border-cyan-300';
+      case 'concert': return 'border-indigo-400/60 hover:border-indigo-300';
+      case 'rest': return 'border-slate-600/60 hover:border-slate-500';
+      case 'optional': return 'border-slate-600/60 hover:border-slate-500';
+      default: return 'border-sky-500/60 hover:border-sky-400';
+    }
+  };
+
   const isCompact = heightPx < 70;
   const isMedium = heightPx >= 70 && heightPx < 115;
   const isTall = heightPx >= 115;
@@ -69,13 +83,13 @@ export const EventCard: React.FC<EventCardProps> = ({
       }}
       className={`absolute rounded-2xl border p-3.5 sm:p-4 transition-all duration-150 cursor-pointer overflow-hidden flex flex-col justify-between select-none ${
         event.status === 'done'
-          ? 'bg-[#1e2330]/80 border-emerald-800/40 text-emerald-300/80 opacity-60 shadow-md shadow-black/25'
+          ? 'bg-[#1e2330]/80 border-emerald-800/50 text-emerald-300/80 opacity-60 shadow-md shadow-black/25'
           : event.status === 'skipped'
           ? 'bg-[#181b24]/50 border-slate-800 text-slate-500 opacity-40 line-through'
-          : 'bg-[#282e3e] border-slate-700/90 hover:border-slate-500 hover:bg-[#31384b] shadow-[0_6px_20px_-3px_rgba(0,0,0,0.5),0_2px_6px_rgba(0,0,0,0.3)] hover:shadow-[0_10px_28px_-4px_rgba(0,0,0,0.65),0_3px_8px_rgba(0,0,0,0.4)]'
+          : `bg-[#282e3e] ${getTypeBorderClass(event.type)} hover:bg-[#31384b] shadow-[0_6px_20px_-3px_rgba(0,0,0,0.5),0_2px_6px_rgba(0,0,0,0.3)] hover:shadow-[0_10px_28px_-4px_rgba(0,0,0,0.65),0_3px_8px_rgba(0,0,0,0.4)]`
       } ${
         isSelected
-          ? 'ring-2 ring-indigo-400 border-indigo-400 bg-[#31384b] z-20 shadow-[0_0_0_2px_rgba(129,140,248,0.8),0_12px_32px_-4px_rgba(0,0,0,0.7)]'
+          ? 'ring-2 ring-indigo-400 !border-indigo-400 bg-[#31384b] z-20 shadow-[0_0_0_2px_rgba(129,140,248,0.8),0_12px_32px_-4px_rgba(0,0,0,0.7)]'
           : 'z-10'
       } ${event.hasCollisionWithFixed ? 'ring-2 ring-rose-500 animate-pulse' : ''}`}
     >
