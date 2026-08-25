@@ -151,14 +151,9 @@ export const EventCard: React.FC<EventCardProps> = ({
                   </span>
                 )}
               </span>
-
-              {/* Duration Badge */}
-              <span className="text-xs font-medium px-2 py-0.5 rounded bg-[#1e2330] border border-slate-700 text-slate-300 shrink-0 font-mono">
-                {formatDuration(event.durationMinutes)}
-              </span>
             </div>
 
-            {/* Status / Fixed Badges */}
+            {/* Right: Status / Fixed / Duration Badges */}
             <div className="flex items-center gap-1.5 shrink-0">
               {event.hasCollisionWithFixed && (
                 <span className="flex items-center gap-1 px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 text-xs font-bold border border-rose-500/30">
@@ -174,6 +169,11 @@ export const EventCard: React.FC<EventCardProps> = ({
                   <Lock className="w-3 h-3 text-amber-400" /> Fixed
                 </span>
               )}
+
+              {/* Duration Badge Moved To Right */}
+              <span className="text-xs font-semibold px-2 py-0.5 rounded bg-[#1e2330] border border-slate-700 text-slate-300 shrink-0 font-mono">
+                {formatDuration(event.durationMinutes)}
+              </span>
 
               {event.status === 'done' && (
                 <span className="text-emerald-400">
