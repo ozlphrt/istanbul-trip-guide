@@ -117,6 +117,18 @@ export function parseEventDescription(rawDescription: string = '', title: string
           case 'food':
             metadata.food = textVal;
             break;
+          case 'do':
+          case 'tip':
+          case 'tips':
+            metadata.do = textVal;
+            break;
+          case 'avoid':
+            metadata.avoid = textVal;
+            break;
+          case 'look_for':
+          case 'lookfor':
+            metadata.lookFor = textVal;
+            break;
           case 'reservation':
             metadata.reservation = textVal;
             break;
@@ -232,6 +244,9 @@ export function parseEventDescription(rawDescription: string = '', title: string
     durationNote: metadata.durationNote,
     facts: metadata.facts || [],
     food: metadata.food,
+    do: metadata.do,
+    avoid: metadata.avoid,
+    lookFor: metadata.lookFor,
     reservation: metadata.reservation,
     ticket: metadata.ticket,
     notes: metadata.notes,

@@ -24,6 +24,9 @@ export interface CalendarEventMetadata {
   durationNote?: string;
   facts?: string[];
   food?: string;
+  do?: string;
+  avoid?: string;
+  lookFor?: string;
   reservation?: string;
   ticket?: string;
   notes?: string;
@@ -50,6 +53,9 @@ export interface ItineraryEvent {
   durationNote?: string;
   facts: string[];
   food?: string;
+  do?: string;
+  avoid?: string;
+  lookFor?: string;
   reservation?: string;
   ticket?: string;
   notes?: string;
