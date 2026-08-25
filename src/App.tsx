@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { Header } from './components/Header';
 import { DaySelector } from './components/DaySelector';
-import { Toolbar } from './components/Toolbar';
 import { TimelineGrid } from './components/TimelineGrid';
 import { EventDetailSheet } from './components/EventDetailSheet';
 import { SettingsModal } from './components/SettingsModal';
 import {
   EventStatus,
   ItineraryEvent,
-  RunningLateMinutes,
   SyncState
 } from './types/calendar';
 import {
@@ -23,14 +21,12 @@ import {
 } from './services/storage';
 import { fetchItineraryEvents } from './services/googleCalendar';
 import { getCachedToken } from './services/auth';
-import { applyRunningLateSimulation, TRIP_DATES } from './utils/time';
+import { TRIP_DATES } from './utils/time';
 
 export const App: React.FC = () => {
   const [events, setEvents] = useState<ItineraryEvent[]>([]);
   const [selectedDate, setSelectedDate] = useState<string>(() => getStoredSelectedDay());
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
-  const [runningLateShift, setRunningLateShift] = useState<RunningLateMinutes>(0);
-  const [isSimplified, setIsSimplified] = useState<boolean>(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
 
   const [syncState, setSyncState] = useState<SyncState>({
@@ -189,23 +185,8 @@ export const App: React.FC = () => {
 
   // Helper to compute processed events for any given day
   const getProcessedDayEvents = useCallback((dateStr: string) => {
-    const raw = events.filter(e => e.startTime.startsWith(dateStr));
-    const filtered = isSimplified ? raw.filter(e => e.type !== 'optional') : raw;
-    return dateStr === selectedDate ? applyRunningLateSimulation(filtered, runningLateShift) : filtered;
-  }, [events, isSimplified, selectedDate, runningLateShift]);
-
-  // Current Day Stats
-  const rawCurrentDayEvents = useMemo(() => {
-    return events.filter(e => e.startTime.startsWith(selectedDate));
-  }, [events, selectedDate]);
-
-  const optionalCount = useMemo(() => {
-    return rawCurrentDayEvents.filter(e => e.type === 'optional').length;
-  }, [rawCurrentDayEvents]);
-
-  const completedCount = useMemo(() => {
-    return rawCurrentDayEvents.filter(e => e.status === 'done').length;
-  }, [rawCurrentDayEvents]);
+    return events.filter(e => e.startTime.startsWith(dateStr));
+  }, [events]);
 
   const currentDisplayDayEvents = useMemo(() => {
     return getProcessedDayEvents(selectedDate);
@@ -238,17 +219,6 @@ export const App: React.FC = () => {
               selectedDate={selectedDate}
               onSelectDate={handleSelectDay}
               allEvents={events}
-            />
-
-            {/* Toolbar: Running Late, Simplify Today, Progress */}
-            <Toolbar
-              runningLateShift={runningLateShift}
-              onSelectRunningLate={setRunningLateShift}
-              isSimplified={isSimplified}
-              onToggleSimplify={() => setIsSimplified(!isSimplified)}
-              completedCount={completedCount}
-              totalCount={rawCurrentDayEvents.length}
-              optionalCount={optionalCount}
             />
 
             {/* Continuous Multi-Day Sliding Carousel Track (Physical Push/Slide) */}
