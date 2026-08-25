@@ -26,7 +26,7 @@ export const DaySelector: React.FC<DaySelectorProps> = ({
   };
 
   return (
-    <div className="relative mb-5 select-none">
+    <div className="sticky top-0 z-30 pt-2 pb-3 bg-[#1a1d26]/95 backdrop-blur-md select-none">
       {/* Day Selector Segmented Bar */}
       <div className="relative flex items-center justify-between p-1.5 bg-[#222734] rounded-2xl border border-slate-700/70 shadow-sm overflow-hidden">
         {/* Physical Sliding Highlight Pill */}
