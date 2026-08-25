@@ -43,15 +43,15 @@ export const EventCard: React.FC<EventCardProps> = ({
   const getTypeStyles = (type: EventType, status: string) => {
     if (status === 'done') {
       return {
-        card: 'bg-emerald-950/20 border-emerald-800/40 text-emerald-300 opacity-60',
+        card: 'bg-gradient-to-br from-emerald-950/25 via-[#0c1813]/60 to-black/60 border-emerald-700/40 text-emerald-200 opacity-60',
         icon: <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 shrink-0" />,
         pinColor: 'text-emerald-400',
-        badge: 'bg-emerald-950/40 border-emerald-700/40 text-emerald-300'
+        badge: 'bg-emerald-950/60 border-emerald-600/40 text-emerald-200'
       };
     }
     if (status === 'skipped') {
       return {
-        card: 'bg-zinc-950/40 border-zinc-800/40 text-zinc-500 opacity-40 line-through',
+        card: 'bg-black/40 border-white/[0.06] text-zinc-500 opacity-40 line-through',
         icon: <XCircle className="w-4 h-4 sm:w-5 sm:h-5 text-zinc-500 shrink-0" />,
         pinColor: 'text-zinc-500',
         badge: 'bg-zinc-900 border-zinc-800 text-zinc-500'
@@ -61,66 +61,66 @@ export const EventCard: React.FC<EventCardProps> = ({
     switch (type) {
       case 'visit':
         return {
-          card: 'bg-sky-950/35 border-sky-800/50 hover:bg-sky-900/35 hover:border-sky-700/70',
+          card: 'bg-gradient-to-br from-sky-950/45 via-[#0b1626]/85 to-black/70 border-sky-500/35 hover:border-sky-400/70 hover:shadow-sky-950/40',
           icon: <Landmark className="w-4 h-4 sm:w-5 sm:h-5 text-sky-400 shrink-0" />,
           pinColor: 'text-sky-400',
-          badge: 'bg-sky-900/40 border-sky-700/40 text-sky-200'
+          badge: 'bg-sky-500/15 border-sky-400/30 text-sky-200'
         };
       case 'food':
         return {
-          card: 'bg-rose-950/35 border-rose-800/50 hover:bg-rose-900/35 hover:border-rose-700/70',
+          card: 'bg-gradient-to-br from-rose-950/45 via-[#1d0d14]/85 to-black/70 border-rose-500/35 hover:border-rose-400/70 hover:shadow-rose-950/40',
           icon: <Utensils className="w-4 h-4 sm:w-5 sm:h-5 text-rose-400 shrink-0" />,
           pinColor: 'text-rose-400',
-          badge: 'bg-rose-900/40 border-rose-700/40 text-rose-200'
+          badge: 'bg-rose-500/15 border-rose-400/30 text-rose-200'
         };
       case 'drink':
         return {
-          card: 'bg-fuchsia-950/35 border-fuchsia-800/50 hover:bg-fuchsia-900/35 hover:border-fuchsia-700/70',
-          icon: <Wine className="w-4 h-4 sm:w-5 sm:h-5 text-fuchsia-400 shrink-0" />,
-          pinColor: 'text-fuchsia-400',
-          badge: 'bg-fuchsia-900/40 border-fuchsia-700/40 text-fuchsia-200'
+          card: 'bg-gradient-to-br from-amber-950/35 via-[#1b1408]/85 to-black/70 border-amber-500/35 hover:border-amber-400/70 hover:shadow-amber-950/40',
+          icon: <Wine className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300 shrink-0" />,
+          pinColor: 'text-amber-300',
+          badge: 'bg-amber-500/15 border-amber-400/30 text-amber-200'
         };
       case 'walk':
         return {
-          card: 'bg-emerald-950/35 border-emerald-800/50 hover:bg-emerald-900/35 hover:border-emerald-700/70',
+          card: 'bg-gradient-to-br from-emerald-950/45 via-[#081812]/85 to-black/70 border-emerald-500/35 hover:border-emerald-400/70 hover:shadow-emerald-950/40',
           icon: <Footprints className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 shrink-0" />,
           pinColor: 'text-emerald-400',
-          badge: 'bg-emerald-900/40 border-emerald-700/40 text-emerald-200'
+          badge: 'bg-emerald-500/15 border-emerald-400/30 text-emerald-200'
         };
       case 'transport':
         return {
-          card: 'bg-cyan-950/35 border-cyan-800/50 hover:bg-cyan-900/35 hover:border-cyan-700/70',
+          card: 'bg-gradient-to-br from-cyan-950/45 via-[#091720]/85 to-black/70 border-cyan-500/35 hover:border-cyan-400/70 hover:shadow-cyan-950/40',
           icon: <Ship className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400 shrink-0" />,
           pinColor: 'text-cyan-400',
-          badge: 'bg-cyan-900/40 border-cyan-700/40 text-cyan-200'
+          badge: 'bg-cyan-500/15 border-cyan-400/30 text-cyan-200'
         };
       case 'concert':
         return {
-          card: 'bg-indigo-950/40 border-indigo-800/60 hover:bg-indigo-900/40 hover:border-indigo-700/80',
-          icon: <Music className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-400 shrink-0" />,
-          pinColor: 'text-indigo-400',
-          badge: 'bg-indigo-900/40 border-indigo-700/40 text-indigo-200'
+          card: 'bg-gradient-to-br from-violet-950/50 via-[#140c26]/85 to-black/70 border-violet-500/35 hover:border-violet-400/70 hover:shadow-violet-950/40',
+          icon: <Music className="w-4 h-4 sm:w-5 sm:h-5 text-violet-400 shrink-0" />,
+          pinColor: 'text-violet-400',
+          badge: 'bg-violet-500/15 border-violet-400/30 text-violet-200'
         };
       case 'rest':
         return {
-          card: 'bg-zinc-850/80 border-zinc-700/60 hover:bg-zinc-800/80 hover:border-zinc-650/80',
+          card: 'bg-gradient-to-br from-slate-900/60 via-[#10141e]/85 to-black/70 border-slate-700/40 hover:border-slate-500/60',
           icon: <BedDouble className="w-4 h-4 sm:w-5 sm:h-5 text-slate-300 shrink-0" />,
           pinColor: 'text-zinc-400',
-          badge: 'bg-zinc-800 border-zinc-700 text-zinc-300'
+          badge: 'bg-white/[0.06] border-white/[0.1] text-zinc-300'
         };
       case 'optional':
         return {
-          card: 'bg-zinc-900/40 border-zinc-700/50 border-dashed hover:bg-zinc-850/50',
+          card: 'bg-white/[0.02] border-white/[0.1] border-dashed hover:bg-white/[0.05]',
           icon: <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5 text-zinc-400 shrink-0" />,
           pinColor: 'text-zinc-400',
-          badge: 'bg-zinc-800 border-zinc-700 text-zinc-400'
+          badge: 'bg-white/[0.04] border-white/[0.08] text-zinc-400'
         };
       default:
         return {
-          card: 'bg-sky-950/35 border-sky-800/50 hover:bg-sky-900/35 hover:border-sky-700/70',
+          card: 'bg-gradient-to-br from-sky-950/45 via-[#0b1626]/85 to-black/70 border-sky-500/35 hover:border-sky-400/70',
           icon: <Landmark className="w-4 h-4 sm:w-5 sm:h-5 text-sky-400 shrink-0" />,
           pinColor: 'text-sky-400',
-          badge: 'bg-sky-900/40 border-sky-700/40 text-sky-200'
+          badge: 'bg-sky-500/15 border-sky-400/30 text-sky-200'
         };
     }
   };
@@ -139,11 +139,11 @@ export const EventCard: React.FC<EventCardProps> = ({
         left: leftOffset,
         width: width,
       }}
-      className={`absolute rounded-2xl border p-3 sm:p-4 transition-all duration-150 cursor-pointer overflow-hidden flex flex-col justify-between shadow-subtle backdrop-blur-md select-none ${
+      className={`absolute rounded-2xl border p-3.5 sm:p-4 transition-all duration-200 cursor-pointer overflow-hidden flex flex-col justify-between shadow-elevated backdrop-blur-xl select-none ${
         style.card
       } ${
         isSelected
-          ? 'ring-2 ring-indigo-400 ring-offset-2 ring-offset-zinc-950 scale-[1.01] z-20 shadow-elevated'
+          ? 'ring-2 ring-indigo-400 ring-offset-2 ring-offset-black scale-[1.015] z-20 shadow-2xl shadow-indigo-500/20'
           : 'hover:scale-[1.005] z-10'
       } ${event.hasCollisionWithFixed ? 'ring-2 ring-rose-500 animate-pulse' : ''}`}
     >
@@ -159,7 +159,7 @@ export const EventCard: React.FC<EventCardProps> = ({
             </div>
             <div className="flex items-center gap-1.5 shrink-0">
               {event.isFixed && (
-                <span className="flex items-center gap-0.5 px-2 py-0.5 rounded bg-black/40 text-amber-200 border border-amber-500/30 text-xs font-bold">
+                <span className="flex items-center gap-0.5 px-2 py-0.5 rounded-lg bg-black/50 text-amber-200 border border-amber-400/40 text-[11px] font-black">
                   <Lock className="w-3 h-3" /> Fixed
                 </span>
               )}
@@ -170,11 +170,11 @@ export const EventCard: React.FC<EventCardProps> = ({
           </div>
 
           <div className="flex items-center justify-between text-xs sm:text-sm font-semibold text-zinc-300 pt-0.5">
-            <span className="font-mono text-white font-bold">
+            <span className="font-mono text-white font-black">
               {formatEventTime(event.startTime)}–{formatEventTime(event.endTime)}
             </span>
             {event.location && (
-              <span className="truncate max-w-[160px] text-zinc-300 font-normal">
+              <span className="truncate max-w-[160px] text-zinc-300 font-medium">
                 {event.location.split(',')[0]}
               </span>
             )}
@@ -189,7 +189,7 @@ export const EventCard: React.FC<EventCardProps> = ({
               {style.icon}
 
               {/* Time */}
-              <span className="font-extrabold tracking-tight text-white shrink-0 font-mono text-sm sm:text-base">
+              <span className="font-black tracking-tight text-white shrink-0 font-mono text-sm sm:text-base">
                 {event.isSimulatedShifted && event.simulatedStartTime ? (
                   <span className="flex items-center gap-1.5">
                     <span className="line-through text-zinc-500 text-xs">
@@ -215,14 +215,14 @@ export const EventCard: React.FC<EventCardProps> = ({
             {/* Status / Fixed Badges */}
             <div className="flex items-center gap-1.5 shrink-0">
               {event.hasCollisionWithFixed && (
-                <span className="flex items-center gap-1 px-2.5 py-0.5 rounded bg-rose-500/20 text-rose-300 text-xs font-bold border border-rose-500/40">
+                <span className="flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-rose-500/25 text-rose-200 text-xs font-black border border-rose-400/50 shadow-sm">
                   <AlertTriangle className="w-3.5 h-3.5" /> Conflict
                 </span>
               )}
 
               {event.isFixed && (
                 <span
-                  className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-black/50 text-amber-200 text-xs sm:text-sm font-bold border border-amber-500/40"
+                  className="flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-black/60 text-amber-200 text-xs sm:text-sm font-black border border-amber-400/40 shadow-sm"
                   title="Fixed time slot (Locked)"
                 >
                   <Lock className="w-3.5 h-3.5 text-amber-400" /> Fixed
@@ -230,7 +230,7 @@ export const EventCard: React.FC<EventCardProps> = ({
               )}
 
               {event.status === 'done' && (
-                <span className="text-emerald-400">
+                <span className="text-emerald-400 drop-shadow-sm">
                   <CheckCircle className="w-5 h-5" />
                 </span>
               )}
@@ -250,7 +250,7 @@ export const EventCard: React.FC<EventCardProps> = ({
             </h3>
 
             {isTall && (event.what || event.why) && (
-              <p className="text-xs sm:text-sm text-zinc-200 line-clamp-2 mt-1.5 font-normal leading-relaxed">
+              <p className="text-xs sm:text-sm text-zinc-300 line-clamp-2 mt-1.5 font-normal leading-relaxed">
                 {event.what || event.why}
               </p>
             )}
@@ -268,11 +268,11 @@ export const EventCard: React.FC<EventCardProps> = ({
             </div>
 
             {event.reservation ? (
-              <span className="px-2.5 py-0.5 rounded-lg bg-rose-950/70 text-rose-200 border border-rose-700/60 text-xs sm:text-sm font-bold shrink-0 ml-1">
+              <span className="px-2.5 py-0.5 rounded-lg bg-rose-500/20 text-rose-200 border border-rose-400/30 text-xs sm:text-sm font-black shrink-0 ml-1 shadow-sm">
                 Reserved
               </span>
             ) : event.ticket ? (
-              <span className="px-2.5 py-0.5 rounded-lg bg-emerald-950/70 text-emerald-200 border border-emerald-700/60 text-xs sm:text-sm font-bold shrink-0 ml-1">
+              <span className="px-2.5 py-0.5 rounded-lg bg-emerald-500/20 text-emerald-200 border border-emerald-400/30 text-xs sm:text-sm font-black shrink-0 ml-1 shadow-sm">
                 Ticketed
               </span>
             ) : null}

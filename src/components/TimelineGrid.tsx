@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ItineraryEvent } from '../types/calendar';
-import { EventCard } from './EventCard';
 import {
   TIMELINE_START_HOUR,
   TIMELINE_END_HOUR,
   PIXELS_PER_MINUTE,
   TIMELINE_TOTAL_HEIGHT_PX,
-  getIstanbulDate,
-  getIstanbulDateString,
+  getIstanbulDate
 } from '../utils/time';
+import { EventCard } from './EventCard';
 
 interface TimelineGridProps {
   events: ItineraryEvent[];
@@ -23,85 +22,82 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
   onSelectEvent,
   selectedDate,
 }) => {
-  // Generate hour slots: 08:00 to 24:00
-  const hours = Array.from(
-    { length: TIMELINE_END_HOUR - TIMELINE_START_HOUR + 1 },
-    (_, i) => TIMELINE_START_HOUR + i
-  );
+  // Generate list of timeline hours (08:00 to 24:00)
+  const hours = useMemo(() => {
+    const arr: number[] = [];
+    for (let h = TIMELINE_START_HOUR; h <= TIMELINE_END_HOUR; h++) {
+      arr.push(h);
+    }
+    return arr;
+  }, []);
 
-  // Compute current time line if selectedDate is today
-  const nowIstanbul = getIstanbulDate();
-  const isToday = getIstanbulDateString(nowIstanbul) === selectedDate;
-  const currentMinutesFromStart = isToday
-    ? (nowIstanbul.getHours() * 60 + nowIstanbul.getMinutes()) - (TIMELINE_START_HOUR * 60)
-    : -1;
+  // Compute current time position for the "Now" red/indigo line if viewing today
+  const istanbulNow = getIstanbulDate();
+  const todayStr = `${istanbulNow.getFullYear()}-${String(istanbulNow.getMonth() + 1).padStart(2, '0')}-${String(istanbulNow.getDate()).padStart(2, '0')}`;
+  const isToday = selectedDate === todayStr;
 
-  // Simple overlap column assignment for overlapping events
-  const layoutEvents = React.useMemo(() => {
-    if (events.length === 0) return [];
+  const currentMinutesFromStart = (istanbulNow.getHours() * 60 + istanbulNow.getMinutes()) - (TIMELINE_START_HOUR * 60);
 
+  // Compute side-by-side collision layout for overlapping events
+  const layoutEvents = useMemo(() => {
     const sorted = [...events].sort((a, b) => {
-      const aStart = a.simulatedStartMinutes ?? a.startMinutesFromDayStart;
-      const bStart = b.simulatedStartMinutes ?? b.startMinutesFromDayStart;
+      const aStart = a.simulatedStartMinutes !== undefined ? a.simulatedStartMinutes : a.startMinutesFromDayStart;
+      const bStart = b.simulatedStartMinutes !== undefined ? b.simulatedStartMinutes : b.startMinutesFromDayStart;
       return aStart - bStart;
     });
 
-    // Group overlapping clusters
-    const clusters: ItineraryEvent[][] = [];
-    let currentCluster: ItineraryEvent[] = [];
-    let clusterEnd = -1;
+    const columns: Array<Array<{ event: ItineraryEvent; end: number }>> = [];
 
-    sorted.forEach((ev) => {
-      const start = ev.simulatedStartMinutes ?? ev.startMinutesFromDayStart;
-      const end = start + ev.durationMinutes;
+    return sorted.map((event) => {
+      const start = event.simulatedStartMinutes !== undefined ? event.simulatedStartMinutes : event.startMinutesFromDayStart;
+      const end = start + event.durationMinutes;
 
-      if (start < clusterEnd) {
-        currentCluster.push(ev);
-        clusterEnd = Math.max(clusterEnd, end);
-      } else {
-        if (currentCluster.length > 0) {
-          clusters.push(currentCluster);
+      // Find first column where this event does not overlap
+      let placedCol = -1;
+      for (let i = 0; i < columns.length; i++) {
+        const lastInCol = columns[i][columns[i].length - 1];
+        if (lastInCol.end <= start) {
+          columns[i].push({ event, end });
+          placedCol = i;
+          break;
         }
-        currentCluster = [ev];
-        clusterEnd = end;
       }
-    });
-    if (currentCluster.length > 0) {
-      clusters.push(currentCluster);
-    }
 
-    // Assign width and left offset within clusters
-    const placed: { event: ItineraryEvent; leftOffset: string; width: string }[] = [];
-
-    clusters.forEach((cluster) => {
-      const count = cluster.length;
-      if (count === 1) {
-        placed.push({ event: cluster[0], leftOffset: '0%', width: '100%' });
-      } else {
-        cluster.forEach((ev, idx) => {
-          const colWidth = 100 / count;
-          const left = idx * colWidth;
-          placed.push({
-            event: ev,
-            leftOffset: `${left}%`,
-            width: `${colWidth - 1}%`,
-          });
-        });
+      if (placedCol === -1) {
+        placedCol = columns.length;
+        columns.push([{ event, end }]);
       }
-    });
 
-    return placed;
+      // Check how many concurrent events overlap with this one
+      const overlappingCols = columns.filter(col =>
+        col.some(item => {
+          const itemStart = item.event.simulatedStartMinutes !== undefined ? item.event.simulatedStartMinutes : item.event.startMinutesFromDayStart;
+          const itemEnd = itemStart + item.event.durationMinutes;
+          return (start < itemEnd && end > itemStart);
+        })
+      ).length;
+
+      const totalCols = Math.max(overlappingCols, 1);
+      const width = `${100 / totalCols}%`;
+      const leftOffset = `${(placedCol / totalCols) * 100}%`;
+
+      return {
+        event,
+        leftOffset,
+        width,
+      };
+    });
   }, [events]);
 
   return (
-    <div className="relative bg-zinc-900/80 rounded-2xl border border-zinc-800 p-3 sm:p-5 shadow-elevated overflow-hidden select-none">
-      {/* Container with fixed calculated height for exact minute-to-pixel ratio */}
+    <div className="bg-[#0b0d16]/80 backdrop-blur-xl rounded-3xl border border-white/[0.08] shadow-elevated p-4 sm:p-6 mb-8 select-none">
+      {/* Scrollable Timeline Canvas */}
       <div
         className="relative flex"
         style={{ height: `${TIMELINE_TOTAL_HEIGHT_PX}px` }}
       >
         {/* Left Time Axis (08:00 to 00:00) */}
-        <div className="w-16 sm:w-20 shrink-0 relative border-r border-zinc-800 select-none">
+        <div className="w-16 sm:w-20 shrink-0 relative border-r border-white/[0.08] select-none">
           {hours.map((hour) => {
             const displayHour = hour === 24 ? '00:00' : `${String(hour).padStart(2, '0')}:00`;
             const topOffsetPx = (hour - TIMELINE_START_HOUR) * 60 * PIXELS_PER_MINUTE;
@@ -110,7 +106,7 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
               <div
                 key={hour}
                 style={{ top: `${topOffsetPx}px` }}
-                className="absolute right-3 -translate-y-1/2 text-sm sm:text-base font-mono text-zinc-200 font-extrabold tracking-tight"
+                className="absolute right-3 -translate-y-1/2 text-sm sm:text-base font-mono text-zinc-300 font-black tracking-tight"
               >
                 {displayHour}
               </div>
@@ -119,7 +115,7 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
         </div>
 
         {/* Right Event Canvas with Hour Grid Lines */}
-        <div className="flex-1 relative ml-2.5 sm:ml-4">
+        <div className="flex-1 relative ml-3 sm:ml-5">
           {/* Horizontal Hour Lines & Half-Hour Lines */}
           {hours.map((hour) => {
             const topOffsetPx = (hour - TIMELINE_START_HOUR) * 60 * PIXELS_PER_MINUTE;
@@ -130,14 +126,14 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
                 {/* Major Hour Line */}
                 <div
                   style={{ top: `${topOffsetPx}px` }}
-                  className="absolute inset-x-0 border-t border-zinc-800 pointer-events-none"
+                  className="absolute inset-x-0 border-t border-white/[0.07] pointer-events-none"
                 />
 
                 {/* Minor 30-min Dashed Line */}
                 {hour < TIMELINE_END_HOUR && (
                   <div
                     style={{ top: `${halfHourTopOffsetPx}px` }}
-                    className="absolute inset-x-0 border-t border-dashed border-zinc-850 pointer-events-none"
+                    className="absolute inset-x-0 border-t border-dashed border-white/[0.03] pointer-events-none"
                   />
                 )}
               </React.Fragment>
@@ -150,8 +146,8 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
               style={{ top: `${currentMinutesFromStart * PIXELS_PER_MINUTE}px` }}
               className="absolute inset-x-0 z-20 flex items-center pointer-events-none"
             >
-              <div className="w-3 h-3 rounded-full bg-indigo-500 shadow-lg shadow-indigo-500/50 -ml-1.5 animate-pulse" />
-              <div className="flex-1 h-[2px] bg-indigo-500 shadow-sm" />
+              <div className="w-3.5 h-3.5 rounded-full bg-indigo-400 shadow-lg shadow-indigo-400/80 -ml-1.5 animate-pulse ring-2 ring-indigo-300/40" />
+              <div className="flex-1 h-[2px] bg-gradient-to-r from-indigo-400 to-transparent shadow-sm shadow-indigo-500/50" />
             </div>
           )}
 
@@ -169,7 +165,7 @@ export const TimelineGrid: React.FC<TimelineGridProps> = ({
 
           {/* Empty state hint if no events on this day */}
           {events.length === 0 && (
-            <div className="absolute inset-0 flex items-center justify-center text-zinc-500 text-base font-medium italic">
+            <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-base font-medium italic">
               No events scheduled for this day
             </div>
           )}

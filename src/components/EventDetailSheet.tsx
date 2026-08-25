@@ -48,9 +48,9 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
   if (!event) {
     if (isDesktopSidebar) {
       return (
-        <div className="h-full flex flex-col items-center justify-center p-8 text-center text-zinc-400 bg-zinc-900/80 rounded-3xl border border-zinc-800">
+        <div className="h-full flex flex-col items-center justify-center p-8 text-center text-zinc-400 bg-[#0a0d17]/80 backdrop-blur-2xl rounded-3xl border border-white/[0.08] shadow-elevated">
           <Landmark className="w-14 h-14 mb-4 text-zinc-600 opacity-60" />
-          <p className="text-xl font-bold text-white">Select an activity</p>
+          <p className="text-xl font-black text-white tracking-tight">Select an activity</p>
           <p className="text-base text-zinc-400 mt-1 max-w-[280px]">
             Click any activity on the timeline to open its Editorial Field Guide.
           </p>
@@ -64,11 +64,11 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
     switch (type) {
       case 'visit': return <Landmark className="w-5 h-5 text-sky-400" />;
       case 'food': return <Utensils className="w-5 h-5 text-rose-400" />;
-      case 'drink': return <Wine className="w-5 h-5 text-fuchsia-400" />;
+      case 'drink': return <Wine className="w-5 h-5 text-amber-300" />;
       case 'walk': return <Footprints className="w-5 h-5 text-emerald-400" />;
       case 'transport': return <Ship className="w-5 h-5 text-cyan-400" />;
-      case 'concert': return <Music className="w-5 h-5 text-indigo-400" />;
-      case 'rest': return <BedDouble className="w-5 h-5 text-slate-400" />;
+      case 'concert': return <Music className="w-5 h-5 text-violet-400" />;
+      case 'rest': return <BedDouble className="w-5 h-5 text-slate-300" />;
       case 'optional': return <HelpCircle className="w-5 h-5 text-zinc-400" />;
     }
   };
@@ -97,17 +97,17 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
         {/* Top Badges & Close Button */}
         <div className="flex items-center justify-between gap-2 mb-3">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider bg-zinc-800 text-zinc-200 border border-zinc-700">
+            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-black uppercase tracking-widest bg-white/[0.06] text-zinc-200 border border-white/[0.1] shadow-sm">
               {getTypeIcon(event.type)}
               <span>{event.type}</span>
             </span>
 
             {event.isFixed ? (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">
-                <Lock className="w-4 h-4" /> Fixed Slot
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-black bg-amber-500/15 text-amber-200 border border-amber-400/30 shadow-sm">
+                <Lock className="w-4 h-4 text-amber-400" /> Fixed Slot
               </span>
             ) : (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold bg-zinc-800 text-zinc-400 border border-zinc-750">
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-white/[0.04] text-zinc-400 border border-white/[0.08]">
                 <Unlock className="w-4 h-4" /> Flexible
               </span>
             )}
@@ -116,7 +116,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
           {!isDesktopSidebar && (
             <button
               onClick={onClose}
-              className="p-2.5 rounded-full bg-zinc-800 text-zinc-400 hover:text-white hover:bg-zinc-700 transition"
+              className="p-2.5 rounded-full bg-white/[0.06] text-zinc-400 hover:text-white hover:bg-white/[0.12] transition shadow-sm border border-white/[0.08]"
               aria-label="Close"
             >
               <X className="w-6 h-6" />
@@ -131,12 +131,12 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
 
         {/* Time & Duration Bar */}
         <div className="flex flex-wrap items-center gap-2.5 mt-3 text-base sm:text-lg font-bold text-zinc-200">
-          <span className="flex items-center gap-2 text-white font-extrabold font-mono">
+          <span className="flex items-center gap-2 text-white font-black font-mono">
             <Clock className="w-5 h-5 text-indigo-400 shrink-0" />
             {formatEventTime(event.startTime)} – {formatEventTime(event.endTime)}
           </span>
           <span className="text-zinc-500">•</span>
-          <span className="px-3 py-1 rounded-xl bg-zinc-800 text-white font-mono text-sm font-bold border border-zinc-700">
+          <span className="px-3 py-1 rounded-xl bg-white/[0.06] text-white font-mono text-sm font-black border border-white/[0.1] shadow-sm">
             {formatDuration(event.durationMinutes)}
           </span>
           {event.durationNote && (
@@ -148,7 +148,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
 
         {/* What It Is (Hero Subtitle) */}
         {event.what && (
-          <p className="text-base sm:text-lg text-zinc-200 leading-relaxed font-normal mt-3.5 pt-3.5 border-t border-zinc-800">
+          <p className="text-base sm:text-lg text-zinc-200 leading-relaxed font-normal mt-3.5 pt-3.5 border-t border-white/[0.08]">
             {event.what}
           </p>
         )}
@@ -164,7 +164,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
               href={getDirectionsUrl(event.location)}
               target="_blank"
               rel="noopener noreferrer"
-              className="sm:col-span-2 flex items-center justify-center gap-2.5 py-3.5 px-5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] text-white text-sm sm:text-base font-bold tracking-wide transition shadow-elevated"
+              className="sm:col-span-2 flex items-center justify-center gap-2.5 py-3.5 px-5 rounded-2xl bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 active:scale-[0.98] text-white text-sm sm:text-base font-black tracking-wide transition shadow-lg shadow-indigo-600/30 border border-indigo-400/30"
             >
               <Navigation className="w-5 h-5 shrink-0" />
               <span className="truncate">Open in Google Maps</span>
@@ -175,10 +175,10 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
           {/* Status Toggle Button */}
           <button
             onClick={() => onUpdateStatus(event.id, event.status === 'done' ? 'pending' : 'done')}
-            className={`flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl text-sm sm:text-base font-bold border transition ${
+            className={`flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl text-sm sm:text-base font-black border transition shadow-sm ${
               event.status === 'done'
-                ? 'bg-emerald-500/20 border-emerald-500/60 text-emerald-300'
-                : 'bg-zinc-800 border-zinc-700 text-zinc-200 hover:bg-zinc-750 hover:text-white'
+                ? 'bg-emerald-500/20 border-emerald-400/50 text-emerald-200 shadow-emerald-500/20'
+                : 'bg-white/[0.04] border-white/[0.08] text-zinc-200 hover:bg-white/[0.08] hover:text-white'
             }`}
           >
             <CheckCircle2 className="w-5 h-5 shrink-0" />
@@ -190,10 +190,10 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
       {/* ========================================================================= */}
       {/* 3. SECTION 1: THE STORY & HIGHLIGHTS (Editorial Reading)                  */}
       {/* ========================================================================= */}
-      <div className="bg-zinc-850/90 rounded-3xl p-5 sm:p-6 border border-zinc-750 shadow-subtle space-y-5">
+      <div className="bg-[#101322]/80 backdrop-blur-xl rounded-3xl p-5 sm:p-6 border border-white/[0.09] shadow-elevated space-y-5">
         {/* Section Header */}
-        <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-indigo-400 border-b border-zinc-750 pb-3">
-          <Sparkles className="w-4 h-4" />
+        <div className="flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-widest text-indigo-300 border-b border-white/[0.08] pb-3">
+          <Sparkles className="w-4 h-4 text-indigo-400" />
           <span>The Story & Essence</span>
         </div>
 
@@ -211,7 +211,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
 
         {/* Key Highlights & Facts */}
         {event.facts && event.facts.length > 0 && (
-          <div className="space-y-2.5 pt-3 border-t border-zinc-750">
+          <div className="space-y-2.5 pt-3 border-t border-white/[0.08]">
             <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-zinc-400 flex items-center gap-2">
               <Eye className="w-4 h-4 text-zinc-400" />
               <span>Key Highlights & Context</span>
@@ -219,7 +219,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
             <ul className="space-y-2.5">
               {event.facts.map((fact, index) => (
                 <li key={index} className="flex items-start gap-3 text-sm sm:text-base text-zinc-200 leading-relaxed">
-                  <span className="w-2 h-2 rounded-full bg-indigo-400 mt-2 shrink-0" />
+                  <span className="w-2 h-2 rounded-full bg-indigo-400 mt-2 shrink-0 shadow-sm shadow-indigo-400/50" />
                   <span>{fact}</span>
                 </li>
               ))}
@@ -229,8 +229,8 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
 
         {/* Culinary Highlights / Food Pairing */}
         {event.food && (
-          <div className="p-4 sm:p-5 rounded-2xl bg-rose-950/30 border border-rose-800/40 space-y-2">
-            <div className="flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-wider text-rose-300">
+          <div className="p-4 sm:p-5 rounded-2xl bg-rose-950/30 border border-rose-500/30 space-y-2 shadow-sm">
+            <div className="flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-widest text-rose-300">
               <Utensils className="w-4 h-4 text-rose-400" />
               <span>Culinary Highlights & What to Order</span>
             </div>
@@ -244,19 +244,19 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
       {/* ========================================================================= */}
       {/* 4. SECTION 2: PRACTICAL FIELD GUIDE (Actionable Logistics)               */}
       {/* ========================================================================= */}
-      <div className="bg-zinc-850/90 rounded-3xl p-5 sm:p-6 border border-zinc-750 shadow-subtle space-y-4">
+      <div className="bg-[#101322]/80 backdrop-blur-xl rounded-3xl p-5 sm:p-6 border border-white/[0.09] shadow-elevated space-y-4">
         {/* Section Header */}
-        <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-emerald-400 border-b border-zinc-750 pb-3">
-          <Compass className="w-4 h-4" />
+        <div className="flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-widest text-emerald-400 border-b border-white/[0.08] pb-3">
+          <Compass className="w-4 h-4 text-emerald-400" />
           <span>Practical Field Guide</span>
         </div>
 
         {/* Do Tips */}
         {event.do && (
-          <div className="p-4 rounded-2xl bg-emerald-950/25 border border-emerald-800/40 flex items-start gap-3.5">
+          <div className="p-4 rounded-2xl bg-emerald-950/25 border border-emerald-500/30 flex items-start gap-3.5 shadow-sm">
             <Check className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
             <div className="text-sm sm:text-base text-emerald-100 leading-relaxed">
-              <span className="font-bold text-emerald-300 uppercase tracking-wide text-xs block mb-1">
+              <span className="font-black text-emerald-300 uppercase tracking-widest text-xs block mb-1">
                 Do & Recommended
               </span>
               {event.do}
@@ -266,10 +266,10 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
 
         {/* Avoid Traps */}
         {event.avoid && (
-          <div className="p-4 rounded-2xl bg-amber-950/25 border border-amber-800/40 flex items-start gap-3.5">
+          <div className="p-4 rounded-2xl bg-amber-950/25 border border-amber-500/30 flex items-start gap-3.5 shadow-sm">
             <AlertCircle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
             <div className="text-sm sm:text-base text-amber-100 leading-relaxed">
-              <span className="font-bold text-amber-300 uppercase tracking-wide text-xs block mb-1">
+              <span className="font-black text-amber-300 uppercase tracking-widest text-xs block mb-1">
                 Avoid / Pitfalls
               </span>
               {event.avoid}
@@ -281,8 +281,8 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
         {(event.ticket || event.reservation) && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
             {event.ticket && (
-              <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-750">
-                <div className="flex items-center gap-2 text-xs sm:text-sm font-bold text-emerald-400 uppercase tracking-wider mb-1.5">
+              <div className="p-4 rounded-2xl bg-black/40 border border-white/[0.08] shadow-sm">
+                <div className="flex items-center gap-2 text-xs sm:text-sm font-black text-emerald-400 uppercase tracking-wider mb-1.5">
                   <Ticket className="w-4 h-4" />
                   <span>Tickets & Entry</span>
                 </div>
@@ -293,8 +293,8 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
             )}
 
             {event.reservation && (
-              <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-750">
-                <div className="flex items-center gap-2 text-xs sm:text-sm font-bold text-rose-400 uppercase tracking-wider mb-1.5">
+              <div className="p-4 rounded-2xl bg-black/40 border border-white/[0.08] shadow-sm">
+                <div className="flex items-center gap-2 text-xs sm:text-sm font-black text-rose-400 uppercase tracking-wider mb-1.5">
                   <CalendarCheck className="w-4 h-4" />
                   <span>Reservation</span>
                 </div>
@@ -308,7 +308,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
 
         {/* Logistics & General Notes */}
         {event.notes && (
-          <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-750 space-y-1.5">
+          <div className="p-4 rounded-2xl bg-black/40 border border-white/[0.08] space-y-1.5 shadow-sm">
             <div className="flex items-center gap-2 text-xs sm:text-sm font-bold text-zinc-400 uppercase tracking-wider mb-1">
               <FileText className="w-4 h-4" />
               <span>Logistics & On-Site Notes</span>
@@ -321,7 +321,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
 
         {/* Exact Address */}
         {event.location && (
-          <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-750 flex items-start gap-3">
+          <div className="p-4 rounded-2xl bg-black/40 border border-white/[0.08] flex items-start gap-3 shadow-sm">
             <MapPin className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" />
             <div className="text-sm sm:text-base text-zinc-200 leading-relaxed">
               <span className="font-bold text-zinc-400 uppercase tracking-wider text-xs block mb-1">
@@ -343,7 +343,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
         {/* External Portals & Links */}
         {event.links && event.links.length > 0 && (
           <div className="space-y-2.5 pt-2">
-            <div className="text-xs sm:text-sm font-bold uppercase tracking-wider text-zinc-400">
+            <div className="text-xs sm:text-sm font-black uppercase tracking-widest text-zinc-400">
               Official Links & Portals
             </div>
             <div className="flex flex-wrap gap-2.5">
@@ -353,7 +353,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-850 hover:bg-zinc-800 border border-zinc-750 text-xs sm:text-sm font-bold text-zinc-200 hover:text-white transition group shadow-sm"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.1] text-xs sm:text-sm font-bold text-zinc-200 hover:text-white transition group shadow-sm"
                 >
                   {getLinkIcon(link)}
                   <span>{link.label}</span>
@@ -370,7 +370,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
   // Desktop Sidebar Layout
   if (isDesktopSidebar) {
     return (
-      <div className="h-full bg-zinc-900 rounded-3xl border border-zinc-800 shadow-elevated overflow-hidden flex flex-col">
+      <div className="h-full bg-[#0a0c14]/90 backdrop-blur-2xl rounded-3xl border border-white/[0.1] shadow-elevated overflow-hidden flex flex-col">
         {content}
       </div>
     );
@@ -382,14 +382,14 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
       {/* Backdrop */}
       <div
         onClick={onClose}
-        className="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity"
+        className="fixed inset-0 bg-black/85 backdrop-blur-md transition-opacity"
       />
 
       {/* Bottom Sheet Container */}
-      <div className="relative z-10 w-full max-h-[92vh] bg-zinc-900 rounded-t-3xl border-t border-zinc-750 shadow-sheet overflow-hidden animate-sheet-up flex flex-col">
+      <div className="relative z-10 w-full max-h-[92vh] bg-[#0a0c14] rounded-t-3xl border-t border-white/[0.16] shadow-sheet overflow-hidden animate-sheet-up flex flex-col">
         {/* Drag Handle */}
         <div className="py-3 flex justify-center items-center shrink-0 cursor-grab">
-          <div className="w-14 h-1.5 rounded-full bg-zinc-700" />
+          <div className="w-14 h-1.5 rounded-full bg-white/20" />
         </div>
 
         {/* Content */}
