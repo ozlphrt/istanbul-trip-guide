@@ -337,7 +337,40 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {/* Google Images Direct Search Button */}
+          {/* 1. Instagram Direct Profile / Explore Button */}
+          {(() => {
+            const igLink = event.links?.find(l => l.type === 'ig');
+            const igUrl = igLink
+              ? igLink.url
+              : `https://www.instagram.com/explore/tags/${encodeURIComponent(event.title.toLowerCase().replace(/[^a-z0-9]/g, ''))}/`;
+            const igLabel = igLink
+              ? `@${igLink.url.replace(/\/$/, '').split('/').pop() || 'Instagram'}`
+              : 'Instagram Search';
+
+            return (
+              <a
+                href={igUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#1d222e] hover:bg-[#282e3e] border border-slate-700 hover:border-pink-500/50 text-slate-100 hover:text-white transition group shadow-sm"
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="p-2 rounded-lg bg-pink-500/15 text-pink-400">
+                    <Instagram className="w-5 h-5" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-sm sm:text-base font-bold text-white group-hover:text-pink-300 transition truncate">
+                      {igLabel}
+                    </div>
+                    <div className="text-xs text-slate-400">Photos, stories & vibe</div>
+                  </div>
+                </div>
+                <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-white transition shrink-0" />
+              </a>
+            );
+          })()}
+
+          {/* 2. Google Images Direct Search Button */}
           <a
             href={getGoogleImagesUrl(event.title, event.location)}
             target="_blank"
@@ -358,7 +391,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
             <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-white transition shrink-0" />
           </a>
 
-          {/* Google Maps / Street View */}
+          {/* 3. Google Maps / Street View */}
           {event.location && (
             <a
               href={getDirectionsUrl(event.location)}
@@ -381,8 +414,8 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
             </a>
           )}
 
-          {/* Parsed Event Links (Web, Instagram, Menus, Portals) */}
-          {event.links && event.links.map((link, idx) => (
+          {/* 4. Other Specific Links (Websites, Tickets, Spotify, etc.) */}
+          {event.links && event.links.filter(l => l.type !== 'ig').map((link, idx) => (
             <a
               key={idx}
               href={link.url}
