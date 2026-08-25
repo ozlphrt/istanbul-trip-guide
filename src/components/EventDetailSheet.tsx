@@ -93,42 +93,31 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
   const content = (
     <div className="flex flex-col h-full overflow-y-auto space-y-5 p-5 sm:p-7 text-slate-100 custom-scrollbar">
       {/* ========================================================================= */}
-      {/* 1. HERO PHOTO BANNER                                                      */}
-      {/* ========================================================================= */}
-      <div className="relative w-full h-44 sm:h-56 rounded-2xl overflow-hidden border border-slate-700/80 shadow-lg group shrink-0">
-        <img
-          src={photoUrl}
-          alt={event.title}
-          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1e2330] via-transparent to-black/30" />
-
-        {/* Category Badge Floating on Image */}
-        <div className="absolute top-3 left-3 flex items-center gap-2">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-[#1e2330]/85 backdrop-blur-md text-slate-100 border border-slate-600/80 shadow">
-            {getTypeIcon(event.type)}
-            <span>{event.type}</span>
-          </span>
-        </div>
-
-        {!isDesktopSidebar && (
-          <button
-            onClick={onClose}
-            className="absolute top-3 right-3 p-2 rounded-full bg-[#1e2330]/85 backdrop-blur-md text-slate-300 hover:text-white transition border border-slate-600/80 shadow"
-            aria-label="Close"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        )}
-      </div>
-
-      {/* ========================================================================= */}
-      {/* 2. HEADER: Title, Time & What                                             */}
+      {/* 1. HEADER: Category Badge, Close Button, Title, Time & What               */}
       {/* ========================================================================= */}
       <div className="space-y-3">
+        {/* Top Badges & Close Button */}
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs sm:text-sm font-black uppercase tracking-wider bg-[#282e3e]/90 text-slate-100 border border-slate-600 shadow-sm backdrop-blur-sm">
+              {getTypeIcon(event.type)}
+              <span>{event.type}</span>
+            </span>
+          </div>
+
+          {!isDesktopSidebar && (
+            <button
+              onClick={onClose}
+              className="p-2.5 rounded-full bg-[#282e3e]/90 text-slate-300 hover:text-white hover:bg-[#31384b] transition border border-slate-700 shadow-sm backdrop-blur-sm"
+              aria-label="Close"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          )}
+        </div>
+
         {/* Title */}
-        <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-white leading-tight">
+        <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-white leading-tight drop-shadow-sm">
           {event.title}
         </h1>
 
@@ -139,7 +128,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
             {formatEventTime(event.startTime)} – {formatEventTime(event.endTime)}
           </span>
           <span className="text-slate-500">•</span>
-          <span className="px-3 py-0.5 rounded-lg bg-[#282e3e] text-slate-100 font-mono text-sm font-black border border-slate-600">
+          <span className="px-3 py-0.5 rounded-lg bg-[#282e3e]/90 text-slate-100 font-mono text-sm font-black border border-slate-600 shadow-inner">
             {formatDuration(event.durationMinutes)}
           </span>
           {event.durationNote && (
@@ -158,7 +147,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
       </div>
 
       {/* ========================================================================= */}
-      {/* 3. ACTIONS: Google Maps & Status                                          */}
+      {/* 2. ACTIONS: Google Maps & Status                                          */}
       {/* ========================================================================= */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
         {event.location && (
@@ -180,7 +169,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
           className={`flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl text-sm sm:text-base font-black border transition ${
             event.status === 'done'
               ? 'bg-emerald-500/25 border-emerald-500/40 text-emerald-200'
-              : 'bg-[#282e3e] border-slate-600 text-slate-100 hover:bg-[#31384b] hover:text-white'
+              : 'bg-[#282e3e]/90 border-slate-600 text-slate-100 hover:bg-[#31384b] hover:text-white'
           }`}
         >
           <CheckCircle2 className="w-5 h-5 shrink-0" />
@@ -189,10 +178,10 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
       </div>
 
       {/* ========================================================================= */}
-      {/* 4. NARRATIVE & HIGHLIGHTS                                                 */}
+      {/* 3. NARRATIVE & HIGHLIGHTS                                                 */}
       {/* ========================================================================= */}
       {(event.why || (event.facts && event.facts.length > 0)) && (
-        <div className="bg-[#242938] rounded-2xl p-5 sm:p-6 border border-slate-700/70 shadow-sm space-y-4">
+        <div className="bg-[#242938]/90 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-slate-700/70 shadow-sm space-y-4">
           {/* Main Context Paragraph */}
           {event.why && (
             <p className="text-base sm:text-lg text-slate-100 leading-relaxed font-semibold">
@@ -216,7 +205,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
 
       {/* Culinary Food Notes */}
       {event.food && (
-        <div className="p-4 sm:p-5 rounded-2xl bg-rose-950/30 border border-rose-500/30 flex items-start gap-3">
+        <div className="p-4 sm:p-5 rounded-2xl bg-rose-950/40 backdrop-blur-sm border border-rose-500/30 flex items-start gap-3">
           <Utensils className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
           <p className="text-sm sm:text-base text-rose-100 font-semibold leading-relaxed">
             {event.food}
@@ -226,7 +215,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
 
       {/* Do & Recommended */}
       {event.do && (
-        <div className="p-4 sm:p-5 rounded-2xl bg-emerald-950/30 border border-emerald-500/30 flex items-start gap-3">
+        <div className="p-4 sm:p-5 rounded-2xl bg-emerald-950/40 backdrop-blur-sm border border-emerald-500/30 flex items-start gap-3">
           <Check className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
           <p className="text-sm sm:text-base text-emerald-100 font-semibold leading-relaxed">
             {event.do}
@@ -236,7 +225,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
 
       {/* Avoid / Warnings */}
       {event.avoid && (
-        <div className="p-4 sm:p-5 rounded-2xl bg-amber-950/30 border border-amber-500/30 flex items-start gap-3">
+        <div className="p-4 sm:p-5 rounded-2xl bg-amber-950/40 backdrop-blur-sm border border-amber-500/30 flex items-start gap-3">
           <AlertCircle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
           <p className="text-sm sm:text-base text-amber-100 font-semibold leading-relaxed">
             {event.avoid}
@@ -248,7 +237,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
       {(event.ticket || event.reservation) && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           {event.ticket && (
-            <div className="p-4 rounded-xl bg-[#242938] border border-slate-700 flex items-start gap-3">
+            <div className="p-4 rounded-xl bg-[#242938]/90 backdrop-blur-sm border border-slate-700 flex items-start gap-3">
               <Ticket className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
               <div>
                 <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">Entry</span>
@@ -260,7 +249,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
           )}
 
           {event.reservation && (
-            <div className="p-4 rounded-xl bg-[#242938] border border-slate-700 flex items-start gap-3">
+            <div className="p-4 rounded-xl bg-[#242938]/90 backdrop-blur-sm border border-slate-700 flex items-start gap-3">
               <CalendarCheck className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
               <div>
                 <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">Reservation</span>
@@ -275,7 +264,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
 
       {/* Logistics & General Notes */}
       {event.notes && (
-        <div className="p-4 sm:p-5 rounded-2xl bg-[#242938] border border-slate-700/70 flex items-start gap-3">
+        <div className="p-4 sm:p-5 rounded-2xl bg-[#242938]/90 backdrop-blur-sm border border-slate-700/70 flex items-start gap-3">
           <FileText className="w-5 h-5 text-slate-400 shrink-0 mt-0.5" />
           <p className="text-sm sm:text-base text-slate-100 font-semibold leading-relaxed whitespace-pre-line">
             {event.notes}
@@ -285,14 +274,14 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
 
       {/* Exact Location */}
       {event.location && (
-        <div className="p-4 sm:p-5 rounded-2xl bg-[#242938] border border-slate-700/70 flex items-start gap-3">
+        <div className="p-4 sm:p-5 rounded-2xl bg-[#242938]/90 backdrop-blur-sm border border-slate-700/70 flex items-start gap-3">
           <MapPin className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" />
           <span className="text-sm sm:text-base text-white font-bold leading-relaxed">{event.location}</span>
         </div>
       )}
 
       {/* ========================================================================= */}
-      {/* 5. VISUALS & LINKS                                                        */}
+      {/* 4. VISUALS & LINKS                                                        */}
       {/* ========================================================================= */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
         {/* Instagram */}
@@ -310,7 +299,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
               href={igUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#242938] hover:bg-[#2e3447] border border-slate-700 hover:border-pink-500/50 text-slate-100 hover:text-white transition group shadow-sm"
+              className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#242938]/90 hover:bg-[#2e3447] border border-slate-700 hover:border-pink-500/50 text-slate-100 hover:text-white transition group shadow-sm backdrop-blur-sm"
             >
               <div className="flex items-center gap-3 min-w-0">
                 <div className="p-2 rounded-lg bg-pink-500/15 text-pink-400">
@@ -333,7 +322,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
           href={getGoogleImagesUrl(event.title, event.location)}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#242938] hover:bg-[#2e3447] border border-slate-700 hover:border-sky-500/50 text-slate-100 hover:text-white transition group shadow-sm"
+          className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#242938]/90 hover:bg-[#2e3447] border border-slate-700 hover:border-sky-500/50 text-slate-100 hover:text-white transition group shadow-sm backdrop-blur-sm"
         >
           <div className="flex items-center gap-3 min-w-0">
             <div className="p-2 rounded-lg bg-sky-500/15 text-sky-400">
@@ -356,7 +345,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#242938] hover:bg-[#2e3447] border border-slate-700 hover:border-slate-500 text-slate-100 hover:text-white transition group shadow-sm"
+            className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#242938]/90 hover:bg-[#2e3447] border border-slate-700 hover:border-slate-500 text-slate-100 hover:text-white transition group shadow-sm backdrop-blur-sm"
           >
             <div className="flex items-center gap-3 min-w-0">
               <div className="p-2 rounded-lg bg-white/[0.06] text-slate-300">
@@ -380,15 +369,14 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
   if (isDesktopSidebar) {
     return (
       <div className="relative h-full bg-[#1e2330] rounded-3xl border border-slate-700/60 shadow-sm overflow-hidden flex flex-col">
-        {/* Atmospheric Local Place Photo Hero Backdrop */}
+        {/* Stylized Monochromatic Place Photo Backdrop (Full Sidebar Background) */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
           <img
             src={photoUrl}
             alt=""
-            className="w-full h-full object-cover object-top opacity-30 mix-blend-luminosity grayscale contrast-125 [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.15)_65%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.15)_65%,transparent_100%)] select-none"
-            loading="lazy"
+            className="w-full h-full object-cover object-top opacity-30 filter grayscale contrast-125 select-none"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#1e2330]/60 via-[#1e2330]/85 to-[#1e2330]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1e2330]/75 via-[#1e2330]/85 to-[#1e2330]" />
         </div>
 
         <div className="relative z-10 h-full overflow-hidden flex flex-col">
@@ -409,15 +397,14 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
 
       {/* Bottom Sheet Container */}
       <div className="relative z-10 w-full max-h-[92vh] bg-[#1e2330] rounded-t-3xl border-t border-slate-700 shadow-sheet overflow-hidden animate-sheet-up flex flex-col">
-        {/* Atmospheric Local Place Photo Hero Backdrop */}
+        {/* Stylized Monochromatic Place Photo Backdrop (Full Sheet Background) */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
           <img
             src={photoUrl}
             alt=""
-            className="w-full h-full object-cover object-top opacity-30 mix-blend-luminosity grayscale contrast-125 [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.15)_65%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.15)_65%,transparent_100%)] select-none"
-            loading="lazy"
+            className="w-full h-full object-cover object-top opacity-30 filter grayscale contrast-125 select-none"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#1e2330]/60 via-[#1e2330]/85 to-[#1e2330]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1e2330]/75 via-[#1e2330]/85 to-[#1e2330]" />
         </div>
 
         {/* Drag Handle */}
