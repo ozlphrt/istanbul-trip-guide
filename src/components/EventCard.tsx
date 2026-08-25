@@ -108,10 +108,10 @@ export const EventCard: React.FC<EventCardProps> = ({
           : 'z-10'
       } ${event.hasCollisionWithFixed ? 'ring-2 ring-rose-500 animate-pulse' : ''}`}
     >
-      {/* Left Integrated Time Spine Ribbon (Concept 5) */}
-      <div className={`w-20 sm:w-24 shrink-0 p-2 sm:p-2.5 flex flex-col justify-between items-center text-center select-none ${getTypeSpineClass(event.type)}`}>
-        {/* Start Time */}
-        <span className="text-sm sm:text-base md:text-lg font-black font-mono tracking-tight leading-none text-white">
+      {/* Left Integrated Time Spine Ribbon (Concept 5 — Big Bold Numbers) */}
+      <div className={`w-24 sm:w-28 md:w-32 shrink-0 p-2 sm:p-3 flex flex-col justify-between items-center text-center select-none ${getTypeSpineClass(event.type)}`}>
+        {/* Big Start Time */}
+        <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-black font-mono tracking-tight leading-none text-white drop-shadow-sm">
           {event.isSimulatedShifted && event.simulatedStartTime ? (
             <span className="text-indigo-300 font-black">
               {formatEventTime(event.simulatedStartTime)}
@@ -122,12 +122,12 @@ export const EventCard: React.FC<EventCardProps> = ({
         </span>
 
         {/* Duration Badge */}
-        <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider opacity-85 py-0.5">
+        <span className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-black/30 text-white/90 border border-white/10 my-1">
           {formatDuration(event.durationMinutes)}
         </span>
 
         {/* End Time */}
-        <span className="text-xs sm:text-sm font-black font-mono tracking-tight leading-none text-slate-300">
+        <span className="text-sm sm:text-base md:text-lg font-black font-mono tracking-tight leading-none text-slate-300">
           {formatEventTime(event.endTime)}
         </span>
       </div>
