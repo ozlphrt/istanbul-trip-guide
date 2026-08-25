@@ -1,318 +1,708 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Timeline Design Mockups — 5 Concepts</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Details Page Premium Design Lab — 5 High-Quality Concepts</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=JetBrains+Mono:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #12151c;
-      color: #f1f5f9;
     }
     .font-mono {
       font-family: 'JetBrains Mono', monospace;
     }
+    .font-serif {
+      font-family: 'Playfair Display', serif;
+    }
     .custom-scrollbar::-webkit-scrollbar {
-      width: 6px;
+      width: 5px;
     }
     .custom-scrollbar::-webkit-scrollbar-track {
-      background: rgba(0,0,0,0.2);
+      background: rgba(0, 0, 0, 0.1);
     }
     .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       border-radius: 4px;
+    }
+    /* Glow Utilities */
+    .gold-glow {
+      box-shadow: 0 0 25px rgba(234, 179, 8, 0.12);
+    }
+    .cyan-glow {
+      box-shadow: 0 0 25px rgba(6, 182, 212, 0.15);
+    }
+    .purple-glow {
+      box-shadow: 0 0 25px rgba(168, 85, 247, 0.15);
     }
   </style>
 </head>
-<body class="p-3 sm:p-6 max-w-7xl mx-auto min-h-screen">
-  <!-- Header & Concept Switcher -->
-  <header class="mb-8 text-center sm:text-left flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-6">
-    <div>
-      <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight flex items-center gap-2.5 justify-center sm:justify-start">
-        <span>⏱️ Timeline Design Lab</span>
-        <span class="text-xs px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-bold border border-indigo-500/30 font-mono">5 OPTIONS</span>
-      </h1>
-      <p class="text-sm text-slate-400 font-semibold mt-1">Comparing 5 distinct layout solutions to maximize card real estate and maximize hour number visibility.</p>
-      <div class="mt-2">
-        <a href="./details-mockups.html" class="inline-flex items-center gap-1.5 text-xs font-black text-indigo-400 hover:text-indigo-300 underline">
-          <span>✨ View New Details Page 5-Concept Redesign Lab &rarr;</span>
-        </a>
+<body class="bg-[#0b0e14] text-slate-100 min-h-screen flex flex-col p-3 sm:p-6 lg:p-8">
+
+  <!-- Header & Concept Selector Bar -->
+  <header class="max-w-6xl w-full mx-auto mb-6 text-center sm:text-left">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800/80 pb-5">
+      <div>
+        <div class="flex items-center gap-2 justify-center sm:justify-start mb-1.5">
+          <span class="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/30">
+            ✨ Premium Details Page Design Lab
+          </span>
+          <span class="text-xs text-slate-400 font-bold">• 5 High-Craft Concepts</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
+          Details Page Visual Architecture
+        </h1>
+        <p class="text-sm text-slate-400 font-medium mt-0.5">
+          Striking the perfect balance between zero clutter, rich luxury aesthetics, and rapid scannability.
+        </p>
+      </div>
+
+      <!-- Sample Activity Switcher -->
+      <div class="flex items-center gap-1.5 self-center sm:self-auto bg-[#141822] p-1.5 rounded-2xl border border-slate-700/80 shadow-md">
+        <span class="text-[11px] font-bold text-slate-400 pl-2">Sample:</span>
+        <button onclick="setSampleEvent('cistern')" id="btn-sample-cistern" class="px-3 py-1.5 rounded-xl text-xs font-black transition bg-indigo-600 text-white shadow-sm">
+          🏛️ Cistern
+        </button>
+        <button onclick="setSampleEvent('cag')" id="btn-sample-cag" class="px-3 py-1.5 rounded-xl text-xs font-black transition text-slate-400 hover:text-white">
+          🥩 Cağ Kebap
+        </button>
+        <button onclick="setSampleEvent('vefa')" id="btn-sample-vefa" class="px-3 py-1.5 rounded-xl text-xs font-black transition text-slate-400 hover:text-white">
+          🥛 Vefa Bozacısı
+        </button>
+        <button onclick="setSampleEvent('babylon')" id="btn-sample-babylon" class="px-3 py-1.5 rounded-xl text-xs font-black transition text-slate-400 hover:text-white">
+          🎵 Babylon
+        </button>
       </div>
     </div>
-    
-    <!-- Quick Jump Buttons -->
-    <div class="flex flex-wrap items-center justify-center gap-2">
-      <a href="#opt1" class="px-3 py-1.5 rounded-xl bg-[#1e2330] hover:bg-[#282f42] text-xs font-bold text-slate-200 border border-slate-700 transition">1. Ghost Hours</a>
-      <a href="#opt2" class="px-3 py-1.5 rounded-xl bg-[#1e2330] hover:bg-[#282f42] text-xs font-bold text-slate-200 border border-slate-700 transition">2. Inset Badges</a>
-      <a href="#opt3" class="px-3 py-1.5 rounded-xl bg-[#1e2330] hover:bg-[#282f42] text-xs font-bold text-slate-200 border border-slate-700 transition">3. Micro-Rail</a>
-      <a href="#opt4" class="px-3 py-1.5 rounded-xl bg-[#1e2330] hover:bg-[#282f42] text-xs font-bold text-slate-200 border border-slate-700 transition">4. Hour Dividers</a>
-      <a href="#opt5" class="px-3 py-1.5 rounded-xl bg-[#1e2330] hover:bg-[#282f42] text-xs font-bold text-slate-200 border border-slate-700 transition">5. Fused Spine</a>
+
+    <!-- 5 Distinct Concept Buttons -->
+    <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 pt-4">
+      <button onclick="selectConcept(1)" id="tab-1" class="concept-tab px-3 py-3 rounded-2xl text-xs sm:text-sm font-black border transition text-center bg-gradient-to-r from-amber-500/20 to-amber-600/30 text-amber-200 border-amber-500/50 shadow-lg">
+        1. Luxe Expedition
+      </button>
+      <button onclick="selectConcept(2)" id="tab-2" class="concept-tab px-3 py-3 rounded-2xl text-xs sm:text-sm font-black border transition text-center bg-[#151924] text-slate-300 border-slate-800 hover:bg-[#1d2333]">
+        2. Neo-Glass Bento
+      </button>
+      <button onclick="selectConcept(3)" id="tab-3" class="concept-tab px-3 py-3 rounded-2xl text-xs sm:text-sm font-black border transition text-center bg-[#151924] text-slate-300 border-slate-800 hover:bg-[#1d2333]">
+        3. Atelier Journal
+      </button>
+      <button onclick="selectConcept(4)" id="tab-4" class="concept-tab px-3 py-3 rounded-2xl text-xs sm:text-sm font-black border transition text-center bg-[#151924] text-slate-300 border-slate-800 hover:bg-[#1d2333]">
+        4. Modern Dark HUD
+      </button>
+      <button onclick="selectConcept(5)" id="tab-5" class="concept-tab px-3 py-3 rounded-2xl text-xs sm:text-sm font-black border transition text-center bg-[#151924] text-slate-300 border-slate-800 hover:bg-[#1d2333]">
+        5. Cinematic Heritage
+      </button>
     </div>
   </header>
 
-  <!-- Grid of Mockup Columns -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <!-- Main Display Grid -->
+  <main class="max-w-6xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start flex-1">
 
-    <!-- ========================================================================= -->
-    <!-- CONCEPT 1: GHOST WATERMARK HOURS (100% Card Width)                         -->
-    <!-- ========================================================================= -->
-    <div id="opt1" class="bg-[#181c26] rounded-3xl border border-slate-800 p-4 sm:p-5 flex flex-col shadow-xl">
-      <div class="mb-4 pb-3 border-b border-slate-800 flex items-center justify-between">
-        <div>
-          <span class="text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">Concept 1</span>
-          <h2 class="text-lg font-black text-white">Ghost Giant Hours</h2>
-        </div>
-        <span class="text-[11px] px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30">100% Width</span>
-      </div>
-      <p class="text-xs text-slate-400 mb-4">Zero left column. Giant <strong class="text-white">text-4xl/5xl</strong> hour numbers sit directly on the grid lines behind cards. 100% of horizontal space goes to cards.</p>
+    <!-- Concept Design Philosophy Panel (Left Col) -->
+    <div class="lg:col-span-4 space-y-4">
+      <div class="bg-[#141822] rounded-3xl p-5 sm:p-6 border border-slate-800/90 shadow-xl">
+        <span id="concept-badge" class="px-2.5 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/30 inline-block mb-3">
+          Concept 1
+        </span>
+        <h2 id="concept-title" class="text-xl sm:text-2xl font-black text-white leading-snug">
+          Luxe Expedition Briefing
+        </h2>
+        <p id="concept-desc" class="text-sm text-slate-300 font-medium mt-2 leading-relaxed">
+          Inspired by luxury travel journals like Monocle & Aman. Uses warm gold accents, refined typography, ambient vignette photography, and compact polished action chips.
+        </p>
 
-      <!-- Mockup Canvas -->
-      <div class="bg-[#1e2330] rounded-2xl p-3 border border-slate-700/60 relative overflow-hidden flex-1 space-y-4">
-        <!-- Hour 14:00 Line + Ghost -->
-        <div class="relative pt-2">
-          <div class="flex items-center justify-between border-t border-slate-700/80 pt-1">
-            <span class="text-3xl font-black font-mono text-slate-400/30 select-none">14:00</span>
-            <span class="text-[10px] font-mono text-slate-500">── 14:00 ──</span>
-          </div>
-          <!-- 100% Width Card -->
-          <div class="mt-2 w-full rounded-2xl bg-gradient-to-br from-[#272e3d] to-[#1c212e] border-[1.5px] border-rose-400/90 p-3.5 shadow-lg relative">
-            <div class="flex items-center justify-between gap-2 mb-1">
-              <span class="text-xs font-mono font-bold text-rose-300">🍽️ 14:15–14:45 • Fatih</span>
-              <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-[#131722] text-sky-300 border border-slate-700 font-mono">30m</span>
-            </div>
-            <h3 class="font-black text-base text-white">Quick local lunch (Esnaf Lokantası)</h3>
-            <p class="text-xs text-slate-300 mt-0.5 font-medium">Home-style hot buffet meze • Historical Fatih</p>
-          </div>
-        </div>
-
-        <!-- Hour 15:00 Line + Ghost -->
-        <div class="relative pt-2">
-          <div class="flex items-center justify-between border-t border-slate-700/80 pt-1">
-            <span class="text-3xl font-black font-mono text-slate-400/30 select-none">15:00</span>
-            <span class="text-[10px] font-mono text-slate-500">── 15:00 ──</span>
-          </div>
-          <!-- 100% Width Card -->
-          <div class="mt-2 w-full rounded-2xl bg-gradient-to-br from-[#272e3d] to-[#1c212e] border-[1.5px] border-emerald-400/90 p-3.5 shadow-lg relative">
-            <div class="flex items-center justify-between gap-2 mb-1">
-              <span class="text-xs font-mono font-bold text-emerald-300">👟 15:15–16:15 • Balat</span>
-              <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-[#131722] text-sky-300 border border-slate-700 font-mono">1h 00m</span>
-            </div>
-            <h3 class="font-black text-base text-white">Fatih → Çarşamba → Fener/Balat</h3>
-            <p class="text-xs text-slate-300 mt-0.5 font-medium">Compressed cultural walking route through heritage streets</p>
-          </div>
+        <div class="mt-5 pt-4 border-t border-slate-800 space-y-3">
+          <div class="text-xs font-black text-slate-400 uppercase tracking-wider">Aesthetic Highlights:</div>
+          <ul id="concept-points" class="text-xs sm:text-sm space-y-2 text-slate-200 font-medium">
+            <li class="flex items-start gap-2"><span class="text-amber-400 font-bold">✦</span> <span>Warm gold category monograms and refined contrast cards.</span></li>
+            <li class="flex items-start gap-2"><span class="text-amber-400 font-bold">✦</span> <span>Polished micro-action dock (Maps, Done) that never takes over the screen.</span></li>
+            <li class="flex items-start gap-2"><span class="text-amber-400 font-bold">✦</span> <span>Rich media & social pills (Instagram, Google Images, Web) with subtle glow.</span></li>
+          </ul>
         </div>
       </div>
     </div>
 
-    <!-- ========================================================================= -->
-    <!-- CONCEPT 2: INLINE ACCENT BADGES (Integrated Card Headers)                 -->
-    <!-- ========================================================================= -->
-    <div id="opt2" class="bg-[#181c26] rounded-3xl border border-slate-800 p-4 sm:p-5 flex flex-col shadow-xl">
-      <div class="mb-4 pb-3 border-b border-slate-800 flex items-center justify-between">
-        <div>
-          <span class="text-xs font-mono font-bold text-indigo-400 uppercase tracking-wider">Concept 2</span>
-          <h2 class="text-lg font-black text-white">Prominent Time Pills</h2>
-        </div>
-        <span class="text-[11px] px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30">100% Width</span>
-      </div>
-      <p class="text-xs text-slate-400 mb-4">No left axis. Time is prominently badged in bold high-contrast mono typography right on each card header with neon accents.</p>
-
-      <!-- Mockup Canvas -->
-      <div class="bg-[#1e2330] rounded-2xl p-3 border border-slate-700/60 relative overflow-hidden flex-1 space-y-3">
-        <!-- Card 1 -->
-        <div class="w-full rounded-2xl bg-gradient-to-br from-[#272e3d] to-[#1c212e] border-[1.5px] border-rose-400/90 p-3.5 shadow-lg">
-          <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="text-xs font-mono font-black px-2.5 py-1 rounded-lg bg-rose-500/20 text-rose-200 border border-rose-500/40">
-              14:15 – 14:45
-            </span>
-            <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-[#131722] text-slate-300 border border-slate-700 font-mono">30m</span>
+    <!-- Phone Simulator Preview (Right Col) -->
+    <div class="lg:col-span-8 flex justify-center">
+      <div class="w-full max-w-md bg-[#10131a] rounded-[36px] border-[6px] border-slate-800 shadow-2xl p-2.5 overflow-hidden flex flex-col relative" style="height: 720px;">
+        
+        <!-- Mobile Device Notch / Top Bar -->
+        <div class="flex items-center justify-between px-6 py-2 text-xs font-bold text-slate-500 shrink-0">
+          <span class="font-mono">09:41</span>
+          <div class="w-20 h-4 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center">
+            <div class="w-3 h-3 rounded-full bg-slate-800 mr-2"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-slate-700"></div>
           </div>
-          <h3 class="font-black text-base text-white">Quick local lunch (Esnaf Lokantası)</h3>
-          <p class="text-xs text-slate-300 mt-1 font-medium">📍 Fatih • Traditional hot buffet</p>
+          <span>100% 🔋</span>
         </div>
 
-        <!-- Card 2 -->
-        <div class="w-full rounded-2xl bg-gradient-to-br from-[#272e3d] to-[#1c212e] border-[1.5px] border-emerald-400/90 p-3.5 shadow-lg">
-          <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="text-xs font-mono font-black px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-200 border border-emerald-500/40">
-              15:15 – 16:15
-            </span>
-            <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-[#131722] text-slate-300 border border-slate-700 font-mono">1h 00m</span>
-          </div>
-          <h3 class="font-black text-base text-white">Fatih → Çarşamba → Fener/Balat</h3>
-          <p class="text-xs text-slate-300 mt-1 font-medium">📍 Fener & Balat • Architectural walk</p>
+        <!-- The Details Sheet Modal Canvas -->
+        <div id="mockup-canvas" class="flex-1 rounded-[28px] bg-[#161a24] border border-slate-800 overflow-hidden relative flex flex-col shadow-inner">
+          <!-- Dynamic Content Rendered by JS -->
         </div>
 
-        <!-- Card 3 -->
-        <div class="w-full rounded-2xl bg-gradient-to-br from-[#272e3d] to-[#1c212e] border-[1.5px] border-sky-400/90 p-3.5 shadow-lg">
-          <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="text-xs font-mono font-black px-2.5 py-1 rounded-lg bg-sky-500/20 text-sky-200 border border-sky-500/40">
-              17:00 – 17:50
-            </span>
-            <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-[#131722] text-slate-300 border border-slate-700 font-mono">50m</span>
-          </div>
-          <h3 class="font-black text-base text-white">Kariye / Chora Church</h3>
-          <p class="text-xs text-slate-300 mt-1 font-medium">📍 Dervişali • Late Byzantine mosaics</p>
-        </div>
       </div>
     </div>
 
-    <!-- ========================================================================= -->
-    <!-- CONCEPT 3: MICRO-NOTCH RAIL (Ultra-Slim 20px Axis)                        -->
-    <!-- ========================================================================= -->
-    <div id="opt3" class="bg-[#181c26] rounded-3xl border border-slate-800 p-4 sm:p-5 flex flex-col shadow-xl">
-      <div class="mb-4 pb-3 border-b border-slate-800 flex items-center justify-between">
-        <div>
-          <span class="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider">Concept 3</span>
-          <h2 class="text-lg font-black text-white">Micro-Rail + Giant Nodes</h2>
-        </div>
-        <span class="text-[11px] px-2 py-0.5 rounded-md bg-sky-500/20 text-sky-300 font-bold border border-sky-500/30">96% Width</span>
-      </div>
-      <p class="text-xs text-slate-400 mb-4">Ultra-slim 20px left rail with glowing node ticks. Giant bold hours sit right above the horizontal ruler lines.</p>
+  </main>
 
-      <!-- Mockup Canvas -->
-      <div class="bg-[#1e2330] rounded-2xl p-3 border border-slate-700/60 relative overflow-hidden flex-1 flex">
-        <!-- Slim Rail -->
-        <div class="w-6 shrink-0 relative border-r-2 border-slate-700 flex flex-col items-center justify-between py-2">
-          <div class="w-3 h-3 rounded-full bg-rose-400 ring-4 ring-rose-400/20"></div>
-          <div class="w-1.5 h-0.5 bg-slate-600"></div>
-          <div class="w-2 h-0.5 bg-slate-500"></div>
-          <div class="w-1.5 h-0.5 bg-slate-600"></div>
-          <div class="w-3 h-3 rounded-full bg-emerald-400 ring-4 ring-emerald-400/20"></div>
-          <div class="w-1.5 h-0.5 bg-slate-600"></div>
-          <div class="w-3 h-3 rounded-full bg-sky-400 ring-4 ring-sky-400/20"></div>
-        </div>
+  <script>
+    // Sample Events Data
+    const SAMPLES = {
+      cistern: {
+        id: 'ist26-0923-5',
+        type: 'visit',
+        typeLabel: 'Imperial Landmark',
+        title: 'Basilica Cistern',
+        subtitle: 'Yerebatan Sarnıcı',
+        startTime: '12:55',
+        endTime: '13:40',
+        duration: '45m',
+        location: 'Alemdar, Yerebatan Cd. 1/3, 34110 Fatih',
+        what: 'Vast 6th-century subterranean water reservoir supported by 336 salvaged marble columns, rising from shallow pools with ambient mood lighting.',
+        why: 'Reveals the ingenious imperial Roman hydraulic infrastructure that kept Constantinople fortified during months of siege.',
+        facts: [
+          'Commissioned in 532 AD by Emperor Justinian after the Nika riots.',
+          'Two columns rest on inverted Medusa heads carved from Roman pagan monuments.',
+          'Holds over 80,000 cubic meters of water piped from the Belgrad Forest.'
+        ],
+        do: 'Book fast-track timed tickets online to bypass the 45-minute street queue in the sun.',
+        avoid: 'Do not rush through the entry walkway; allow your eyes 3 minutes to adjust to the dim light.',
+        ticket: '₺800 Fast Track / Pass Accepted',
+        bg: 'https://upload.wikimedia.org/wikipedia/commons/9/98/Istanbul_Basilica_Cistern_2009.JPG'
+      },
+      cag: {
+        id: 'ist26-0922-3',
+        type: 'food',
+        typeLabel: 'Artisanal Culinary',
+        title: 'Şehzade Cağ Kebap',
+        subtitle: 'Erzurum Wood-Fired Lamb',
+        startTime: '20:00',
+        endTime: '21:00',
+        duration: '1h',
+        location: 'Hoca Paşa Sk. No:6 D:4, Sirkeci, Fatih',
+        what: 'Legendary Erzurum-style whole milk-fed lamb cooked horizontally on a rotating spit over oak embers and sliced onto small metal skewers.',
+        why: 'A masterclass demonstrating that authentic Turkish meat culture is regional, subtle, and fundamentally distinct from commercial döner.',
+        facts: [
+          'Marinated for 24 hours in grated onion, black pepper, and rock salt.',
+          'Served continuously skewer-by-skewer until you place your fork across the plate.'
+        ],
+        food: 'Order 3 skewers per person with charred thin lavaş, ezme salad, roasted sweet peppers, and freshly whisked salted ayran.',
+        do: 'Order in batches of 2 skewers so the meat is sizzling hot for every single bite.',
+        avoid: 'Do not fill up on bread before the main skewers arrive.',
+        ig: '@sehzadecagkebap',
+        bg: 'https://upload.wikimedia.org/wikipedia/commons/6/62/Ca%C4%9Fkebab%C4%B15.jpg'
+      },
+      vefa: {
+        id: 'ist26-0924-6',
+        type: 'drink',
+        typeLabel: 'Living Heritage',
+        title: 'Vefa Bozacısı',
+        subtitle: 'Established 1876',
+        startTime: '12:55',
+        endTime: '13:30',
+        duration: '35m',
+        location: 'Katip Çelebi Cd. No:104, Vefa, Fatih',
+        what: 'Istanbul’s oldest and most iconic boza shop, unchanged since the late Ottoman era with its original marble counters and vintage mirrors.',
+        why: 'One of the rare places in Istanbul where living culinary heritage has survived continuously across three centuries.',
+        facts: [
+          'Preserves Mustafa Kemal Atatürk’s personal drinking glass from his 1937 visit inside a velvet-lined glass case.',
+          'Boza is a fermented fermented millet brew rich in probiotics with a thick, velvety sweet-tart profile.'
+        ],
+        food: 'Order a heavy glass of boza, dust generously with cinnamon, and top with crunchy yellow roasted chickpeas (leblebi).',
+        do: 'Purchase fresh warm leblebi from the historical roaster across the street before entering.',
+        ig: '@vefabozacisi1876',
+        bg: 'https://upload.wikimedia.org/wikipedia/commons/8/8f/Istanbul_Vefa_Bozaci_4881.jpg'
+      },
+      babylon: {
+        id: 'ist26-0925-12',
+        type: 'concert',
+        typeLabel: 'Live Music & Nightlife',
+        title: 'Gevende @ Babylon',
+        subtitle: 'Bomontiada Cultural Complex',
+        startTime: '21:30',
+        endTime: '23:30',
+        duration: '2h',
+        location: 'Tarihi Bomonti Bira Fabrikası, Birahane Sk. No:1, Şişli',
+        what: 'Live performance by cult Turkish psychedelic/folk band Gevende inside Istanbul’s premier music venue Babylon at Bomontiada.',
+        why: 'Babylon is the spiritual home of Istanbul’s independent music and contemporary youth culture since 1999.',
+        facts: [
+          'Located inside the revitalized 1890s Swiss Bomonti Beer Factory complex.',
+          'World-class acoustics specifically engineered for live jazz, psychedelia, and world music.'
+        ],
+        do: 'Arrive 45 minutes before showtime to grab a craft beer in the open-air brick courtyard of Bomontiada.',
+        ticket: 'Biletix / Passo mobile entry QR',
+        ig: '@babylonistanbul',
+        bg: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/Bomonti_beer_factory_complex.jpg'
+      }
+    };
 
-        <!-- Right Content with Giant Embedded Hour Stamping -->
-        <div class="flex-1 pl-3 space-y-3">
-          <div>
-            <span class="text-xl font-black font-mono text-white tracking-widest block mb-1">14 <span class="text-xs font-bold text-slate-400">HRS</span></span>
-            <div class="w-full rounded-2xl bg-gradient-to-br from-[#272e3d] to-[#1c212e] border-[1.5px] border-rose-400/90 p-3 shadow-lg">
-              <div class="flex justify-between items-center text-xs font-bold text-rose-300 mb-1">
-                <span>14:15–14:45 • Fatih</span>
-                <span class="font-mono bg-[#131722] px-2 py-0.5 rounded-full text-slate-300">30m</span>
+    let currentEvent = SAMPLES.cistern;
+    let currentConcept = 1;
+
+    function setSampleEvent(key) {
+      currentEvent = SAMPLES[key];
+      document.querySelectorAll('[id^="btn-sample-"]').forEach(b => {
+        b.className = "px-3 py-1.5 rounded-xl text-xs font-black transition text-slate-400 hover:text-white";
+      });
+      document.getElementById(`btn-sample-${key}`).className = "px-3 py-1.5 rounded-xl text-xs font-black transition bg-indigo-600 text-white shadow-sm";
+      renderCurrentConcept();
+    }
+
+    function selectConcept(num) {
+      currentConcept = num;
+      document.querySelectorAll('.concept-tab').forEach((tab, idx) => {
+        if (idx + 1 === num) {
+          tab.className = "concept-tab px-3 py-3 rounded-2xl text-xs sm:text-sm font-black border transition text-center bg-gradient-to-r from-amber-500/20 to-amber-600/30 text-amber-200 border-amber-500/50 shadow-lg";
+        } else {
+          tab.className = "concept-tab px-3 py-3 rounded-2xl text-xs sm:text-sm font-black border transition text-center bg-[#151924] text-slate-300 border-slate-800 hover:bg-[#1d2333]";
+        }
+      });
+      updateConceptInfo(num);
+      renderCurrentConcept();
+    }
+
+    function updateConceptInfo(num) {
+      const titles = {
+        1: "Luxe Expedition Briefing (Gold & Ambient Vignette)",
+        2: "Neo-Glass Bento Magazine (Vibrant iOS 18 Craft)",
+        3: "Atelier Journal (Artisanal Luxury & Gold Stamping)",
+        4: "Modern Dark HUD (High-Contrast Tech Aesthetics)",
+        5: "Cinematic Heritage Showcase (Full-Bleed Visuals)"
+      };
+      const descs = {
+        1: "Warm amber & gold luxury styling. Refined typography, ambient monochrome landmark background with soft warm vignette, and an integrated expedition action dock with micro-glows.",
+        2: "Vibrant frosted glass modules with dynamic accent borders matching the event type (Sky Blue for visits, Rose for food, Emerald for walks). Stat badge counters and bold visual hierarchy.",
+        3: "Inspired by architectural sketchbooks and luxury heritage guides. Clean bronze borders, numbered curiosities, and a stamped field logistics seal.",
+        4: "Ultra-slick, deep obsidian slate with laser-sharp cyan and emerald telemetry badges. JetBrains Mono time metrics, floating quick-launch HUD dock.",
+        5: "Cinematic National Geographic documentary layout. Dramatic high-contrast typography, pull-quote essence cards, and a dedicated high-gloss media explorer."
+      };
+      const points = {
+        1: [
+          "Warm gold category monograms and refined contrast cards.",
+          "Polished micro-action dock (Maps, Done) that never takes over the screen.",
+          "Rich media & social pills (Instagram, Google Images, Web) with subtle glow."
+        ],
+        2: [
+          "Dynamic color-coded frosted glass Bento tiles.",
+          "Quick Stats Pill Bar (Columns, Era, Duration).",
+          "Rich social buttons with authentic brand gradient borders."
+        ],
+        3: [
+          "Artisanal luxury typography with Playfair serif accents.",
+          "Numbered Curiosities & Architectural Highlights.",
+          "Stamped logistics seal for tickets and directions."
+        ],
+        4: [
+          "High-contrast obsidian HUD with crisp neon indicators.",
+          "Live duration progress bar and tactile action pills.",
+          "Zero fluff, maximum technical precision and legibility."
+        ],
+        5: [
+          "Dramatic full-bleed photo atmospheric lighting.",
+          "Pull-quote 'The Story' narrative card.",
+          "Split Insider Protocol (Do's vs Pitfalls) with rich media hub."
+        ]
+      };
+
+      document.getElementById('concept-badge').textContent = `Concept ${num}`;
+      document.getElementById('concept-title').textContent = titles[num];
+      document.getElementById('concept-desc').textContent = descs[num];
+      document.getElementById('concept-points').innerHTML = points[num].map(p => `
+        <li class="flex items-start gap-2"><span class="text-amber-400 font-bold">✦</span> <span>${p}</span></li>
+      `).join('');
+    }
+
+    function renderCurrentConcept() {
+      const e = currentEvent;
+      const canvas = document.getElementById('mockup-canvas');
+
+      if (currentConcept === 1) {
+        // =========================================================================
+        // CONCEPT 1: LUXE EXPEDITION BRIEFING
+        // =========================================================================
+        canvas.innerHTML = `
+          <!-- Ambient Vignette Landmark Photo Layer -->
+          <div class="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
+            <img src="${e.bg}" alt="" class="w-full h-full object-cover object-center opacity-30 filter grayscale contrast-125 select-none" />
+            <div class="absolute inset-0 bg-gradient-to-b from-[#141822]/80 via-[#141822]/90 to-[#141822]"></div>
+          </div>
+
+          <!-- Content Stream -->
+          <div class="relative z-10 flex flex-col h-full overflow-y-auto p-5 space-y-4 custom-scrollbar text-slate-100">
+            
+            <!-- Top Header & Expedition Action Bar -->
+            <div class="flex items-center justify-between gap-2 border-b border-amber-500/20 pb-3.5">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/30 gold-glow">
+                ✦ ${e.typeLabel}
+              </span>
+
+              <!-- Compact Polished Action Cluster -->
+              <div class="flex items-center gap-1.5">
+                <a href="#" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-xs transition shadow-md">
+                  <span>🗺️ Maps</span>
+                </a>
+                <button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#1e2433] hover:bg-[#273044] text-emerald-300 font-bold text-xs border border-emerald-500/30 transition">
+                  <span>✓ Done</span>
+                </button>
+                <button class="p-1.5 rounded-xl bg-[#1e2433] text-slate-400 hover:text-white border border-slate-700">
+                  ✕
+                </button>
               </div>
-              <h3 class="font-black text-sm text-white">Quick local lunch</h3>
             </div>
-          </div>
 
-          <div>
-            <span class="text-xl font-black font-mono text-white tracking-widest block mb-1">15 <span class="text-xs font-bold text-slate-400">HRS</span></span>
-            <div class="w-full rounded-2xl bg-gradient-to-br from-[#272e3d] to-[#1c212e] border-[1.5px] border-emerald-400/90 p-3 shadow-lg">
-              <div class="flex justify-between items-center text-xs font-bold text-emerald-300 mb-1">
-                <span>15:15–16:15 • Balat</span>
-                <span class="font-mono bg-[#131722] px-2 py-0.5 rounded-full text-slate-300">1h</span>
+            <!-- Title & Rich Time Ribbon -->
+            <div class="space-y-1">
+              <div class="text-[11px] font-mono font-bold text-amber-400/90 tracking-widest uppercase">${e.subtitle || 'Istanbul Private Guide'}</div>
+              <h1 class="text-2xl font-black text-white leading-tight tracking-tight">${e.title}</h1>
+              
+              <div class="flex flex-wrap items-center gap-2 pt-1 text-xs text-slate-300 font-bold">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg bg-[#1f2536] text-amber-200 border border-amber-500/20 font-mono">
+                  🕒 ${e.startTime} – ${e.endTime}
+                </span>
+                <span class="px-2 py-0.5 rounded-md bg-black/40 text-slate-300 font-mono text-[11px] border border-white/10">
+                  ${e.duration}
+                </span>
+                <span class="text-slate-400 truncate max-w-[170px]">• ${e.location.split(',')[0]}</span>
               </div>
-              <h3 class="font-black text-sm text-white">Fatih → Çarşamba → Balat</h3>
             </div>
+
+            <!-- The Essence (Luxury Quote Card) -->
+            <div class="p-4 rounded-2xl bg-[#1c2230]/90 backdrop-blur-md border border-amber-500/20 gold-glow space-y-2">
+              <div class="text-[10px] font-black uppercase tracking-widest text-amber-400 flex items-center gap-1.5">
+                <span>✦ THE ESSENCE</span>
+              </div>
+              <p class="text-xs sm:text-sm font-semibold text-white leading-relaxed">${e.what}</p>
+              <p class="text-xs text-slate-300 font-medium leading-relaxed italic border-t border-slate-700/60 pt-2 text-amber-100/90">${e.why}</p>
+            </div>
+
+            <!-- Key Curiosities & Highlights -->
+            <div class="p-4 rounded-2xl bg-[#181e2b]/90 backdrop-blur-md border border-slate-700/70 space-y-2">
+              <div class="text-[11px] font-black uppercase tracking-wider text-slate-300">Curator’s Field Highlights</div>
+              <ul class="space-y-2 text-xs text-slate-200 font-medium">
+                ${e.facts.map(f => `<li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0"></span><span>${f}</span></li>`).join('')}
+              </ul>
+            </div>
+
+            <!-- Do & Avoid Grid -->
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div class="p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-emerald-100">
+                <span class="font-black text-emerald-300 block mb-0.5 text-[11px]">Recommended:</span>
+                ${e.do}
+              </div>
+              <div class="p-3 rounded-xl bg-amber-950/40 border border-amber-500/30 text-amber-100">
+                <span class="font-black text-amber-300 block mb-0.5 text-[11px]">Caution:</span>
+                ${e.avoid || 'Stay on pace.'}
+              </div>
+            </div>
+
+            <!-- Logistics & Ticket Seal -->
+            ${e.ticket ? `
+              <div class="p-3 rounded-xl bg-[#1c2230]/90 border border-slate-700 flex items-center justify-between text-xs">
+                <span class="text-slate-400 font-bold">Access Pass:</span>
+                <span class="font-mono font-black text-amber-300">${e.ticket}</span>
+              </div>
+            ` : ''}
+
+            <!-- Rich Visuals & Media Hub -->
+            <div class="pt-2 border-t border-slate-700/60 flex flex-wrap gap-2">
+              <a href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent(e.title + ' Istanbul')}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#1c2230] hover:bg-[#262e42] border border-slate-700 text-xs font-bold text-slate-200 transition">
+                <span>📸 Google Images</span>
+              </a>
+              ${e.ig ? `
+                <a href="https://instagram.com/${e.ig.replace('@', '')}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#1c2230] hover:bg-[#262e42] border border-pink-500/40 text-xs font-bold text-pink-300 transition">
+                  <span>📷 ${e.ig}</span>
+                </a>
+              ` : ''}
+            </div>
+
           </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ========================================================================= -->
-    <!-- CONCEPT 4: HORIZONTAL MILESTONE BANNERS (No Column at all)                 -->
-    <!-- ========================================================================= -->
-    <div id="opt4" class="bg-[#181c26] rounded-3xl border border-slate-800 p-4 sm:p-5 flex flex-col shadow-xl">
-      <div class="mb-4 pb-3 border-b border-slate-800 flex items-center justify-between">
-        <div>
-          <span class="text-xs font-mono font-bold text-rose-400 uppercase tracking-wider">Concept 4</span>
-          <h2 class="text-lg font-black text-white">Horizontal Hour Banners</h2>
-        </div>
-        <span class="text-[11px] px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30">100% Width</span>
-      </div>
-      <p class="text-xs text-slate-400 mb-4">Hours are rendered as crisp horizontal dividers spanning the width of the screen. Cards have full 100% width with giant readable hour banners.</p>
-
-      <!-- Mockup Canvas -->
-      <div class="bg-[#1e2330] rounded-2xl p-3 border border-slate-700/60 relative overflow-hidden flex-1 space-y-3">
-        <!-- 14:00 Banner -->
-        <div class="flex items-center gap-3 py-1">
-          <span class="text-2xl font-black font-mono text-white">14:00</span>
-          <div class="flex-1 h-[1.5px] bg-gradient-to-r from-slate-600 to-transparent"></div>
-          <span class="text-xs font-bold text-slate-400 uppercase font-mono tracking-wider">Afternoon</span>
-        </div>
-        <div class="w-full rounded-2xl bg-gradient-to-br from-[#272e3d] to-[#1c212e] border-[1.5px] border-rose-400/90 p-3.5 shadow-lg">
-          <div class="flex justify-between items-center text-xs font-bold text-rose-300 mb-1">
-            <span>🍽️ 14:15–14:45 • Fatih</span>
-            <span class="font-mono bg-[#131722] px-2 py-0.5 rounded-full text-sky-300">30m</span>
+        `;
+      } else if (currentConcept === 2) {
+        // =========================================================================
+        // CONCEPT 2: NEO-GLASS BENTO MAGAZINE
+        // =========================================================================
+        canvas.innerHTML = `
+          <!-- Ambient Color Glow Background -->
+          <div class="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
+            <img src="${e.bg}" alt="" class="w-full h-full object-cover object-center opacity-30 filter grayscale contrast-125 select-none" />
+            <div class="absolute inset-0 bg-gradient-to-b from-[#0f131c]/80 via-[#0f131c]/90 to-[#0f131c]"></div>
           </div>
-          <h3 class="font-black text-base text-white">Quick local lunch (Esnaf Lokantası)</h3>
-        </div>
 
-        <!-- 15:00 Banner -->
-        <div class="flex items-center gap-3 py-1">
-          <span class="text-2xl font-black font-mono text-white">15:00</span>
-          <div class="flex-1 h-[1.5px] bg-gradient-to-r from-slate-600 to-transparent"></div>
-        </div>
-        <div class="w-full rounded-2xl bg-gradient-to-br from-[#272e3d] to-[#1c212e] border-[1.5px] border-emerald-400/90 p-3.5 shadow-lg">
-          <div class="flex justify-between items-center text-xs font-bold text-emerald-300 mb-1">
-            <span>👟 15:15–16:15 • Balat</span>
-            <span class="font-mono bg-[#131722] px-2 py-0.5 rounded-full text-sky-300">1h 00m</span>
+          <div class="relative z-10 flex flex-col h-full overflow-y-auto p-4 space-y-3 custom-scrollbar text-slate-100">
+            
+            <!-- Modern Bento Header -->
+            <div class="p-4 rounded-3xl bg-[#181d2a]/90 backdrop-blur-md border border-slate-700/80 shadow-lg space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-sky-500/20 text-sky-300 border border-sky-500/30">
+                  ${e.typeLabel}
+                </span>
+                <span class="text-xs font-mono font-bold text-slate-400">${e.duration} activity</span>
+              </div>
+              <h1 class="text-2xl font-black text-white leading-tight tracking-tight">${e.title}</h1>
+              <div class="flex items-center justify-between pt-2 border-t border-slate-700/60">
+                <span class="text-xs font-mono font-black text-indigo-300">🕒 ${e.startTime} – ${e.endTime}</span>
+                <div class="flex items-center gap-1.5">
+                  <a href="#" class="px-3 py-1 rounded-xl bg-indigo-600 text-white font-black text-xs">🗺️ Maps</a>
+                  <button class="px-3 py-1 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-bold text-xs">✓ Done</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bento Stats Counter Strip -->
+            <div class="grid grid-cols-3 gap-2 text-center">
+              <div class="p-2.5 rounded-2xl bg-[#181d2a]/90 border border-slate-700/70">
+                <div class="text-[10px] font-bold text-slate-400 uppercase">Window</div>
+                <div class="text-xs font-mono font-black text-white mt-0.5">${e.duration}</div>
+              </div>
+              <div class="p-2.5 rounded-2xl bg-[#181d2a]/90 border border-slate-700/70">
+                <div class="text-[10px] font-bold text-slate-400 uppercase">Access</div>
+                <div class="text-xs font-bold text-emerald-400 mt-0.5 truncate">${e.ticket ? 'Ticketed' : 'Free Entry'}</div>
+              </div>
+              <div class="p-2.5 rounded-2xl bg-[#181d2a]/90 border border-slate-700/70">
+                <div class="text-[10px] font-bold text-slate-400 uppercase">District</div>
+                <div class="text-xs font-bold text-sky-400 mt-0.5 truncate">${e.location.split(',')[1] || 'Istanbul'}</div>
+              </div>
+            </div>
+
+            <!-- Bento Block 1: Story -->
+            <div class="p-4 rounded-3xl bg-[#181d2a]/90 backdrop-blur-md border border-slate-700/80 space-y-2">
+              <div class="text-[11px] font-black uppercase tracking-wider text-sky-400">The Experience</div>
+              <p class="text-xs sm:text-sm font-semibold text-white leading-relaxed">${e.what}</p>
+              <p class="text-xs text-slate-300 leading-relaxed font-medium">${e.why}</p>
+            </div>
+
+            <!-- Bento Block 2: Field Strategy -->
+            <div class="p-4 rounded-3xl bg-emerald-950/30 border border-emerald-500/30 space-y-1.5">
+              <div class="text-[11px] font-black uppercase tracking-wider text-emerald-300">💡 Field Advice</div>
+              <p class="text-xs text-emerald-100 leading-relaxed font-medium">${e.do}</p>
+            </div>
+
+            ${e.food ? `
+              <div class="p-4 rounded-3xl bg-rose-950/30 border border-rose-500/30 space-y-1.5">
+                <div class="text-[11px] font-black uppercase tracking-wider text-rose-300">🍴 Flavor Notes</div>
+                <p class="text-xs text-rose-100 leading-relaxed font-medium">${e.food}</p>
+              </div>
+            ` : ''}
+
+            <!-- Social Media Hub -->
+            <div class="flex items-center gap-2 pt-1">
+              <a href="#" class="flex-1 py-2 px-3 rounded-2xl bg-[#181d2a] border border-slate-700 hover:border-sky-400 text-xs font-bold text-center text-slate-200">
+                📸 Google Images
+              </a>
+              ${e.ig ? `
+                <a href="#" class="flex-1 py-2 px-3 rounded-2xl bg-[#181d2a] border border-pink-500/40 text-xs font-bold text-center text-pink-300">
+                  📷 ${e.ig}
+                </a>
+              ` : ''}
+            </div>
+
           </div>
-          <h3 class="font-black text-base text-white">Fatih → Çarşamba → Fener/Balat</h3>
-        </div>
-      </div>
-    </div>
-
-    <!-- ========================================================================= -->
-    <!-- CONCEPT 5: INTEGRATED TIME SPINE (Card-Fused Badge)                        -->
-    <!-- ========================================================================= -->
-    <div id="opt5" class="bg-[#181c26] rounded-3xl border border-slate-800 p-4 sm:p-5 flex flex-col shadow-xl">
-      <div class="mb-4 pb-3 border-b border-slate-800 flex items-center justify-between">
-        <div>
-          <span class="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider">Concept 5</span>
-          <h2 class="text-lg font-black text-white">Integrated Spine Ribbons</h2>
-        </div>
-        <span class="text-[11px] px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30">100% Width</span>
-      </div>
-      <p class="text-xs text-slate-400 mb-4">Card has a built-in vertical time block fused on its left edge. Zero external margins, bold time blocks, maximum internal room.</p>
-
-      <!-- Mockup Canvas -->
-      <div class="bg-[#1e2330] rounded-2xl p-3 border border-slate-700/60 relative overflow-hidden flex-1 space-y-3">
-        <!-- Card with Fused Left Time Spine -->
-        <div class="w-full rounded-2xl bg-gradient-to-br from-[#272e3d] to-[#1c212e] border-[1.5px] border-rose-400/90 flex overflow-hidden shadow-lg">
-          <!-- Left Time Spine Block -->
-          <div class="w-20 bg-rose-500/15 border-r border-rose-500/30 p-3 flex flex-col justify-between items-center text-center">
-            <span class="text-lg font-black font-mono text-rose-200 leading-tight">14:15</span>
-            <span class="text-[10px] font-mono text-rose-300/70 font-bold">30 MIN</span>
-            <span class="text-xs font-black font-mono text-rose-300/80 leading-tight">14:45</span>
+        `;
+      } else if (currentConcept === 3) {
+        // =========================================================================
+        // CONCEPT 3: ATELIER TRAVEL JOURNAL
+        // =========================================================================
+        canvas.innerHTML = `
+          <div class="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
+            <img src="${e.bg}" alt="" class="w-full h-full object-cover object-center opacity-25 filter grayscale contrast-150 select-none" />
+            <div class="absolute inset-0 bg-gradient-to-b from-[#12161f]/85 via-[#12161f]/90 to-[#12161f]"></div>
           </div>
-          <!-- Card Content -->
-          <div class="flex-1 p-3.5 flex flex-col justify-center">
-            <h3 class="font-black text-base text-white">Quick local lunch</h3>
-            <p class="text-xs text-slate-300 font-medium mt-0.5">Esnaf Lokantası • Fatih</p>
-          </div>
-        </div>
 
-        <!-- Card with Fused Left Time Spine -->
-        <div class="w-full rounded-2xl bg-gradient-to-br from-[#272e3d] to-[#1c212e] border-[1.5px] border-emerald-400/90 flex overflow-hidden shadow-lg">
-          <!-- Left Time Spine Block -->
-          <div class="w-20 bg-emerald-500/15 border-r border-emerald-500/30 p-3 flex flex-col justify-between items-center text-center">
-            <span class="text-lg font-black font-mono text-emerald-200 leading-tight">15:15</span>
-            <span class="text-[10px] font-mono text-emerald-300/70 font-bold">1 HOUR</span>
-            <span class="text-xs font-black font-mono text-emerald-300/80 leading-tight">16:15</span>
-          </div>
-          <!-- Card Content -->
-          <div class="flex-1 p-3.5 flex flex-col justify-center">
-            <h3 class="font-black text-base text-white">Fatih → Çarşamba → Balat</h3>
-            <p class="text-xs text-slate-300 font-medium mt-0.5">Historic walking route • Balat</p>
-          </div>
-        </div>
-      </div>
-    </div>
+          <div class="relative z-10 flex flex-col h-full overflow-y-auto p-5 space-y-4 custom-scrollbar text-slate-100">
+            
+            <!-- Journal Header -->
+            <div class="border-b-2 border-amber-600/40 pb-3 flex items-start justify-between">
+              <div>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-amber-400 font-bold">IST • DOSSIER N° ${e.id.split('-').pop()}</span>
+                <h1 class="text-2xl font-serif font-black text-white tracking-tight mt-0.5">${e.title}</h1>
+                <div class="text-xs font-mono text-slate-400 mt-1">🕒 ${e.startTime} – ${e.endTime} (${e.duration})</div>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <a href="#" class="px-3 py-1.5 rounded-lg bg-amber-500 text-slate-950 font-black text-xs shadow">Maps 🗺️</a>
+                <button class="p-1.5 rounded-lg bg-[#1c222e] text-slate-300 border border-slate-700">✕</button>
+              </div>
+            </div>
 
-  </div>
+            <!-- Curator's Note -->
+            <div class="border-l-2 border-amber-400 pl-4 py-1 space-y-2">
+              <div class="text-[10px] font-black uppercase tracking-widest text-amber-400">Curator’s Note</div>
+              <p class="text-xs sm:text-sm font-serif italic text-slate-100 leading-relaxed">${e.what}</p>
+              <p class="text-xs text-slate-300 font-medium leading-relaxed">${e.why}</p>
+            </div>
 
-  <!-- Summary Footer -->
-  <footer class="mt-10 p-6 bg-[#181c26] rounded-3xl border border-slate-800 text-center">
-    <p class="text-sm font-bold text-slate-200">
-      Pick your favorite layout concept or request any hybrid combination!
-    </p>
-  </footer>
+            <!-- Numbered Architectural Highlights -->
+            <div class="bg-[#181e2b]/90 rounded-2xl p-4 border border-slate-700 space-y-2.5">
+              <div class="text-[11px] font-black uppercase tracking-wider text-slate-300">Key Curiosities</div>
+              <div class="space-y-2">
+                ${e.facts.map((f, i) => `
+                  <div class="flex items-start gap-2.5 text-xs text-slate-200">
+                    <span class="w-4 h-4 rounded-full bg-amber-500/20 text-amber-300 font-mono text-[10px] font-black flex items-center justify-center shrink-0 mt-0.5">${i+1}</span>
+                    <span class="leading-relaxed font-medium">${f}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Field Strategy Stamped Card -->
+            <div class="p-3.5 rounded-2xl bg-[#181e2b]/90 border border-slate-700 text-xs space-y-1.5">
+              <span class="text-amber-400 font-bold block text-[11px] uppercase tracking-wider">Field Protocol:</span>
+              <p class="text-slate-200 font-medium leading-relaxed">${e.do}</p>
+            </div>
+
+            <!-- Logistics Seal -->
+            <div class="p-3 rounded-xl bg-black/40 border border-slate-700 flex justify-between items-center text-xs font-mono">
+              <span class="text-slate-400">ACCESS:</span>
+              <span class="text-amber-300 font-bold">${e.ticket || 'Standard Entrance'}</span>
+            </div>
+
+            <!-- Visual Links -->
+            <div class="flex items-center gap-2 pt-1">
+              <a href="#" class="px-3 py-1.5 rounded-xl bg-[#181e2b] border border-slate-700 text-xs font-bold text-slate-300">📸 Photos</a>
+              ${e.ig ? `<a href="#" class="px-3 py-1.5 rounded-xl bg-[#181e2b] border border-pink-500/40 text-xs font-bold text-pink-300">📷 ${e.ig}</a>` : ''}
+            </div>
+
+          </div>
+        `;
+      } else if (currentConcept === 4) {
+        // =========================================================================
+        // CONCEPT 4: MODERN DARK HUD (TECH AESTHETICS)
+        // =========================================================================
+        canvas.innerHTML = `
+          <div class="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
+            <img src="${e.bg}" alt="" class="w-full h-full object-cover object-center opacity-25 filter grayscale contrast-150 select-none" />
+            <div class="absolute inset-0 bg-gradient-to-b from-[#0b0e14]/85 via-[#0b0e14]/90 to-[#0b0e14]"></div>
+          </div>
+
+          <div class="relative z-10 flex flex-col h-full overflow-y-auto p-5 space-y-3.5 custom-scrollbar text-slate-100 font-mono">
+            
+            <!-- HUD Status Header -->
+            <div class="flex items-center justify-between border-b border-cyan-500/30 pb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                <span class="text-[11px] font-black tracking-widest text-cyan-300 uppercase">${e.type} // ACTIVE</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <a href="#" class="px-3 py-1 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 text-xs font-black hover:bg-cyan-500/30 transition">MAPS</a>
+                <button class="px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs font-black">DONE</button>
+              </div>
+            </div>
+
+            <!-- Title & Telemetry -->
+            <div>
+              <div class="text-[10px] text-slate-400 uppercase tracking-widest font-mono">ID: ${e.id}</div>
+              <h1 class="text-xl font-black text-white font-sans tracking-tight mt-0.5">${e.title}</h1>
+              <div class="flex items-center gap-2 text-xs font-mono text-cyan-300 mt-1">
+                <span>[${e.startTime} > ${e.endTime}]</span>
+                <span>•</span>
+                <span class="text-slate-400">${e.duration}</span>
+              </div>
+            </div>
+
+            <!-- HUD Card: Narrative -->
+            <div class="p-3.5 rounded-xl bg-[#101520]/95 border border-cyan-500/30 cyan-glow space-y-2 font-sans">
+              <div class="text-[10px] font-mono font-bold text-cyan-400 uppercase tracking-wider">// SUMMARY_DATA</div>
+              <p class="text-xs text-white font-semibold leading-relaxed">${e.what}</p>
+              <p class="text-xs text-slate-300 leading-relaxed">${e.why}</p>
+            </div>
+
+            <!-- HUD Card: Directives -->
+            <div class="p-3.5 rounded-xl bg-[#101520]/95 border border-emerald-500/30 space-y-1.5 font-sans">
+              <div class="text-[10px] font-mono font-bold text-emerald-400 uppercase tracking-wider">// ACTIONABLE_TIP</div>
+              <p class="text-xs text-emerald-100 font-medium leading-relaxed">${e.do}</p>
+            </div>
+
+            <!-- Telemetry Footer -->
+            <div class="p-3 rounded-xl bg-[#101520] border border-slate-800 flex justify-between items-center text-xs font-mono">
+              <span class="text-slate-500">TICKETS:</span>
+              <span class="text-cyan-300 font-bold">${e.ticket || 'OPEN'}</span>
+            </div>
+
+            <!-- Media Links -->
+            <div class="flex gap-2 pt-1 font-sans">
+              <a href="#" class="px-3 py-1.5 rounded-xl bg-[#101520] border border-slate-700 text-xs text-slate-300 font-bold">Google Images</a>
+              ${e.ig ? `<a href="#" class="px-3 py-1.5 rounded-xl bg-[#101520] border border-pink-500/40 text-xs text-pink-300 font-bold">${e.ig}</a>` : ''}
+            </div>
+
+          </div>
+        `;
+      } else if (currentConcept === 5) {
+        // =========================================================================
+        // CONCEPT 5: CINEMATIC HERITAGE SHOWCASE
+        // =========================================================================
+        canvas.innerHTML = `
+          <div class="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
+            <img src="${e.bg}" alt="" class="w-full h-full object-cover object-center opacity-35 filter grayscale contrast-125 select-none" />
+            <div class="absolute inset-0 bg-gradient-to-b from-[#10141e]/75 via-[#10141e]/85 to-[#10141e]"></div>
+          </div>
+
+          <div class="relative z-10 flex flex-col h-full overflow-y-auto p-5 space-y-4 custom-scrollbar text-slate-100">
+            
+            <!-- Cinematic Top Ribbon -->
+            <div class="flex items-center justify-between border-b border-slate-700/60 pb-3">
+              <div>
+                <span class="text-[10px] font-black uppercase tracking-widest text-indigo-400 block">${e.typeLabel}</span>
+                <h1 class="text-2xl font-black text-white leading-tight tracking-tight">${e.title}</h1>
+              </div>
+              <button class="p-2 rounded-full bg-[#1e2433] text-slate-400 hover:text-white border border-slate-700">✕</button>
+            </div>
+
+            <!-- Floating Action Ribbon (Directions & Done) -->
+            <div class="flex items-center justify-between gap-2 p-2.5 rounded-2xl bg-[#1a202c]/90 backdrop-blur-md border border-slate-700/80 shadow-md">
+              <div class="pl-2 text-xs font-mono font-bold text-indigo-300">
+                🕒 ${e.startTime} – ${e.endTime}
+              </div>
+              <div class="flex items-center gap-1.5">
+                <a href="#" class="px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs shadow">
+                  Directions 🗺️
+                </a>
+                <button class="px-3 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold text-xs">
+                  Done ✓
+                </button>
+              </div>
+            </div>
+
+            <!-- Story Pull-Quote Card -->
+            <div class="p-4 rounded-2xl bg-[#171d2b]/90 backdrop-blur-md border border-slate-700/70 space-y-2 shadow-sm">
+              <div class="text-[10px] font-black uppercase tracking-widest text-indigo-300">The Story</div>
+              <p class="text-xs sm:text-sm font-semibold text-white leading-relaxed">${e.what}</p>
+              <p class="text-xs text-slate-300 leading-relaxed font-medium pt-2 border-t border-slate-700/60">${e.why}</p>
+            </div>
+
+            <!-- Insider Highlights -->
+            <div class="p-4 rounded-2xl bg-[#171d2b]/90 backdrop-blur-md border border-slate-700/70 space-y-2">
+              <div class="text-[10px] font-black uppercase tracking-widest text-slate-300">Curated Context</div>
+              <ul class="space-y-2 text-xs text-slate-200 font-medium">
+                ${e.facts.map(f => `<li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5 shrink-0"></span><span>${f}</span></li>`).join('')}
+              </ul>
+            </div>
+
+            <!-- Split Protocol -->
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-100">
+                <span class="font-bold text-emerald-300 block mb-0.5 text-[10px] uppercase">Recommended:</span>
+                ${e.do}
+              </div>
+              <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/30 text-amber-100">
+                <span class="font-bold text-amber-300 block mb-0.5 text-[10px] uppercase">Caution:</span>
+                ${e.avoid || 'Stay on pace.'}
+              </div>
+            </div>
+
+            <!-- Media Hub -->
+            <div class="pt-2 border-t border-slate-700/60 flex items-center gap-2">
+              <a href="#" class="px-3 py-1.5 rounded-xl bg-[#171d2b] border border-slate-700 text-xs font-bold text-slate-200">📸 Google Images</a>
+              ${e.ig ? `<a href="#" class="px-3 py-1.5 rounded-xl bg-[#171d2b] border border-pink-500/40 text-xs font-bold text-pink-300">📷 ${e.ig}</a>` : ''}
+            </div>
+
+          </div>
+        `;
+      }
+    }
+
+    // Initialize
+    renderCurrentConcept();
+  </script>
 </body>
 </html>
