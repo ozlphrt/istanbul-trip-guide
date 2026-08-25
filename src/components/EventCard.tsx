@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { EventType, ItineraryEvent } from '../types/calendar';
 import { formatDuration, formatEventTime, PIXELS_PER_MINUTE } from '../utils/time';
-import { getPlaceWatermark } from '../utils/placeWatermarks';
+import { getPlacePhotoUrl } from '../utils/placePhotos';
 
 interface EventCardProps {
   event: ItineraryEvent;
@@ -73,6 +73,7 @@ export const EventCard: React.FC<EventCardProps> = ({
 
   const locationShort = event.location ? event.location.split(',')[0].trim() : '';
   const subtitle = event.what || event.why || '';
+  const photoUrl = getPlacePhotoUrl(event.id, event.title);
 
   return (
     <div
@@ -95,8 +96,15 @@ export const EventCard: React.FC<EventCardProps> = ({
           : 'z-10'
       } ${event.hasCollisionWithFixed ? 'ring-2 ring-rose-500 animate-pulse' : ''}`}
     >
-      {/* Place-Specific Architectural Watermark Silhouette */}
-      {getPlaceWatermark(event.id, event.title)}
+      {/* Stylized Monochromatic Place Photo Watermark with Gradient Fade */}
+      <div className="absolute right-0 top-0 bottom-0 w-3/5 pointer-events-none overflow-hidden rounded-r-[20px] sm:rounded-r-[22px]">
+        <img
+          src={photoUrl}
+          alt=""
+          className="w-full h-full object-cover object-center opacity-30 mix-blend-luminosity grayscale contrast-125 [mask-image:linear-gradient(to_left,rgba(0,0,0,0.85)_10%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_left,rgba(0,0,0,0.85)_10%,transparent_100%)] select-none"
+          loading="lazy"
+        />
+      </div>
 
       {/* 1. Compact View (< 70px: 15–25 min stops) */}
       {isCompact ? (
