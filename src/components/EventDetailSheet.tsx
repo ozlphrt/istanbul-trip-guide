@@ -29,6 +29,7 @@ import {
 } from 'lucide-react';
 import { EventLink, EventStatus, EventType, ItineraryEvent } from '../types/calendar';
 import { formatDuration, formatEventTime } from '../utils/time';
+import { getPlacePhotoUrl } from '../utils/placePhotos';
 
 interface EventDetailSheetProps {
   event: ItineraryEvent | null;
@@ -445,8 +446,21 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
   // Desktop Sidebar Layout
   if (isDesktopSidebar) {
     return (
-      <div className="h-full bg-[#1e2330] rounded-3xl border border-slate-700/60 shadow-sm overflow-hidden flex flex-col">
-        {content}
+      <div className="relative h-full bg-[#1e2330] rounded-3xl border border-slate-700/60 shadow-sm overflow-hidden flex flex-col">
+        {/* Stylized Monochromatic Place Photo Hero Backdrop */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
+          <img
+            src={getPlacePhotoUrl(event.id, event.title)}
+            alt=""
+            className="w-full h-full object-cover object-top opacity-20 mix-blend-luminosity grayscale contrast-125 [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.15)_65%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.15)_65%,transparent_100%)] select-none"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1e2330]/65 via-[#1e2330]/85 to-[#1e2330]" />
+        </div>
+
+        <div className="relative z-10 h-full overflow-hidden flex flex-col">
+          {content}
+        </div>
       </div>
     );
   }
@@ -462,13 +476,24 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
 
       {/* Bottom Sheet Container */}
       <div className="relative z-10 w-full max-h-[92vh] bg-[#1e2330] rounded-t-3xl border-t border-slate-700 shadow-sheet overflow-hidden animate-sheet-up flex flex-col">
+        {/* Stylized Monochromatic Place Photo Hero Backdrop */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
+          <img
+            src={getPlacePhotoUrl(event.id, event.title)}
+            alt=""
+            className="w-full h-full object-cover object-top opacity-20 mix-blend-luminosity grayscale contrast-125 [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.15)_65%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.15)_65%,transparent_100%)] select-none"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1e2330]/65 via-[#1e2330]/85 to-[#1e2330]" />
+        </div>
+
         {/* Drag Handle */}
-        <div className="py-3 flex justify-center items-center shrink-0 cursor-grab">
+        <div className="relative z-10 py-3 flex justify-center items-center shrink-0 cursor-grab">
           <div className="w-12 h-1.5 rounded-full bg-slate-500" />
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto pb-10">
+        <div className="relative z-10 flex-1 overflow-y-auto pb-10">
           {content}
         </div>
       </div>
