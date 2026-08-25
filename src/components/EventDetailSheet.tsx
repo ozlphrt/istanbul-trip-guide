@@ -38,8 +38,8 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
         <div className="h-full flex flex-col items-center justify-center p-8 text-center text-slate-400 bg-[#161a24] rounded-3xl border border-slate-800 shadow-sm">
           <Landmark className="w-14 h-14 mb-3 text-slate-500 opacity-60" />
           <p className="text-xl font-black text-slate-200">Select an activity</p>
-          <p className="text-base text-slate-400 font-semibold mt-1 max-w-[280px]">
-            Click any activity on the timeline to view its private briefing.
+          <p className="text-base text-slate-300 font-semibold mt-1 max-w-[280px]">
+            Click any activity on the timeline to view its details.
           </p>
         </div>
       );
@@ -47,16 +47,16 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
     return null;
   }
 
-  const getTypeLabel = (type: EventType) => {
+  const getTypeBadge = (type: EventType) => {
     switch (type) {
-      case 'visit': return 'Imperial Landmark';
-      case 'food': return 'Artisanal Culinary';
-      case 'drink': return 'Living Heritage';
-      case 'walk': return 'Neighborhood Walk';
-      case 'transport': return 'Scenic Transfer';
-      case 'concert': return 'Live Performance';
-      case 'rest': return 'Buffer & Rest';
-      case 'optional': return 'Flexible Option';
+      case 'visit': return { label: 'Landmark', dot: 'bg-sky-400' };
+      case 'food': return { label: 'Dining', dot: 'bg-rose-400' };
+      case 'drink': return { label: 'Heritage', dot: 'bg-amber-400' };
+      case 'walk': return { label: 'Walk', dot: 'bg-emerald-400' };
+      case 'transport': return { label: 'Transfer', dot: 'bg-cyan-400' };
+      case 'concert': return { label: 'Concert', dot: 'bg-indigo-400' };
+      case 'rest': return { label: 'Break', dot: 'bg-slate-400' };
+      case 'optional': return { label: 'Optional', dot: 'bg-slate-400' };
     }
   };
 
@@ -74,52 +74,54 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
   const photoUrl = getPlacePhotoUrl(event.id, event.title);
   const igLink = event.links?.find(l => l.type === 'ig');
   const otherLinks = event.links?.filter(l => l.type !== 'ig') || [];
+  const typeBadge = getTypeBadge(event.type);
 
   const content = (
-    <div className="flex flex-col h-full overflow-y-auto space-y-4 p-5 sm:p-6 text-slate-100 custom-scrollbar">
+    <div className="flex flex-col h-full overflow-y-auto space-y-5 p-5 sm:p-7 text-slate-100 custom-scrollbar">
       
       {/* ========================================================================= */}
-      {/* 1. LUXE EXPEDITION HEADER WITH GOOGLE IMAGES & MAPS (NO DONE BUTTON)      */}
+      {/* 1. COHESIVE, IDENTICAL-HEIGHT TOP HEADER BAR (All elements exactly 34px)  */}
       {/* ========================================================================= */}
-      <div className="flex items-center justify-between gap-2 border-b border-amber-500/20 pb-3.5">
-        {/* Warm Gold Category Monogram */}
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/30 shadow-sm backdrop-blur-sm">
-          <span>✦</span>
-          <span>{getTypeLabel(event.type)}</span>
-        </span>
+      <div className="flex items-center justify-between gap-2 border-b border-slate-700/60 pb-4">
+        
+        {/* Category Pill (Single line, consistent height) */}
+        <div className="h-9 px-3.5 rounded-xl bg-[#222838]/90 text-slate-200 border border-slate-700/80 text-xs font-black uppercase tracking-wider flex items-center gap-2 whitespace-nowrap shadow-sm backdrop-blur-sm">
+          <span className={`w-2 h-2 rounded-full ${typeBadge.dot}`} />
+          <span>{typeBadge.label}</span>
+        </div>
 
-        {/* Top Micro-Action Cluster (Maps + Google Images + Close) */}
-        <div className="flex items-center gap-1.5">
+        {/* Top Action Cluster (Identical height, matching styling & crisp fonts) */}
+        <div className="flex items-center gap-2">
           {event.location && (
             <a
               href={getDirectionsUrl(event.location)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 active:scale-95 text-slate-950 text-xs font-black transition shadow-md"
+              className="h-9 px-3.5 rounded-xl bg-[#2a3147] hover:bg-[#343e5a] active:scale-95 text-slate-100 hover:text-white border border-slate-700 hover:border-slate-600 font-bold text-xs flex items-center gap-1.5 transition shadow-sm backdrop-blur-sm"
               title="Open directions in Google Maps"
             >
-              <Navigation className="w-3.5 h-3.5 shrink-0" />
+              <Navigation className="w-4 h-4 text-sky-400 shrink-0" />
               <span>Maps</span>
             </a>
           )}
 
-          {/* Google Images Button at Top (Replacing Done button) */}
+          {/* Google Images Button (Same height, matching styling) */}
           <a
             href={getGoogleImagesUrl(event.title, event.location)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#1c2230]/90 hover:bg-[#273044] active:scale-95 border border-slate-700 hover:border-amber-500/40 text-slate-200 hover:text-white text-xs font-bold transition shadow-sm backdrop-blur-sm"
+            className="h-9 px-3.5 rounded-xl bg-[#2a3147] hover:bg-[#343e5a] active:scale-95 text-slate-100 hover:text-white border border-slate-700 hover:border-slate-600 font-bold text-xs flex items-center gap-1.5 transition shadow-sm backdrop-blur-sm"
             title="Browse photo galleries on Google Images"
           >
-            <ImageIcon className="w-3.5 h-3.5 text-amber-300 shrink-0" />
+            <ImageIcon className="w-4 h-4 text-indigo-400 shrink-0" />
             <span>Images</span>
-            <ExternalLink className="w-3 h-3 text-slate-400 opacity-60" />
+            <ExternalLink className="w-3.5 h-3.5 text-slate-400 opacity-60" />
           </a>
 
           {!isDesktopSidebar && (
             <button
               onClick={onClose}
-              className="p-1.5 rounded-xl bg-[#1c2230]/90 text-slate-400 hover:text-white hover:bg-[#273044] border border-slate-700 transition"
+              className="w-9 h-9 rounded-xl bg-[#2a3147] hover:bg-[#343e5a] active:scale-95 text-slate-300 hover:text-white border border-slate-700 flex items-center justify-center transition shadow-sm shrink-0"
               aria-label="Close"
             >
               <X className="w-4 h-4" />
@@ -129,30 +131,30 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
       </div>
 
       {/* ========================================================================= */}
-      {/* 2. TITLE & LUXURY TIME RIBBON                                             */}
+      {/* 2. TITLE & ULTRA-READABLE TIME RIBBON                                     */}
       {/* ========================================================================= */}
-      <div className="space-y-1.5">
-        <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white leading-tight">
+      <div className="space-y-2">
+        <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-white leading-tight drop-shadow-sm">
           {event.title}
         </h1>
 
-        <div className="flex flex-wrap items-center gap-2 pt-0.5 text-xs sm:text-sm font-bold text-slate-300">
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg bg-[#1e2434] text-amber-200 border border-amber-500/20 font-mono font-black">
-            <Clock className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+        <div className="flex flex-wrap items-center gap-2.5 text-sm sm:text-base font-bold text-slate-200">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#222838] text-white border border-slate-700 font-mono font-black shadow-inner">
+            <Clock className="w-4 h-4 text-indigo-400 shrink-0" />
             {formatEventTime(event.startTime)} – {formatEventTime(event.endTime)}
           </span>
-          <span className="px-2 py-0.5 rounded-md bg-black/40 text-slate-300 font-mono text-xs font-bold border border-white/10">
+          <span className="px-2.5 py-1 rounded-md bg-black/40 text-slate-200 font-mono text-sm font-black border border-white/10">
             {formatDuration(event.durationMinutes)}
           </span>
           {event.durationNote && (
-            <span className="text-slate-400 italic text-xs">
+            <span className="text-slate-300 italic text-sm font-semibold">
               ({event.durationNote})
             </span>
           )}
           {event.location && (
             <>
               <span className="text-slate-500">•</span>
-              <span className="text-slate-400 truncate max-w-[200px]">
+              <span className="text-slate-300 font-semibold truncate max-w-[220px]">
                 {event.location.split(',')[0]}
               </span>
             </>
@@ -161,21 +163,17 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
       </div>
 
       {/* ========================================================================= */}
-      {/* 3. THE ESSENCE (Luxury Pull-Quote Card)                                   */}
+      {/* 3. THE ESSENCE & STORY (High Contrast, Large Readable Typography)          */}
       {/* ========================================================================= */}
       {(event.what || event.why) && (
-        <div className="p-4 sm:p-5 rounded-2xl bg-[#1c2230]/90 backdrop-blur-md border border-amber-500/20 shadow-md space-y-2.5">
-          <div className="text-[10px] font-black uppercase tracking-widest text-amber-400 flex items-center gap-1.5">
-            <span>✦</span>
-            <span>THE ESSENCE</span>
-          </div>
+        <div className="p-5 sm:p-6 rounded-2xl bg-[#1e2434]/95 backdrop-blur-md border border-slate-700/80 shadow-md space-y-3">
           {event.what && (
-            <p className="text-xs sm:text-sm font-semibold text-white leading-relaxed">
+            <p className="text-base sm:text-lg font-bold text-white leading-relaxed">
               {event.what}
             </p>
           )}
           {event.why && (
-            <p className="text-xs sm:text-sm font-medium leading-relaxed italic border-t border-slate-700/60 pt-2.5 text-amber-100/90">
+            <p className="text-sm sm:text-base font-semibold leading-relaxed text-slate-200 border-t border-slate-700/60 pt-3">
               {event.why}
             </p>
           )}
@@ -183,17 +181,17 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
       )}
 
       {/* ========================================================================= */}
-      {/* 4. CURATOR'S FIELD HIGHLIGHTS                                             */}
+      {/* 4. FIELD HIGHLIGHTS                                                       */}
       {/* ========================================================================= */}
       {event.facts && event.facts.length > 0 && (
-        <div className="p-4 sm:p-5 rounded-2xl bg-[#181e2b]/90 backdrop-blur-md border border-slate-700/70 shadow-sm space-y-2.5">
-          <div className="text-[11px] font-black uppercase tracking-wider text-slate-300">
-            Curator’s Field Highlights
+        <div className="p-5 sm:p-6 rounded-2xl bg-[#1e2434]/95 backdrop-blur-md border border-slate-700/80 shadow-sm space-y-3">
+          <div className="text-xs font-black uppercase tracking-wider text-indigo-300">
+            Key Highlights
           </div>
-          <ul className="space-y-2">
+          <ul className="space-y-2.5">
             {event.facts.map((fact, index) => (
-              <li key={index} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-200 font-semibold leading-relaxed">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 shrink-0" />
+              <li key={index} className="flex items-start gap-3 text-sm sm:text-base text-slate-100 font-semibold leading-relaxed">
+                <span className="w-2 h-2 rounded-full bg-indigo-400 mt-2 shrink-0" />
                 <span>{fact}</span>
               </li>
             ))}
@@ -204,22 +202,22 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
       {/* ========================================================================= */}
       {/* 5. FIELD GUIDELINES (DO / AVOID / FOOD)                                    */}
       {/* ========================================================================= */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {event.do && (
-          <div className="p-3.5 sm:p-4 rounded-2xl bg-emerald-950/40 backdrop-blur-sm border border-emerald-500/30 flex items-start gap-2.5">
-            <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-            <p className="text-xs sm:text-sm text-emerald-100 font-semibold leading-relaxed">
-              <strong className="text-emerald-300 block mb-0.5 text-[11px] uppercase tracking-wider">Recommended:</strong>
+          <div className="p-4 sm:p-5 rounded-2xl bg-emerald-950/50 backdrop-blur-sm border border-emerald-500/40 flex items-start gap-3">
+            <Check className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+            <p className="text-sm sm:text-base text-emerald-100 font-semibold leading-relaxed">
+              <strong className="text-emerald-300 block mb-1 text-xs uppercase tracking-wider font-black">Recommended:</strong>
               {event.do}
             </p>
           </div>
         )}
 
         {event.avoid && (
-          <div className="p-3.5 sm:p-4 rounded-2xl bg-amber-950/40 backdrop-blur-sm border border-amber-500/30 flex items-start gap-2.5">
-            <AlertCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-            <p className="text-xs sm:text-sm text-amber-100 font-semibold leading-relaxed">
-              <strong className="text-amber-300 block mb-0.5 text-[11px] uppercase tracking-wider">Caution:</strong>
+          <div className="p-4 sm:p-5 rounded-2xl bg-amber-950/50 backdrop-blur-sm border border-amber-500/40 flex items-start gap-3">
+            <AlertCircle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+            <p className="text-sm sm:text-base text-amber-100 font-semibold leading-relaxed">
+              <strong className="text-amber-300 block mb-1 text-xs uppercase tracking-wider font-black">Note / Avoid:</strong>
               {event.avoid}
             </p>
           </div>
@@ -227,10 +225,10 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
       </div>
 
       {event.food && (
-        <div className="p-3.5 sm:p-4 rounded-2xl bg-rose-950/40 backdrop-blur-sm border border-rose-500/30 flex items-start gap-2.5">
-          <Utensils className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
-          <p className="text-xs sm:text-sm text-rose-100 font-semibold leading-relaxed">
-            <strong className="text-rose-300 block mb-0.5 text-[11px] uppercase tracking-wider">What to Order:</strong>
+        <div className="p-4 sm:p-5 rounded-2xl bg-rose-950/50 backdrop-blur-sm border border-rose-500/40 flex items-start gap-3">
+          <Utensils className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
+          <p className="text-sm sm:text-base text-rose-100 font-semibold leading-relaxed">
+            <strong className="text-rose-300 block mb-1 text-xs uppercase tracking-wider font-black">What to Order:</strong>
             {event.food}
           </p>
         </div>
@@ -238,23 +236,23 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
 
       {/* Entry Tickets & Reservations Chips */}
       {(event.ticket || event.reservation) && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {event.ticket && (
-            <div className="p-3 rounded-xl bg-[#1c2230]/90 backdrop-blur-sm border border-slate-700 flex items-center justify-between text-xs">
-              <span className="font-bold text-slate-400 flex items-center gap-1.5">
-                <Ticket className="w-3.5 h-3.5 text-amber-400" />
-                <span>Access Pass:</span>
+            <div className="p-4 rounded-xl bg-[#1e2434]/95 backdrop-blur-sm border border-slate-700 flex items-center justify-between text-sm">
+              <span className="font-bold text-slate-300 flex items-center gap-2">
+                <Ticket className="w-4 h-4 text-emerald-400" />
+                <span>Entry:</span>
               </span>
-              <span className="font-mono font-black text-amber-300">{event.ticket}</span>
+              <span className="font-mono font-black text-emerald-300 text-sm sm:text-base">{event.ticket}</span>
             </div>
           )}
           {event.reservation && (
-            <div className="p-3 rounded-xl bg-[#1c2230]/90 backdrop-blur-sm border border-slate-700 flex items-center justify-between text-xs">
-              <span className="font-bold text-slate-400 flex items-center gap-1.5">
-                <CalendarCheck className="w-3.5 h-3.5 text-rose-400" />
+            <div className="p-4 rounded-xl bg-[#1e2434]/95 backdrop-blur-sm border border-slate-700 flex items-center justify-between text-sm">
+              <span className="font-bold text-slate-300 flex items-center gap-2">
+                <CalendarCheck className="w-4 h-4 text-rose-400" />
                 <span>Reservation:</span>
               </span>
-              <span className="font-mono font-black text-rose-300">{event.reservation}</span>
+              <span className="font-mono font-black text-rose-300 text-sm sm:text-base">{event.reservation}</span>
             </div>
           )}
         </div>
@@ -262,9 +260,9 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
 
       {/* Notes */}
       {event.notes && (
-        <div className="p-3.5 sm:p-4 rounded-2xl bg-[#1c2230]/90 backdrop-blur-sm border border-slate-700/70 flex items-start gap-2.5">
-          <FileText className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
-          <p className="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed whitespace-pre-line">
+        <div className="p-4 sm:p-5 rounded-2xl bg-[#1e2434]/95 backdrop-blur-sm border border-slate-700/70 flex items-start gap-3">
+          <FileText className="w-5 h-5 text-slate-400 shrink-0 mt-0.5" />
+          <p className="text-sm sm:text-base text-slate-100 font-medium leading-relaxed whitespace-pre-line">
             {event.notes}
           </p>
         </div>
@@ -272,9 +270,9 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
 
       {/* Exact Location Full Address */}
       {event.location && (
-        <div className="p-3.5 sm:p-4 rounded-2xl bg-[#1c2230]/90 backdrop-blur-sm border border-slate-700/70 flex items-start gap-2.5 text-xs sm:text-sm">
-          <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-          <span className="text-slate-200 font-semibold leading-relaxed">{event.location}</span>
+        <div className="p-4 sm:p-5 rounded-2xl bg-[#1e2434]/95 backdrop-blur-sm border border-slate-700/70 flex items-start gap-3 text-sm sm:text-base">
+          <MapPin className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" />
+          <span className="text-slate-100 font-bold leading-relaxed">{event.location}</span>
         </div>
       )}
 
@@ -282,22 +280,22 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
       {/* 6. SOCIAL & EXTRA VERIFIED LINKS                                          */}
       {/* ========================================================================= */}
       {(igLink || otherLinks.length > 0) && (
-        <div className="pt-2 border-t border-slate-700/60">
-          <div className="text-[11px] font-black uppercase tracking-wider text-slate-400 mb-2">
+        <div className="pt-3 border-t border-slate-700/60">
+          <div className="text-xs font-black uppercase tracking-wider text-slate-400 mb-2.5">
             Official Links
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2.5">
             {/* Official Verified Instagram Profile (Only if verified handle exists!) */}
             {igLink && (
               <a
                 href={igLink.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-[#1c2230]/90 hover:bg-[#273044] border border-slate-700 hover:border-pink-500/50 text-slate-200 hover:text-white text-xs font-bold transition shadow-sm backdrop-blur-sm"
+                className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-[#1e2434]/95 hover:bg-[#273044] border border-slate-700 hover:border-pink-500/50 text-slate-100 hover:text-white text-sm font-bold transition shadow-sm backdrop-blur-sm"
               >
                 <Instagram className="w-4 h-4 text-pink-400 shrink-0" />
                 <span>@{igLink.url.replace(/\/$/, '').split('/').pop() || 'Instagram'}</span>
-                <ExternalLink className="w-3 h-3 text-slate-400 opacity-60" />
+                <ExternalLink className="w-3.5 h-3.5 text-slate-400 opacity-60" />
               </a>
             )}
 
@@ -308,11 +306,11 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-[#1c2230]/90 hover:bg-[#273044] border border-slate-700 hover:border-amber-500/50 text-slate-200 hover:text-white text-xs font-bold transition shadow-sm backdrop-blur-sm"
+                className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-[#1e2434]/95 hover:bg-[#273044] border border-slate-700 hover:border-indigo-500/50 text-slate-100 hover:text-white text-sm font-bold transition shadow-sm backdrop-blur-sm"
               >
-                <Globe className="w-4 h-4 text-amber-400 shrink-0" />
+                <Globe className="w-4 h-4 text-indigo-400 shrink-0" />
                 <span>{link.label}</span>
-                <ExternalLink className="w-3 h-3 text-slate-400 opacity-60" />
+                <ExternalLink className="w-3.5 h-3.5 text-slate-400 opacity-60" />
               </a>
             ))}
           </div>
@@ -353,7 +351,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
       />
 
       {/* Bottom Sheet Container */}
-      <div className="relative z-10 w-full max-h-[92vh] bg-[#141822] rounded-t-3xl border-t border-amber-500/20 shadow-2xl overflow-hidden animate-sheet-up flex flex-col">
+      <div className="relative z-10 w-full max-h-[92vh] bg-[#141822] rounded-t-3xl border-t border-slate-700/80 shadow-2xl overflow-hidden animate-sheet-up flex flex-col">
         {/* Stylized Monochromatic Landmark Photo Backdrop */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
           <img
