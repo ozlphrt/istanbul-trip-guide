@@ -1,0 +1,52 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          50: '#eef2ff',
+          100: '#e0e7ff',
+          200: '#c7d2fe',
+          300: '#a5b4fc',
+          400: '#818cf8',
+          500: '#6366f1', // Apple Indigo
+          600: '#4f46e5',
+          700: '#4338ca',
+          800: '#3730a3',
+          900: '#312e81',
+          950: '#1e1b4b',
+        },
+        accent: {
+          blue: '#38bdf8',
+          emerald: '#34d399',
+          amber: '#fbbf24',
+          purple: '#a855f7',
+          rose: '#f43f5e',
+        }
+      },
+      fontFamily: {
+        sans: [
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"SF Pro Text"',
+          '"SF Pro Display"',
+          '"Segoe UI"',
+          'Roboto',
+          'Inter',
+          'sans-serif'
+        ]
+      },
+      boxShadow: {
+        'subtle': '0 1px 3px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.1)',
+        'elevated': '0 8px 30px rgba(0,0,0,0.35)',
+        'sheet': '0 -10px 40px rgba(0,0,0,0.5)',
+      }
+    },
+  },
+  plugins: [],
+}
