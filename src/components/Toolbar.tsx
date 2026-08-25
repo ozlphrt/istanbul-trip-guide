@@ -24,21 +24,21 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   const lateOptions: RunningLateMinutes[] = [15, 30, 45, 60];
 
   return (
-    <div className="bg-[#0e111a]/80 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-4 sm:p-5 mb-5 space-y-4 shadow-elevated">
+    <div className="bg-[#12141c] border border-white/[0.07] rounded-2xl p-4 sm:p-5 mb-5 space-y-4 shadow-subtle">
       {/* Top Row: Progress + Simplify Today Toggle */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         {/* Progress Counter */}
         <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 shadow-sm">
-            <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6" />
+          <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            <CheckCircle2 className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-base sm:text-lg font-black text-white tracking-tight">
+            <div className="text-sm sm:text-base font-bold text-zinc-200">
               {completedCount} of {totalCount} stops completed
             </div>
-            <div className="w-36 sm:w-48 bg-white/[0.06] h-2 rounded-full overflow-hidden mt-1.5 border border-white/[0.06]">
+            <div className="w-36 sm:w-44 bg-zinc-800 h-1.5 rounded-full overflow-hidden mt-1.5">
               <div
-                className="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full transition-all duration-300 shadow-sm"
+                className="bg-emerald-500 h-full rounded-full transition-all duration-300"
                 style={{ width: `${totalCount > 0 ? (completedCount / totalCount) * 100 : 0}%` }}
               />
             </div>
@@ -48,10 +48,10 @@ export const Toolbar: React.FC<ToolbarProps> = ({
         {/* Simplify Today Button */}
         <button
           onClick={onToggleSimplify}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold border transition-all shadow-sm ${
+          className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border transition-all ${
             isSimplified
-              ? 'bg-indigo-500/20 border-indigo-400/50 text-indigo-200 shadow-indigo-500/20'
-              : 'bg-white/[0.04] border-white/[0.08] text-zinc-300 hover:bg-white/[0.08] hover:text-white'
+              ? 'bg-indigo-500/15 border-indigo-500/30 text-indigo-300'
+              : 'bg-white/[0.03] border-white/[0.08] text-zinc-300 hover:bg-white/[0.06] hover:text-white'
           }`}
           title="Hides optional events to make schedule more relaxed"
         >
@@ -70,25 +70,25 @@ export const Toolbar: React.FC<ToolbarProps> = ({
       </div>
 
       {/* Bottom Row: Running Late Simulation */}
-      <div className="pt-3.5 border-t border-white/[0.06] flex flex-wrap items-center justify-between gap-3 text-sm">
-        <div className="flex items-center gap-2 text-zinc-200 font-extrabold text-sm sm:text-base">
-          <FastForward className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-400" />
+      <div className="pt-3 border-t border-white/[0.05] flex flex-wrap items-center justify-between gap-3 text-sm">
+        <div className="flex items-center gap-2 text-zinc-300 font-semibold text-xs sm:text-sm">
+          <FastForward className="w-4 h-4 text-indigo-400" />
           <span>Running Late?</span>
-          <span className="text-xs text-zinc-400 font-normal">(Simulation)</span>
+          <span className="text-xs text-zinc-500 font-normal">(Simulation)</span>
         </div>
 
         {/* Delay Pills */}
-        <div className="flex items-center gap-1.5 sm:gap-2">
+        <div className="flex items-center gap-1.5">
           {lateOptions.map((minutes) => {
             const isActive = runningLateShift === minutes;
             return (
               <button
                 key={minutes}
                 onClick={() => onSelectRunningLate(isActive ? 0 : minutes)}
-                className={`px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-extrabold font-mono transition shadow-sm ${
+                className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold font-mono transition ${
                   isActive
-                    ? 'bg-gradient-to-r from-indigo-600 to-indigo-500 text-white shadow-md ring-2 ring-indigo-400/60'
-                    : 'bg-white/[0.04] text-zinc-300 hover:bg-white/[0.08] hover:text-white border border-white/[0.08]'
+                    ? 'bg-indigo-600 text-white shadow-sm ring-1 ring-indigo-400'
+                    : 'bg-white/[0.04] text-zinc-300 hover:bg-white/[0.08] hover:text-white border border-white/[0.06]'
                 }`}
               >
                 +{minutes}m
@@ -99,7 +99,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
           {runningLateShift > 0 && (
             <button
               onClick={() => onSelectRunningLate(0)}
-              className="p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-white/[0.08] transition ml-1 border border-white/[0.08]"
+              className="p-1.5 rounded-xl text-zinc-400 hover:text-white hover:bg-white/[0.08] transition ml-1 border border-white/[0.06]"
               title="Reset simulation"
             >
               <RotateCcw className="w-4 h-4" />
