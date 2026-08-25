@@ -20,10 +20,10 @@ import {
   Check,
   AlertCircle,
   MapPin,
-  Share2,
-  Image as ImageIcon
+  Image as ImageIcon,
+  Globe
 } from 'lucide-react';
-import { EventLink, EventStatus, EventType, ItineraryEvent } from '../types/calendar';
+import { EventStatus, EventType, ItineraryEvent } from '../types/calendar';
 import { formatDuration, formatEventTime } from '../utils/time';
 import { getPlacePhotoUrl } from '../utils/placePhotos';
 
@@ -57,14 +57,14 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
 
   const getTypeIcon = (type: EventType) => {
     switch (type) {
-      case 'visit': return <Landmark className="w-5 h-5 text-sky-400" />;
-      case 'food': return <Utensils className="w-5 h-5 text-rose-400" />;
-      case 'drink': return <Wine className="w-5 h-5 text-amber-300" />;
-      case 'walk': return <Footprints className="w-5 h-5 text-emerald-400" />;
-      case 'transport': return <Ship className="w-5 h-5 text-cyan-400" />;
-      case 'concert': return <Music className="w-5 h-5 text-indigo-400" />;
-      case 'rest': return <BedDouble className="w-5 h-5 text-slate-400" />;
-      case 'optional': return <HelpCircle className="w-5 h-5 text-slate-400" />;
+      case 'visit': return <Landmark className="w-4 h-4 text-sky-400" />;
+      case 'food': return <Utensils className="w-4 h-4 text-rose-400" />;
+      case 'drink': return <Wine className="w-4 h-4 text-amber-300" />;
+      case 'walk': return <Footprints className="w-4 h-4 text-emerald-400" />;
+      case 'transport': return <Ship className="w-4 h-4 text-cyan-400" />;
+      case 'concert': return <Music className="w-4 h-4 text-indigo-400" />;
+      case 'rest': return <BedDouble className="w-4 h-4 text-slate-400" />;
+      case 'optional': return <HelpCircle className="w-4 h-4 text-slate-400" />;
     }
   };
 
@@ -79,285 +79,261 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
     )}`;
   };
 
-  const getLinkIcon = (link: EventLink) => {
-    switch (link.type) {
-      case 'ig': return <Instagram className="w-5 h-5 text-pink-400 shrink-0" />;
-      case 'fb': return <Share2 className="w-5 h-5 text-blue-400 shrink-0" />;
-      case 'x': return <span className="font-black text-base">𝕏</span>;
-      default: return <ExternalLink className="w-5 h-5 text-indigo-400 shrink-0" />;
-    }
-  };
-
   const photoUrl = getPlacePhotoUrl(event.id, event.title);
+  const igLink = event.links?.find(l => l.type === 'ig');
+  const otherLinks = event.links?.filter(l => l.type !== 'ig') || [];
 
   const content = (
-    <div className="flex flex-col h-full overflow-y-auto space-y-5 p-5 sm:p-7 text-slate-100 custom-scrollbar">
+    <div className="flex flex-col h-full overflow-y-auto space-y-4 p-5 sm:p-6 text-slate-100 custom-scrollbar">
+      
       {/* ========================================================================= */}
-      {/* 1. HEADER: Category Badge, Close Button, Title, Time & What               */}
+      {/* 1. COMPACT EDITORIAL HEADER WITH INTEGRATED ACTION CLUSTER                */}
       {/* ========================================================================= */}
-      <div className="space-y-3">
-        {/* Top Badges & Close Button */}
-        <div className="flex items-center justify-between gap-2">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs sm:text-sm font-black uppercase tracking-wider bg-[#282e3e]/90 text-slate-100 border border-slate-600 shadow-sm backdrop-blur-sm">
-              {getTypeIcon(event.type)}
-              <span>{event.type}</span>
-            </span>
-          </div>
+      <div className="flex items-center justify-between gap-2 border-b border-slate-700/60 pb-3.5">
+        {/* Category Pill */}
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-[#282e3e]/90 text-slate-200 border border-slate-600 shadow-sm backdrop-blur-sm">
+          {getTypeIcon(event.type)}
+          <span>{event.type}</span>
+        </span>
+
+        {/* Compact Micro-Action Cluster (No oversized buttons!) */}
+        <div className="flex items-center gap-1.5">
+          {event.location && (
+            <a
+              href={getDirectionsUrl(event.location)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white text-xs font-black transition shadow-sm"
+              title="Open directions in Google Maps"
+            >
+              <Navigation className="w-3.5 h-3.5 shrink-0" />
+              <span>Maps</span>
+            </a>
+          )}
+
+          {/* Status Toggle Pill */}
+          <button
+            onClick={() => onUpdateStatus(event.id, event.status === 'done' ? 'pending' : 'done')}
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black border transition active:scale-95 ${
+              event.status === 'done'
+                ? 'bg-emerald-500/25 border-emerald-500/40 text-emerald-200'
+                : 'bg-[#282e3e]/90 border-slate-600 text-slate-200 hover:bg-[#31384b] hover:text-white'
+            }`}
+          >
+            <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+            <span>{event.status === 'done' ? 'Completed' : 'Mark Done'}</span>
+          </button>
 
           {!isDesktopSidebar && (
             <button
               onClick={onClose}
-              className="p-2.5 rounded-full bg-[#282e3e]/90 text-slate-300 hover:text-white hover:bg-[#31384b] transition border border-slate-700 shadow-sm backdrop-blur-sm"
+              className="p-1.5 rounded-xl bg-[#282e3e]/90 text-slate-400 hover:text-white hover:bg-[#31384b] border border-slate-700 transition"
               aria-label="Close"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </button>
           )}
         </div>
+      </div>
 
-        {/* Title */}
-        <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-white leading-tight drop-shadow-sm">
+      {/* ========================================================================= */}
+      {/* 2. TITLE & TIME RIBBON                                                    */}
+      {/* ========================================================================= */}
+      <div className="space-y-1.5">
+        <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white leading-tight">
           {event.title}
         </h1>
 
-        {/* Time & Duration Bar */}
-        <div className="flex flex-wrap items-center gap-2.5 text-base sm:text-lg font-bold text-slate-200">
-          <span className="flex items-center gap-2 text-white font-black font-mono">
-            <Clock className="w-5 h-5 text-indigo-400 shrink-0" />
+        <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm font-bold text-slate-300">
+          <span className="flex items-center gap-1.5 text-indigo-300 font-mono font-black">
+            <Clock className="w-4 h-4 text-indigo-400 shrink-0" />
             {formatEventTime(event.startTime)} – {formatEventTime(event.endTime)}
           </span>
           <span className="text-slate-500">•</span>
-          <span className="px-3 py-0.5 rounded-lg bg-[#282e3e]/90 text-slate-100 font-mono text-sm font-black border border-slate-600 shadow-inner">
+          <span className="px-2 py-0.5 rounded-md bg-[#282e3e]/90 text-slate-200 font-mono text-xs font-black border border-slate-600/80">
             {formatDuration(event.durationMinutes)}
           </span>
           {event.durationNote && (
-            <span className="text-slate-300 text-sm font-semibold italic">
+            <span className="text-slate-400 italic text-xs">
               ({event.durationNote})
             </span>
           )}
+          {event.location && (
+            <>
+              <span className="text-slate-500">•</span>
+              <span className="text-slate-400 truncate max-w-[200px]">
+                {event.location.split(',')[0]}
+              </span>
+            </>
+          )}
         </div>
-
-        {/* What It Is */}
-        {event.what && (
-          <p className="text-base sm:text-lg text-slate-100 leading-relaxed font-semibold pt-2 border-t border-slate-700/60">
-            {event.what}
-          </p>
-        )}
       </div>
 
       {/* ========================================================================= */}
-      {/* 2. ACTIONS: Google Maps & Status                                          */}
+      {/* 3. THE ESSENCE & STORY                                                    */}
       {/* ========================================================================= */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-        {event.location && (
-          <a
-            href={getDirectionsUrl(event.location)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="sm:col-span-2 flex items-center justify-center gap-2.5 py-3.5 px-4 rounded-2xl bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] text-white text-sm sm:text-base font-black tracking-wide transition shadow-sm"
-          >
-            <Navigation className="w-5 h-5 shrink-0" />
-            <span className="truncate">Open in Google Maps</span>
-            <ExternalLink className="w-4 h-4 opacity-75 shrink-0" />
-          </a>
-        )}
-
-        {/* Status Toggle Button */}
-        <button
-          onClick={() => onUpdateStatus(event.id, event.status === 'done' ? 'pending' : 'done')}
-          className={`flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl text-sm sm:text-base font-black border transition ${
-            event.status === 'done'
-              ? 'bg-emerald-500/25 border-emerald-500/40 text-emerald-200'
-              : 'bg-[#282e3e]/90 border-slate-600 text-slate-100 hover:bg-[#31384b] hover:text-white'
-          }`}
-        >
-          <CheckCircle2 className="w-5 h-5 shrink-0" />
-          <span>{event.status === 'done' ? 'Completed' : 'Mark Done'}</span>
-        </button>
-      </div>
-
-      {/* ========================================================================= */}
-      {/* 3. NARRATIVE & HIGHLIGHTS                                                 */}
-      {/* ========================================================================= */}
-      {(event.why || (event.facts && event.facts.length > 0)) && (
-        <div className="bg-[#242938]/90 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-slate-700/70 shadow-sm space-y-4">
-          {/* Main Context Paragraph */}
+      {(event.what || event.why) && (
+        <div className="bg-[#242938]/90 backdrop-blur-sm rounded-2xl p-4 sm:p-5 border border-slate-700/70 shadow-sm space-y-2.5">
+          {event.what && (
+            <p className="text-sm sm:text-base font-bold text-white leading-relaxed">
+              {event.what}
+            </p>
+          )}
           {event.why && (
-            <p className="text-base sm:text-lg text-slate-100 leading-relaxed font-semibold">
+            <p className="text-xs sm:text-sm font-semibold text-slate-300 leading-relaxed">
               {event.why}
             </p>
           )}
-
-          {/* Key Facts & Bullet Points */}
-          {event.facts && event.facts.length > 0 && (
-            <ul className={`space-y-2.5 ${event.why ? 'pt-3 border-t border-slate-700/60' : ''}`}>
-              {event.facts.map((fact, index) => (
-                <li key={index} className="flex items-start gap-2.5 text-sm sm:text-base text-slate-200 font-semibold leading-relaxed">
-                  <span className="w-2 h-2 rounded-full bg-indigo-400 mt-2 shrink-0" />
-                  <span>{fact}</span>
-                </li>
-              ))}
-            </ul>
-          )}
         </div>
       )}
 
-      {/* Culinary Food Notes */}
-      {event.food && (
-        <div className="p-4 sm:p-5 rounded-2xl bg-rose-950/40 backdrop-blur-sm border border-rose-500/30 flex items-start gap-3">
-          <Utensils className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
-          <p className="text-sm sm:text-base text-rose-100 font-semibold leading-relaxed">
-            {event.food}
-          </p>
+      {/* ========================================================================= */}
+      {/* 4. KEY CONTEXT FACTS                                                      */}
+      {/* ========================================================================= */}
+      {event.facts && event.facts.length > 0 && (
+        <div className="bg-[#242938]/90 backdrop-blur-sm rounded-2xl p-4 sm:p-5 border border-slate-700/70 shadow-sm space-y-2">
+          <div className="text-xs font-black uppercase tracking-wider text-indigo-300">
+            Highlights & Historical Context
+          </div>
+          <ul className="space-y-2">
+            {event.facts.map((fact, index) => (
+              <li key={index} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-200 font-semibold leading-relaxed">
+                <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-2 shrink-0" />
+                <span>{fact}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
 
-      {/* Do & Recommended */}
+      {/* ========================================================================= */}
+      {/* 5. FIELD GUIDELINES (DO / AVOID / FOOD)                                    */}
+      {/* ========================================================================= */}
       {event.do && (
-        <div className="p-4 sm:p-5 rounded-2xl bg-emerald-950/40 backdrop-blur-sm border border-emerald-500/30 flex items-start gap-3">
-          <Check className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-          <p className="text-sm sm:text-base text-emerald-100 font-semibold leading-relaxed">
+        <div className="p-3.5 sm:p-4 rounded-2xl bg-emerald-950/40 backdrop-blur-sm border border-emerald-500/30 flex items-start gap-2.5">
+          <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+          <p className="text-xs sm:text-sm text-emerald-100 font-semibold leading-relaxed">
+            <strong className="text-emerald-300 block mb-0.5">Recommended:</strong>
             {event.do}
           </p>
         </div>
       )}
 
-      {/* Avoid / Warnings */}
       {event.avoid && (
-        <div className="p-4 sm:p-5 rounded-2xl bg-amber-950/40 backdrop-blur-sm border border-amber-500/30 flex items-start gap-3">
-          <AlertCircle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-          <p className="text-sm sm:text-base text-amber-100 font-semibold leading-relaxed">
+        <div className="p-3.5 sm:p-4 rounded-2xl bg-amber-950/40 backdrop-blur-sm border border-amber-500/30 flex items-start gap-2.5">
+          <AlertCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+          <p className="text-xs sm:text-sm text-amber-100 font-semibold leading-relaxed">
+            <strong className="text-amber-300 block mb-0.5">Note / Avoid:</strong>
             {event.avoid}
           </p>
         </div>
       )}
 
-      {/* Tickets & Reservations */}
+      {event.food && (
+        <div className="p-3.5 sm:p-4 rounded-2xl bg-rose-950/40 backdrop-blur-sm border border-rose-500/30 flex items-start gap-2.5">
+          <Utensils className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+          <p className="text-xs sm:text-sm text-rose-100 font-semibold leading-relaxed">
+            <strong className="text-rose-300 block mb-0.5">What to Order:</strong>
+            {event.food}
+          </p>
+        </div>
+      )}
+
+      {/* Entry Tickets & Reservations Chips */}
       {(event.ticket || event.reservation) && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {event.ticket && (
-            <div className="p-4 rounded-xl bg-[#242938]/90 backdrop-blur-sm border border-slate-700 flex items-start gap-3">
-              <Ticket className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-              <div>
-                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">Entry</span>
-                <p className="text-sm sm:text-base text-white font-mono font-bold">
-                  {event.ticket}
-                </p>
-              </div>
+            <div className="p-3 rounded-xl bg-[#242938]/90 backdrop-blur-sm border border-slate-700 flex items-center justify-between text-xs">
+              <span className="font-bold text-slate-400 flex items-center gap-1.5">
+                <Ticket className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Entry:</span>
+              </span>
+              <span className="font-mono font-black text-emerald-300">{event.ticket}</span>
             </div>
           )}
-
           {event.reservation && (
-            <div className="p-4 rounded-xl bg-[#242938]/90 backdrop-blur-sm border border-slate-700 flex items-start gap-3">
-              <CalendarCheck className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
-              <div>
-                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">Reservation</span>
-                <p className="text-sm sm:text-base text-white font-mono font-bold">
-                  {event.reservation}
-                </p>
-              </div>
+            <div className="p-3 rounded-xl bg-[#242938]/90 backdrop-blur-sm border border-slate-700 flex items-center justify-between text-xs">
+              <span className="font-bold text-slate-400 flex items-center gap-1.5">
+                <CalendarCheck className="w-3.5 h-3.5 text-rose-400" />
+                <span>Reservation:</span>
+              </span>
+              <span className="font-mono font-black text-rose-300">{event.reservation}</span>
             </div>
           )}
         </div>
       )}
 
-      {/* Logistics & General Notes */}
+      {/* Notes */}
       {event.notes && (
-        <div className="p-4 sm:p-5 rounded-2xl bg-[#242938]/90 backdrop-blur-sm border border-slate-700/70 flex items-start gap-3">
-          <FileText className="w-5 h-5 text-slate-400 shrink-0 mt-0.5" />
-          <p className="text-sm sm:text-base text-slate-100 font-semibold leading-relaxed whitespace-pre-line">
+        <div className="p-3.5 sm:p-4 rounded-2xl bg-[#242938]/90 backdrop-blur-sm border border-slate-700/70 flex items-start gap-2.5">
+          <FileText className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
+          <p className="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed whitespace-pre-line">
             {event.notes}
           </p>
         </div>
       )}
 
-      {/* Exact Location */}
+      {/* Exact Location Full Address */}
       {event.location && (
-        <div className="p-4 sm:p-5 rounded-2xl bg-[#242938]/90 backdrop-blur-sm border border-slate-700/70 flex items-start gap-3">
-          <MapPin className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" />
-          <span className="text-sm sm:text-base text-white font-bold leading-relaxed">{event.location}</span>
+        <div className="p-3.5 sm:p-4 rounded-2xl bg-[#242938]/90 backdrop-blur-sm border border-slate-700/70 flex items-start gap-2.5 text-xs sm:text-sm">
+          <MapPin className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
+          <span className="text-slate-200 font-semibold leading-relaxed">{event.location}</span>
         </div>
       )}
 
       {/* ========================================================================= */}
-      {/* 4. VISUALS & LINKS (Only genuine verified links)                           */}
+      {/* 6. COMPACT VISUALS & SOCIAL LINKS BAR                                     */}
       {/* ========================================================================= */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-        {/* Verified Instagram Profile (Render ONLY if genuine verified IG account is configured) */}
-        {(() => {
-          const igLink = event.links?.find(l => l.type === 'ig');
-          if (!igLink) return null;
-          const igLabel = `@${igLink.url.replace(/\/$/, '').split('/').pop() || 'Instagram'}`;
+      <div className="pt-2 border-t border-slate-700/60">
+        <div className="text-xs font-black uppercase tracking-wider text-slate-400 mb-2.5">
+          Visuals & Media Links
+        </div>
+        <div className="flex flex-wrap gap-2">
+          
+          {/* Google Images Button */}
+          <a
+            href={getGoogleImagesUrl(event.title, event.location)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-[#242938]/90 hover:bg-[#2e3447] border border-slate-700 hover:border-sky-500/50 text-slate-200 hover:text-white text-xs font-bold transition shadow-sm backdrop-blur-sm"
+          >
+            <ImageIcon className="w-4 h-4 text-sky-400 shrink-0" />
+            <span>Google Images</span>
+            <ExternalLink className="w-3 h-3 text-slate-400 opacity-60" />
+          </a>
 
-          return (
+          {/* Official Verified Instagram Profile (Only if verified handle exists!) */}
+          {igLink && (
             <a
               href={igLink.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#242938]/90 hover:bg-[#2e3447] border border-slate-700 hover:border-pink-500/50 text-slate-100 hover:text-white transition group shadow-sm backdrop-blur-sm"
+              className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-[#242938]/90 hover:bg-[#2e3447] border border-slate-700 hover:border-pink-500/50 text-slate-200 hover:text-white text-xs font-bold transition shadow-sm backdrop-blur-sm"
             >
-              <div className="flex items-center gap-3 min-w-0">
-                <div className="p-2 rounded-lg bg-pink-500/15 text-pink-400">
-                  <Instagram className="w-5 h-5" />
-                </div>
-                <div className="min-w-0">
-                  <div className="text-sm sm:text-base font-bold text-white group-hover:text-pink-300 transition truncate">
-                    {igLabel}
-                  </div>
-                  <div className="text-xs text-slate-400">Official Instagram</div>
-                </div>
-              </div>
-              <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-white transition shrink-0" />
+              <Instagram className="w-4 h-4 text-pink-400 shrink-0" />
+              <span>@{igLink.url.replace(/\/$/, '').split('/').pop() || 'Instagram'}</span>
+              <ExternalLink className="w-3 h-3 text-slate-400 opacity-60" />
             </a>
-          );
-        })()}
+          )}
 
-        {/* Google Images */}
-        <a
-          href={getGoogleImagesUrl(event.title, event.location)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#242938]/90 hover:bg-[#2e3447] border border-slate-700 hover:border-sky-500/50 text-slate-100 hover:text-white transition group shadow-sm backdrop-blur-sm"
-        >
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="p-2 rounded-lg bg-sky-500/15 text-sky-400">
-              <ImageIcon className="w-5 h-5" />
-            </div>
-            <div className="min-w-0">
-              <div className="text-sm sm:text-base font-bold text-white group-hover:text-sky-300 transition">
-                Google Images
-              </div>
-              <div className="text-xs text-slate-400">Visual galleries</div>
-            </div>
-          </div>
-          <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-white transition shrink-0" />
-        </a>
+          {/* Official Web / Extra Links */}
+          {otherLinks.map((link, idx) => (
+            <a
+              key={idx}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-[#242938]/90 hover:bg-[#2e3447] border border-slate-700 hover:border-indigo-500/50 text-slate-200 hover:text-white text-xs font-bold transition shadow-sm backdrop-blur-sm"
+            >
+              <Globe className="w-4 h-4 text-indigo-400 shrink-0" />
+              <span>{link.label}</span>
+              <ExternalLink className="w-3 h-3 text-slate-400 opacity-60" />
+            </a>
+          ))}
 
-        {/* Other Specific Verified Links (Websites, Tickets, etc.) */}
-        {event.links && event.links.filter(l => l.type !== 'ig').map((link, idx) => (
-          <a
-            key={idx}
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#242938]/90 hover:bg-[#2e3447] border border-slate-700 hover:border-slate-500 text-slate-100 hover:text-white transition group shadow-sm backdrop-blur-sm"
-          >
-            <div className="flex items-center gap-3 min-w-0">
-              <div className="p-2 rounded-lg bg-white/[0.06] text-slate-300">
-                {getLinkIcon(link)}
-              </div>
-              <div className="min-w-0">
-                <div className="text-sm sm:text-base font-bold text-white group-hover:text-indigo-300 transition truncate">
-                  {link.label}
-                </div>
-                <div className="text-xs text-slate-400 uppercase font-mono">{link.type} link</div>
-              </div>
-            </div>
-            <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-white transition shrink-0" />
-          </a>
-        ))}
+        </div>
       </div>
+
     </div>
   );
 
@@ -370,7 +346,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
           <img
             src={photoUrl}
             alt=""
-            className="w-full h-full object-cover object-top opacity-30 filter grayscale contrast-125 select-none"
+            className="w-full h-full object-cover object-center opacity-30 filter grayscale contrast-125 select-none"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#1e2330]/75 via-[#1e2330]/85 to-[#1e2330]" />
         </div>
@@ -398,7 +374,7 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
           <img
             src={photoUrl}
             alt=""
-            className="w-full h-full object-cover object-top opacity-30 filter grayscale contrast-125 select-none"
+            className="w-full h-full object-cover object-center opacity-30 filter grayscale contrast-125 select-none"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#1e2330]/75 via-[#1e2330]/85 to-[#1e2330]" />
         </div>
