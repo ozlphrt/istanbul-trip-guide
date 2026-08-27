@@ -102,7 +102,7 @@ export const PLACE_PHOTOS_DATABASE: Record<string, PlacePhoto[]> = {
   ],
 
   // Hagia Sophia
-  'ist26-0923-3': [
+  'ist26-0923-4': [
     { url: 'https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?w=800&auto=format&fit=crop&q=80', caption: 'Monumental 537 AD Central Dome' },
     { url: 'https://images.unsplash.com/photo-1527838832700-5059252407fa?w=800&auto=format&fit=crop&q=80', caption: 'Exterior Minarets & Byzantine Domes' },
     { url: 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=800&auto=format&fit=crop&q=80', caption: 'Golden Byzantine Mosaics (Deesis)' },
@@ -126,7 +126,7 @@ export const PLACE_PHOTOS_DATABASE: Record<string, PlacePhoto[]> = {
   ],
 
   // Basilica Cistern
-  'ist26-0923-5': [
+  'ist26-0923-6': [
     { url: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=800&auto=format&fit=crop&q=80', caption: 'Forest of 336 Illuminated Columns' },
     { url: 'https://images.unsplash.com/photo-1546874177-9e664107314e?w=800&auto=format&fit=crop&q=80', caption: 'Upside-Down Medusa Head Base' },
     { url: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&auto=format&fit=crop&q=80', caption: 'Sideways Medusa Head Column' },
@@ -149,32 +149,32 @@ export const PLACE_PHOTOS_DATABASE: Record<string, PlacePhoto[]> = {
     { url: 'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?w=800&auto=format&fit=crop&q=80', caption: 'Yerebatan Sarnıcı Entrance Pavilion' }
   ],
 
-  // Hamdi Restaurant
+  // Dönerci Celal Usta — yaprak döner
   'ist26-0923-7': [
-    { url: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&auto=format&fit=crop&q=80', caption: 'Upper Terrace View of Golden Horn' },
-    { url: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80', caption: 'Pistachio Kebap (Fıstıklı Kebap)' },
-    { url: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=800&auto=format&fit=crop&q=80', caption: 'Galata Bridge Panorama from Window Table' },
-    { url: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&auto=format&fit=crop&q=80', caption: 'Cold Meze Selection & Gavurdağı Salad' },
-    { url: 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=800&auto=format&fit=crop&q=80', caption: 'Ali Nazik Smoky Eggplant Kebap' },
-    { url: 'https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?w=800&auto=format&fit=crop&q=80', caption: 'Warm Künefe with Melted Hatay Cheese' },
-    { url: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&auto=format&fit=crop&q=80', caption: 'Eminönü Ferry Piers Below Terrace' },
-    { url: 'https://images.unsplash.com/photo-1541544741938-0af808871cc0?w=800&auto=format&fit=crop&q=80', caption: 'Southeastern Urfa Spiced Kebap' },
-    { url: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop&q=80', caption: 'Muhammara & Hummus Meze Platter' },
-    { url: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&auto=format&fit=crop&q=80', caption: 'Hamdi Restaurant Facade at Eminönü Square' },
-    { url: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=800&auto=format&fit=crop&q=80', caption: 'Puffed Balloon Lavaş Fresh from Oven' },
-    { url: 'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=800&auto=format&fit=crop&q=80', caption: 'Poppy Seed Kebap (Haşhaş Kebabı)' },
-    { url: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=800&auto=format&fit=crop&q=80', caption: 'Dining Room with Galata Tower Views' },
-    { url: 'https://images.unsplash.com/photo-1574484284002-952d92456975?w=800&auto=format&fit=crop&q=80', caption: 'Grilled Tomatoes, Shallots & Peppers' },
-    { url: 'https://images.unsplash.com/photo-1550547660-d9450f859349?w=800&auto=format&fit=crop&q=80', caption: 'Open Grill Section with Master Usta' },
-    { url: 'https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&auto=format&fit=crop&q=80', caption: 'Eggplant Kebab with Charred Garlic' },
-    { url: 'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800&auto=format&fit=crop&q=80', caption: 'Turkish Çay & Antep Pistachio Baklava' },
-    { url: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&auto=format&fit=crop&q=80', caption: 'Golden Hour Reflections on Bosphorus' },
-    { url: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800&auto=format&fit=crop&q=80', caption: 'Eminönü Square Hustle and Bustle' },
-    { url: 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800&auto=format&fit=crop&q=80', caption: 'Hamdi Arpacı Historic Heritage' }
+    { url: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&auto=format&fit=crop&q=80', caption: 'Freshly Carved Yaprak Döner Layers' },
+    { url: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80', caption: 'Döner Portions & Warm Flatbread' },
+    { url: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=800&auto=format&fit=crop&q=80', caption: 'Master Usta Slicing Thin Meat Layers' },
+    { url: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&auto=format&fit=crop&q=80', caption: 'Dürüm Yaprak Döner with Sumac Onions' },
+    { url: 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=800&auto=format&fit=crop&q=80', caption: 'Vertical Wood & Charcoal Döner Spit' },
+    { url: 'https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?w=800&auto=format&fit=crop&q=80', caption: 'Foamy Frothy Turkish Ayran' },
+    { url: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&auto=format&fit=crop&q=80', caption: 'Sirkeci Dining Atmosphere' },
+    { url: 'https://images.unsplash.com/photo-1541544741938-0af808871cc0?w=800&auto=format&fit=crop&q=80', caption: 'Grilled Green Peppers & Tomato Garnish' },
+    { url: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop&q=80', caption: 'Crispy Searing on Prime Beef & Lamb' },
+    { url: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&auto=format&fit=crop&q=80', caption: 'Dönerci Celal Usta Sirkeci Shop' },
+    { url: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=800&auto=format&fit=crop&q=80', caption: 'Fresh Lavaş Bread Wrapped Tight' },
+    { url: 'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=800&auto=format&fit=crop&q=80', caption: 'Authentic Döner Aroma in Sirkeci' },
+    { url: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=800&auto=format&fit=crop&q=80', caption: 'Restrained Lunch Meal Setting' },
+    { url: 'https://images.unsplash.com/photo-1574484284002-952d92456975?w=800&auto=format&fit=crop&q=80', caption: 'Turkish Pickles & Hot Peppers' },
+    { url: 'https://images.unsplash.com/photo-1550547660-d9450f859349?w=800&auto=format&fit=crop&q=80', caption: 'Quick Lunch before Grand Bazaar' },
+    { url: 'https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&auto=format&fit=crop&q=80', caption: 'Juicy Whole-Meat Cuts' },
+    { url: 'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800&auto=format&fit=crop&q=80', caption: 'Turkish Tea after Döner' },
+    { url: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&auto=format&fit=crop&q=80', caption: 'Hocapaşa Historic Culinary Quarter' },
+    { url: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800&auto=format&fit=crop&q=80', caption: 'Istanbul Döner Craft Heritage' },
+    { url: 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800&auto=format&fit=crop&q=80', caption: 'Celal Usta Signature Flavor' }
   ],
 
   // İsmet Baba (Kuzguncuk)
-  'ist26-0923-11': [
+  'ist26-0923-12': [
     { url: 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800&auto=format&fit=crop&q=80', caption: 'Waterside Bosphorus Table at Sunset' },
     { url: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&auto=format&fit=crop&q=80', caption: 'Traditional Rakı & Cold Meze Table' },
     { url: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80', caption: 'Fresh Grilled Bosphorus Bluefish (Lüfer)' },
@@ -243,6 +243,30 @@ export const PLACE_PHOTOS_DATABASE: Record<string, PlacePhoto[]> = {
     { url: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&auto=format&fit=crop&q=80', caption: 'Late Night Kokoreç Street Anticipation' },
     { url: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&auto=format&fit=crop&q=80', caption: 'Cultural Heart of Contemporary Istanbul' },
     { url: 'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=800&auto=format&fit=crop&q=80', caption: 'Babylon Concert Night Memory' }
+  ],
+
+  // Hamdi Restaurant (Eminönü Farewell Lunch)
+  'ist26-0926-4': [
+    { url: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&auto=format&fit=crop&q=80', caption: 'Upper Terrace View of Golden Horn' },
+    { url: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80', caption: 'Pistachio Kebap (Fıstıklı Kebap)' },
+    { url: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=800&auto=format&fit=crop&q=80', caption: 'Galata Bridge Panorama from Window Table' },
+    { url: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&auto=format&fit=crop&q=80', caption: 'Cold Meze Selection & Gavurdağı Salad' },
+    { url: 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=800&auto=format&fit=crop&q=80', caption: 'Ali Nazik Smoky Eggplant Kebap' },
+    { url: 'https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?w=800&auto=format&fit=crop&q=80', caption: 'Warm Künefe with Melted Hatay Cheese' },
+    { url: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&auto=format&fit=crop&q=80', caption: 'Eminönü Ferry Piers Below Terrace' },
+    { url: 'https://images.unsplash.com/photo-1541544741938-0af808871cc0?w=800&auto=format&fit=crop&q=80', caption: 'Southeastern Urfa Spiced Kebap' },
+    { url: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop&q=80', caption: 'Muhammara & Hummus Meze Platter' },
+    { url: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&auto=format&fit=crop&q=80', caption: 'Hamdi Restaurant Facade at Eminönü Square' },
+    { url: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=800&auto=format&fit=crop&q=80', caption: 'Puffed Balloon Lavaş Fresh from Oven' },
+    { url: 'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=800&auto=format&fit=crop&q=80', caption: 'Poppy Seed Kebap (Haşhaş Kebabı)' },
+    { url: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=800&auto=format&fit=crop&q=80', caption: 'Dining Room with Galata Tower Views' },
+    { url: 'https://images.unsplash.com/photo-1574484284002-952d92456975?w=800&auto=format&fit=crop&q=80', caption: 'Grilled Tomatoes, Shallots & Peppers' },
+    { url: 'https://images.unsplash.com/photo-1550547660-d9450f859349?w=800&auto=format&fit=crop&q=80', caption: 'Open Grill Section with Master Usta' },
+    { url: 'https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&auto=format&fit=crop&q=80', caption: 'Eggplant Kebab with Charred Garlic' },
+    { url: 'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800&auto=format&fit=crop&q=80', caption: 'Turkish Çay & Antep Pistachio Baklava' },
+    { url: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&auto=format&fit=crop&q=80', caption: 'Golden Hour Reflections on Bosphorus' },
+    { url: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800&auto=format&fit=crop&q=80', caption: 'Eminönü Square Hustle and Bustle' },
+    { url: 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800&auto=format&fit=crop&q=80', caption: 'Hamdi Arpacı Historic Heritage' }
   ]
 };
 

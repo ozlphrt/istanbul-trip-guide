@@ -16,7 +16,7 @@ import {
   Image as ImageIcon,
   Globe
 } from 'lucide-react';
-import { EventStatus, EventType, ItineraryEvent } from '../types/calendar';
+import { EventLink, EventStatus, EventType, ItineraryEvent } from '../types/calendar';
 import { formatDuration, formatEventTime } from '../utils/time';
 import { getPlacePhotoUrl } from '../utils/placePhotos';
 
@@ -71,9 +71,51 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
     )}`;
   };
 
+  const getLinkIconAndStyle = (link: EventLink) => {
+    const labelLower = link.label.toLowerCase();
+    if (link.type === 'ig' || labelLower.includes('instagram')) {
+      return {
+        icon: <Instagram className="w-4 h-4 text-pink-400 shrink-0" />,
+        hoverBorder: 'hover:border-pink-500/50',
+        displayLabel: link.label || 'Instagram'
+      };
+    }
+    if (link.type === 'fb' || labelLower.includes('facebook')) {
+      return {
+        icon: <span className="w-4 h-4 flex items-center justify-center font-black text-xs text-blue-400">f</span>,
+        hoverBorder: 'hover:border-blue-500/50',
+        displayLabel: link.label || 'Facebook'
+      };
+    }
+    if (link.type === 'x' || labelLower === 'x' || labelLower.includes('twitter')) {
+      return {
+        icon: <span className="w-4 h-4 flex items-center justify-center font-black text-xs text-slate-300">𝕏</span>,
+        hoverBorder: 'hover:border-slate-400/50',
+        displayLabel: link.label || 'X'
+      };
+    }
+    if (labelLower.includes('image') || labelLower.includes('photo')) {
+      return {
+        icon: <ImageIcon className="w-4 h-4 text-purple-400 shrink-0" />,
+        hoverBorder: 'hover:border-purple-500/50',
+        displayLabel: link.label || 'Images'
+      };
+    }
+    if (labelLower.includes('map')) {
+      return {
+        icon: <MapPin className="w-4 h-4 text-sky-400 shrink-0" />,
+        hoverBorder: 'hover:border-sky-500/50',
+        displayLabel: link.label || 'Map'
+      };
+    }
+    return {
+      icon: <Globe className="w-4 h-4 text-indigo-400 shrink-0" />,
+      hoverBorder: 'hover:border-indigo-500/50',
+      displayLabel: link.label || 'Website'
+    };
+  };
+
   const photoUrl = getPlacePhotoUrl(event.id, event.title);
-  const igLink = event.links?.find(l => l.type === 'ig');
-  const otherLinks = event.links?.filter(l => l.type !== 'ig') || [];
   const typeBadge = getTypeBadge(event.type);
 
   const content = (
@@ -276,42 +318,30 @@ export const EventDetailSheet: React.FC<EventDetailSheetProps> = ({
       )}
 
       {/* ========================================================================= */}
-      {/* 6. SOCIAL & EXTRA VERIFIED LINKS                                          */}
+      {/* 6. SOCIAL & EXTRA USEFUL LINKS                                            */}
       {/* ========================================================================= */}
-      {(igLink || otherLinks.length > 0) && (
+      {event.links && event.links.length > 0 && (
         <div className="pt-3 border-t border-slate-700/60">
           <div className="text-xs font-black uppercase tracking-wider text-slate-400 mb-2.5">
-            Official Links
+            Useful Links
           </div>
           <div className="flex flex-wrap gap-2.5">
-            {/* Official Verified Instagram Profile (Only if verified handle exists!) */}
-            {igLink && (
-              <a
-                href={igLink.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-[#1e2434]/95 hover:bg-[#273044] border border-slate-700 hover:border-pink-500/50 text-slate-100 hover:text-white text-sm font-bold transition shadow-sm backdrop-blur-sm"
-              >
-                <Instagram className="w-4 h-4 text-pink-400 shrink-0" />
-                <span>@{igLink.url.replace(/\/$/, '').split('/').pop() || 'Instagram'}</span>
-                <ExternalLink className="w-3.5 h-3.5 text-slate-400 opacity-60" />
-              </a>
-            )}
-
-            {/* Official Web / Extra Links */}
-            {otherLinks.map((link, idx) => (
-              <a
-                key={idx}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-[#1e2434]/95 hover:bg-[#273044] border border-slate-700 hover:border-indigo-500/50 text-slate-100 hover:text-white text-sm font-bold transition shadow-sm backdrop-blur-sm"
-              >
-                <Globe className="w-4 h-4 text-indigo-400 shrink-0" />
-                <span>{link.label}</span>
-                <ExternalLink className="w-3.5 h-3.5 text-slate-400 opacity-60" />
-              </a>
-            ))}
+            {event.links.map((link, idx) => {
+              const { icon, hoverBorder, displayLabel } = getLinkIconAndStyle(link);
+              return (
+                <a
+                  key={idx}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#1e2434]/95 hover:bg-[#273044] border border-slate-700 ${hoverBorder} text-slate-100 hover:text-white text-xs sm:text-sm font-bold transition shadow-sm backdrop-blur-sm`}
+                >
+                  {icon}
+                  <span>{displayLabel}</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-slate-400 opacity-60 ml-0.5" />
+                </a>
+              );
+            })}
           </div>
         </div>
       )}

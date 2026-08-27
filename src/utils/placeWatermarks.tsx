@@ -8,7 +8,7 @@ export function getPlaceWatermark(eventId: string, title: string = ''): React.Re
   const clean = title.toLowerCase();
 
   // 1. Hagia Sophia (Ayasofya)
-  if (eventId.includes('0923-3') || clean.includes('hagia sophia') || clean.includes('ayasofya')) {
+  if (eventId.includes('0923-4') || eventId.includes('0923-3') || clean.includes('hagia sophia') || clean.includes('ayasofya')) {
     return (
       <svg className="absolute -right-2 -bottom-2 w-32 h-32 text-sky-400/[0.14] pointer-events-none stroke-current fill-current/5" viewBox="0 0 120 120" fill="none">
         {/* Hagia Sophia central dome, buttresses and minarets */}
@@ -20,7 +20,7 @@ export function getPlaceWatermark(eventId: string, title: string = ''): React.Re
   }
 
   // 2. Basilica Cistern (Yerebatan Sarnıcı)
-  if (eventId.includes('0923-5') || clean.includes('basilica cistern') || clean.includes('yerebatan')) {
+  if (eventId.includes('0923-6') || eventId.includes('0923-5') || clean.includes('basilica cistern') || clean.includes('yerebatan')) {
     return (
       <svg className="absolute -right-2 -bottom-2 w-32 h-32 text-sky-400/[0.14] pointer-events-none stroke-current" viewBox="0 0 120 120" fill="none">
         {/* Sunken columns and vaulted subterranean arches */}
@@ -114,8 +114,8 @@ export function getPlaceWatermark(eventId: string, title: string = ''): React.Re
     );
   }
 
-  // 9. Şehzade Cağ Kebap / Hamdi / Çiya / Lokanta (Authentic Kebab & Food)
-  if (clean.includes('kebap') || clean.includes('kebab') || clean.includes('şehzade') || clean.includes('hamdi') || clean.includes('çiya') || clean.includes('köfte') || clean.includes('lunch') || clean.includes('dinner') || clean.includes('food')) {
+  // 9. Şehzade Cağ Kebap / Dönerci Celal Usta / Hamdi / Çiya / Lokanta (Authentic Kebab & Food)
+  if (clean.includes('kebap') || clean.includes('kebab') || clean.includes('döner') || clean.includes('doner') || clean.includes('celal') || clean.includes('şehzade') || clean.includes('hamdi') || clean.includes('çiya') || clean.includes('köfte') || clean.includes('lunch') || clean.includes('dinner') || clean.includes('food')) {
     return (
       <svg className="absolute -right-2 -bottom-2 w-30 h-30 text-rose-400/[0.14] pointer-events-none stroke-current" viewBox="0 0 120 120" fill="none">
         {/* Clay oven & skewered rotating meats over ember flames */}

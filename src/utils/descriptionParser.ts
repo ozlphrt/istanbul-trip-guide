@@ -47,14 +47,18 @@ export function inferEventType(title: string, description: string = ''): EventTy
 function extractMarkdownLinks(text: string): EventLink[] {
   const linkRegex = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/gi;
   const links: EventLink[] = [];
+  const seenUrls = new Set<string>();
   let match;
 
   while ((match = linkRegex.exec(text)) !== null) {
     const label = match[1].trim();
     const url = match[2].trim();
+    if (seenUrls.has(url)) continue;
+    seenUrls.add(url);
+
     const lower = label.toLowerCase();
     let type: EventLink['type'] = 'other';
-    if (lower === 'web' || lower === 'website' || lower === 'site') type = 'web';
+    if (lower === 'web' || lower === 'website' || lower === 'site' || lower === 'official' || lower.includes('şehir hatları') || lower.includes('sehir hatlari')) type = 'web';
     else if (lower === 'ig' || lower === 'instagram') type = 'ig';
     else if (lower === 'fb' || lower === 'facebook') type = 'fb';
     else if (lower === 'x' || lower === 'twitter') type = 'x';
@@ -153,6 +157,13 @@ export function parseEventDescription(rawDescription: string = '', title: string
     const rawLine = lines[i];
     const line = rawLine.trim();
 
+    // If line contains standalone markdown links or link headers, commit section and stop appending to text buffer
+    if (line.match(/^(\s*([🖼️🌐📸🟦𝕏·•\s]|\*|-)*\s*\[([^\]]+)\]\((https?:\/\/[^\s)]+)\))+/) || line.toLowerCase().startsWith('useful links')) {
+      commitCurrentSection();
+      currentKey = null;
+      continue;
+    }
+
     // Check for "key: value" or "key:"
     const keyMatch = line.match(/^([a-zA-Z0-9_ -]+):\s*(.*)$/);
 
@@ -170,17 +181,29 @@ export function parseEventDescription(rawDescription: string = '', title: string
       } else if (rawKey === 'fixed') {
         metadata.fixed = inlineValue.toLowerCase() === 'true' || inlineValue === '1' || inlineValue.toLowerCase() === 'yes';
         currentKey = null;
-      } else if (rawKey === 'web' || rawKey === 'website' || rawKey === 'url') {
-        if (inlineValue) metadata.links?.push({ label: 'Website', url: inlineValue, type: 'web' });
+      } else if (rawKey === 'web' || rawKey === 'website' || rawKey === 'url' || rawKey === 'official') {
+        if (inlineValue && !metadata.links?.some(l => l.url === inlineValue)) {
+          metadata.links?.push({ label: 'Website', url: inlineValue, type: 'web' });
+        }
         currentKey = null;
       } else if (rawKey === 'ig' || rawKey === 'instagram') {
-        if (inlineValue) metadata.links?.push({ label: 'Instagram', url: inlineValue.startsWith('http') ? inlineValue : `https://instagram.com/${inlineValue.replace('@', '')}`, type: 'ig' });
+        const url = inlineValue.startsWith('http') ? inlineValue : `https://instagram.com/${inlineValue.replace('@', '')}`;
+        if (inlineValue && !metadata.links?.some(l => l.url === url)) {
+          metadata.links?.push({ label: 'Instagram', url, type: 'ig' });
+        }
         currentKey = null;
       } else if (rawKey === 'fb' || rawKey === 'facebook') {
-        if (inlineValue) metadata.links?.push({ label: 'Facebook', url: inlineValue, type: 'fb' });
+        if (inlineValue && !metadata.links?.some(l => l.url === inlineValue)) {
+          metadata.links?.push({ label: 'Facebook', url: inlineValue, type: 'fb' });
+        }
         currentKey = null;
       } else if (rawKey === 'x' || rawKey === 'twitter') {
-        if (inlineValue) metadata.links?.push({ label: 'X', url: inlineValue.startsWith('http') ? inlineValue : `https://x.com/${inlineValue.replace('@', '')}`, type: 'x' });
+        const url = inlineValue.startsWith('http') ? inlineValue : `https://x.com/${inlineValue.replace('@', '')}`;
+        if (inlineValue && !metadata.links?.some(l => l.url === url)) {
+          metadata.links?.push({ label: 'X', url, type: 'x' });
+        }
+        currentKey = null;
+      } else if (rawKey === 'useful_links' || rawKey === 'links') {
         currentKey = null;
       } else if (rawKey === 'facts') {
         currentKey = 'facts';
