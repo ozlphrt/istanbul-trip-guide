@@ -19,12 +19,31 @@ import {
   setStoredMockMode,
   clearAllAppData
 } from './services/storage';
-import { fetchItineraryEvents } from './services/googleCalendar';
+import { fetchItineraryEvents, transformCalendarEvent } from './services/googleCalendar';
+import { MOCK_GOOGLE_CALENDAR_EVENTS } from './services/mockData';
 import { getCachedToken } from './services/auth';
 import { TRIP_DATES } from './utils/time';
 
+const CURRENT_DATASET_VERSION = 'ist26_v2026_08_29_v7_clean';
+if (typeof window !== 'undefined') {
+  try {
+    if (localStorage.getItem('ist26_dataset_version') !== CURRENT_DATASET_VERSION) {
+      localStorage.clear();
+      localStorage.setItem('ist26_dataset_version', CURRENT_DATASET_VERSION);
+    }
+  } catch {
+    // ignore
+  }
+}
+
+const getInitialEvents = (): ItineraryEvent[] => {
+  return MOCK_GOOGLE_CALENDAR_EVENTS
+    .map(transformCalendarEvent)
+    .filter((e): e is ItineraryEvent => e !== null);
+};
+
 export const App: React.FC = () => {
-  const [events, setEvents] = useState<ItineraryEvent[]>([]);
+  const [events, setEvents] = useState<ItineraryEvent[]>(getInitialEvents);
   const [selectedDate, setSelectedDate] = useState<string>(() => getStoredSelectedDay());
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
@@ -48,10 +67,12 @@ export const App: React.FC = () => {
   }, [selectedDate]);
 
   // Load and Sync Events
-  const loadEvents = useCallback(async (forceRefresh = false) => {
+  const loadEvents = useCallback(async (_forceRefresh = false) => {
     const isMock = getStoredMockMode();
+    const token = getCachedToken();
 
-    if (isMock) {
+    // If mock mode or no live Google OAuth token, load fresh code events
+    if (isMock || !token) {
       const mockEvents = await fetchItineraryEvents(null, true);
       setEvents(mockEvents);
       setSyncState({
@@ -60,20 +81,6 @@ export const App: React.FC = () => {
         isMockMode: true,
       });
       return;
-    }
-
-    const token = getCachedToken();
-    if (!token && !forceRefresh) {
-      const cached = getOfflineCachedEvents();
-      if (cached) {
-        setEvents(cached.events);
-        setSyncState({
-          status: 'offline',
-          lastSyncedAt: cached.lastSynced,
-          isMockMode: false,
-        });
-        return;
-      }
     }
 
     setSyncState(prev => ({ ...prev, status: 'syncing' }));

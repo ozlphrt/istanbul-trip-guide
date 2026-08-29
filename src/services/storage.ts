@@ -1,33 +1,36 @@
 import { EventStatus, ItineraryEvent } from '../types/calendar';
 
 const STORAGE_KEYS = {
-  VERSION: 'ist26_schema_version_v2',
-  DONE_EVENTS: 'ist26_done_events_v2',
-  SKIPPED_EVENTS: 'ist26_skipped_events_v2',
-  OFFLINE_EVENTS_CACHE: 'ist26_offline_events_v2',
-  LAST_SYNC_TIME: 'ist26_last_sync_time_v2',
-  MOCK_MODE_ENABLED: 'ist26_mock_mode_enabled_v2',
-  GOOGLE_CLIENT_ID: 'ist26_google_client_id_v2',
-  SELECTED_DAY: 'ist26_selected_day_v2',
-  SIMULATED_TIME_PREVIEW: 'ist26_simulated_time_preview_v2',
+  VERSION: 'ist26_schema_version_v5',
+  DONE_EVENTS: 'ist26_done_events_v5',
+  SKIPPED_EVENTS: 'ist26_skipped_events_v5',
+  OFFLINE_EVENTS_CACHE: 'ist26_offline_events_v5',
+  LAST_SYNC_TIME: 'ist26_last_sync_time_v5',
+  MOCK_MODE_ENABLED: 'ist26_mock_mode_enabled_v5',
+  GOOGLE_CLIENT_ID: 'ist26_google_client_id_v5',
+  SELECTED_DAY: 'ist26_selected_day_v5',
+  SIMULATED_TIME_PREVIEW: 'ist26_simulated_time_preview_v5',
 };
 
-// Clear legacy v1 data on first run
+const CURRENT_SCHEMA_VERSION = '5.0.0';
+
+// Clear legacy/stale data on schema version bump
 (function migrateStorage() {
   try {
-    const isV2 = localStorage.getItem(STORAGE_KEYS.VERSION);
-    if (!isV2) {
-      // Clear legacy keys
+    const version = localStorage.getItem(STORAGE_KEYS.VERSION);
+    if (version !== CURRENT_SCHEMA_VERSION) {
+      console.log(`[Storage] Upgrading schema from ${version} to ${CURRENT_SCHEMA_VERSION}. Purging stale cache.`);
+      // Clear all legacy offline event caches
       const keysToRemove = [
         'ist26_offline_events_v1',
-        'ist26_done_events_v1',
-        'ist26_skipped_events_v1',
-        'ist26_last_sync_time_v1',
-        'ist26_mock_mode_enabled_v1',
-        'ist26_selected_day_v1'
+        'ist26_offline_events_v2',
+        'ist26_offline_events_v3',
+        'ist26_offline_events_v4',
+        STORAGE_KEYS.OFFLINE_EVENTS_CACHE,
+        STORAGE_KEYS.LAST_SYNC_TIME
       ];
       keysToRemove.forEach(k => localStorage.removeItem(k));
-      localStorage.setItem(STORAGE_KEYS.VERSION, '2.0.0');
+      localStorage.setItem(STORAGE_KEYS.VERSION, CURRENT_SCHEMA_VERSION);
     }
   } catch {
     // ignore
@@ -37,7 +40,7 @@ const STORAGE_KEYS = {
 export function clearAllAppData(): void {
   try {
     localStorage.clear();
-    localStorage.setItem(STORAGE_KEYS.VERSION, '2.0.0');
+    localStorage.setItem(STORAGE_KEYS.VERSION, CURRENT_SCHEMA_VERSION);
   } catch (err) {
     console.error('Failed to clear local storage', err);
   }

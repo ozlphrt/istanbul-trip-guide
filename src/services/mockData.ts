@@ -2,51 +2,33 @@ import { GoogleCalendarApiEvent } from '../types/calendar';
 
 export const MOCK_GOOGLE_CALENDAR_EVENTS: GoogleCalendarApiEvent[] = [
   // =========================================================================
-  // 🟦 22 SEPTEMBER 2026 (Tuesday) — ARRIVAL / SIRKECI
+  // 🟦 22 SEPTEMBER 2026 (Tuesday) — ARRIVAL + FIRST TASTE OF ISTANBUL
   // =========================================================================
   {
     id: 'ist26-0922-1',
-    summary: '[IST26] Arrive at IST Airport',
-    location: 'Istanbul Airport (IST), Tayakadın, 34283 Arnavutköy/İstanbul',
+    summary: '[IST26] Arrive IST → Sirkeci Hotel',
+    location: 'Istanbul Airport (IST) to Sirkeci, Istanbul',
     start: { dateTime: '2026-09-22T17:00:00+03:00' },
-    end: { dateTime: '2026-09-22T18:45:00+03:00' },
+    end: { dateTime: '2026-09-22T19:15:00+03:00' },
     description: `type: transport
 fixed: true
-what: Arrival, immigration, baggage collection and transfer into Istanbul.
-why: The trip starts with a long airport-to-city transition, so the first evening should be intentionally light.
+what: Arrival, immigration, baggage collection and transfer to Sirkeci.
+why: Sirkeci keeps the Historic Peninsula, Eminönü ferries, T1 and Karaköy within easy reach.
 web: https://www.istairport.com/en/
 
-notes: Clear immigration, collect luggage, use Havaist/private transfer, and head directly to Sirkeci.
-Avoid: Do not schedule sightseeing before dinner.`
+notes: Keep the evening light. No sightseeing after check-in.
+avoid: Do not schedule sightseeing before dinner.`
   },
   {
     id: 'ist26-0922-2',
-    summary: '[IST26] Check-in — Sirkeci Hotel',
-    location: 'Sirkeci, Fatih, 34110 İstanbul',
-    start: { dateTime: '2026-09-22T19:00:00+03:00' },
-    end: { dateTime: '2026-09-22T19:45:00+03:00' },
-    description: `type: rest
-fixed: true
-what: Base for the full trip.
-why: Sirkeci gives excellent access to Sultanahmet, Eminönü, ferries, T1 tram, Karaköy and Galata while retaining an old-Istanbul atmosphere.
-web: https://www.regieottoman.com/
-
-facts:
-- Hotel style: Small, historic or Ottoman-style boutique property rather than a large chain.
-- Current shortlist: Ferman Konak, Régie Ottoman, Sarnıç Hotel Ottoman Mansion, Sirkeci Mansion Hotel.
-
-notes: Check in, drop luggage, freshen up and leave only for dinner.`
-  },
-  {
-    id: 'ist26-0922-3',
     summary: '[IST26] Şehzade Cağ Kebap',
     location: 'Hobyar, Hoca Paşa Sk. No:6 D:4, 34112 Fatih/İstanbul',
     start: { dateTime: '2026-09-22T20:00:00+03:00' },
     end: { dateTime: '2026-09-22T21:00:00+03:00' },
     description: `type: food
 fixed: false
-what: Erzurum-style lamb cooked on a horizontal rotating spit and sliced onto small skewers.
-why: A strong introduction to the fact that Turkish meat culture is regional and far broader than döner.
+what: Erzurum-style lamb cooked on a horizontal rotating spit.
+why: Strong first introduction to regional Turkish food and a useful contrast with vertical döner.
 web: https://www.sehzadecagkebap.com
 ig: sehzadecagkebap
 
@@ -54,37 +36,37 @@ facts:
 - Marinated with onion, salt, and black pepper, cooked over wood embers.
 - The horizontal spit and carving technique are unique to eastern Anatolia.
 
-food: Start with 2–3 skewers each, eat with lavaş, onions and ezme, then add more if wanted.
-notes: Look for: The horizontal spit and carving technique. Avoid: Keep dinner simple after the flight.`
+food: Start with a few skewers, lavaş, onions and ayran. Order more only if wanted.
+notes: Look for the horizontal spit and wood-fire embers.`
   },
   {
-    id: 'ist26-0922-4',
-    summary: '[IST26] Return to hotel',
+    id: 'ist26-0922-3',
+    summary: '[IST26] Return to Hotel',
     location: 'Sirkeci, Fatih, 34110 İstanbul',
-    start: { dateTime: '2026-09-22T21:05:00+03:00' },
+    start: { dateTime: '2026-09-22T21:00:00+03:00' },
     end: { dateTime: '2026-09-22T21:30:00+03:00' },
     description: `type: rest
 fixed: false
-what: Short walk back and end of the day.
-why: Preserves energy for the first full historical day.
+what: Simple close to the arrival day.
+why: Preserves energy for the first full sightseeing day.
 
-notes: Unpack and sleep early. Avoid: No additional sightseeing.`
+notes: No additional program. Sleep early and reset.`
   },
 
   // =========================================================================
-  // 🟨 23 SEPTEMBER 2026 (Wednesday) — IMPERIAL ISTANBUL + ASIAN SHORE
+  // 🟨 23 SEPTEMBER 2026 (Wednesday) — IMPERIAL CORE + MARKETS + KOKOREÇ + HAMDI + GALATA VIEW
   // =========================================================================
   {
     id: 'ist26-0923-1',
-    summary: '[IST26] Simit & Turkish tea',
+    summary: '[IST26] Simit & Turkish Tea',
     location: 'Sirkeci / Sultanahmet, Istanbul',
     start: { dateTime: '2026-09-23T08:20:00+03:00' },
     end: { dateTime: '2026-09-23T08:45:00+03:00' },
     description: `type: food
 fixed: false
-what: A simple local breakfast before the historic core.
-why: It gives the day an everyday Istanbul start without filling up before lunch.
-do: Get a fresh simit from a busy bakery/cart, have strong tea, keep it brief.
+what: Simple everyday Istanbul breakfast.
+why: Keeps the morning local and light.
+food: Fresh simit, strong tea, perhaps a little cheese. Keep it quick.
 
 [Google Images](https://www.google.com/search?tbm=isch&q=Istanbul+simit+tea)`
   },
@@ -96,14 +78,12 @@ do: Get a fresh simit from a busy bakery/cart, have strong tea, keep it brief.
     end: { dateTime: '2026-09-23T11:00:00+03:00' },
     description: `type: visit
 fixed: false
-what: The Ottoman imperial residence and administrative center for centuries.
-why: This is where you understand how Ottoman power was physically organized through courtyards, gates and increasingly restricted zones.
-do: Prioritize the Imperial Council, Treasury, Sacred Relics, palace kitchens and Bosphorus terraces. Harem only if queues and timing allow.
+what: Ottoman imperial residence and administrative center.
+why: Shows how Ottoman power was organized through gates, courtyards and progressively restricted zones.
+do: Prioritize Imperial Council, Treasury, Sacred Relics, kitchens and Bosphorus terraces. Harem only if timing allows.
 
 [Official](https://topkapisarayi.org/en/)
 [Instagram](https://www.google.com/search?q=site%3Ainstagram.com+Topkapi+Palace)
-[Facebook](https://www.facebook.com/search/top?q=Topkapi%20Palace)
-[X](https://x.com/search?q=Topkapi%20Palace)
 [Images](https://www.google.com/search?tbm=isch&q=Topkapi+Palace+Istanbul)`
   },
   {
@@ -112,734 +92,604 @@ do: Prioritize the Imperial Council, Treasury, Sacred Relics, palace kitchens an
     location: 'Sultanahmet Square, 34122 Fatih/İstanbul',
     start: { dateTime: '2026-09-23T11:00:00+03:00' },
     end: { dateTime: '2026-09-23T11:20:00+03:00' },
-    description: `type: walk
+    description: `type: transport
 fixed: false
-what: Deliberate buffer time between Topkapı Palace and Hagia Sophia.
-why: This is deliberate buffer time. The buildings are close, but exiting Topkapı, moving through crowds and entering Hagia Sophia can easily consume 15–20 minutes.
-notes: Exiting Topkapı Palace courtyards, walking through Sultanahmet Square, and navigating visitor lines.
-
-[Map / images](https://www.google.com/search?tbm=isch&q=Topkapi+Palace+to+Hagia+Sophia)`
+what: Deliberate buffer for exiting Topkapı and entering Hagia Sophia.
+why: A 10-minute transfer is too optimistic in real conditions.
+notes: Deliberate buffer to navigate visitor crowds and security lines.`
   },
   {
     id: 'ist26-0923-4',
     summary: '[IST26] Hagia Sophia',
-    location: 'Sultan Ahmet, Ayasofya Meydanı No:1, 34122 Fatih',
+    location: 'Sultan Ahmet, Ayasofya Meydanı No:1, 34122 Fatih/İstanbul',
     start: { dateTime: '2026-09-23T11:20:00+03:00' },
     end: { dateTime: '2026-09-23T12:40:00+03:00' },
     description: `type: visit
 fixed: false
 what: Justinian’s 537 church, later Ottoman mosque, museum and mosque again.
-why: The most important building of the trip. It compresses Byzantine engineering, Christian art, Ottoman additions and modern political history into one space.
-do: First understand the dome and pendentives, then look for the coexistence of mosaics, giant Islamic calligraphy, mihrab and later Ottoman interventions. Do not rush this stop.
+why: The single most important building of the trip.
+do: First understand the dome and pendentives. Then mosaics, giant Islamic calligraphy, mihrab and Ottoman additions. Do not rush.
 
 [Web](https://visit.istanbul/hagia-sophia-mosque)
 [Instagram](https://www.google.com/search?q=site%3Ainstagram.com+Hagia+Sophia+Istanbul)
-[Facebook](https://www.facebook.com/search/top?q=Hagia%20Sophia%20Istanbul)
-[X](https://x.com/search?q=Hagia%20Sophia%20Istanbul)
 [Images](https://www.google.com/search?tbm=isch&q=Hagia+Sophia+Istanbul)`
   },
   {
     id: 'ist26-0923-5',
     summary: '[IST26] Hippodrome',
-    location: 'Binbirdirek, Sultan Ahmet Parkı, 34122 Fatih',
+    location: 'Binbirdirek, Sultan Ahmet Parkı No:2, 34122 Fatih/İstanbul',
     start: { dateTime: '2026-09-23T12:40:00+03:00' },
     end: { dateTime: '2026-09-23T13:00:00+03:00' },
     description: `type: visit
 fixed: false
-what: The ceremonial and sporting heart of Byzantine Constantinople.
-why: This was where chariot racing, imperial ceremony and political tension converged.
-do: Mentally reconstruct the lost stadium around today’s square and use the Obelisk and Serpent Column to understand the original central spine.
+what: Ceremonial and sporting center of Byzantine Constantinople.
+why: Chariot racing, imperial ritual and politics converged here.
+do: Use the Obelisk and Serpent Column to reconstruct the lost stadium mentally.
 
-[Web](https://www.google.com/search?q=Hippodrome+of+Constantinople)
-[Images](https://www.google.com/search?tbm=isch&q=Hippodrome+of+Constantinople+reconstruction)`
+[Web](https://www.google.com/search?q=Hippodrome+of+Constantinople)`
   },
   {
     id: 'ist26-0923-6',
     summary: '[IST26] Basilica Cistern',
-    location: 'Alemdar, Yerebatan Cd. 1/3, 34110 Fatih',
+    location: 'Alemdar, Yerebatan Cd. 1/3, 34110 Fatih/İstanbul',
     start: { dateTime: '2026-09-23T13:10:00+03:00' },
     end: { dateTime: '2026-09-23T13:55:00+03:00' },
     description: `type: visit
 fixed: false
-what: A vast 6th-century underground reservoir with 336 columns.
-why: It reveals the engineering infrastructure beneath imperial Constantinople.
-do: Take in the entire column forest before focusing on the Medusa heads; notice the reused columns and varied capitals.
+what: Vast 6th-century underground reservoir supported by 336 columns.
+why: Reveals the engineering infrastructure beneath imperial Constantinople.
+do: Take in the full column forest before focusing on the Medusa heads.
 
 [Official](https://yerebatan.com/en/)
-[Instagram](https://www.google.com/search?q=site%3Ainstagram.com+Basilica+Cistern)
-[Facebook](https://www.facebook.com/search/top?q=Basilica%20Cistern)
-[X](https://x.com/search?q=Basilica%20Cistern)
-[Images](https://www.google.com/search?tbm=isch&q=Basilica+Cistern+Istanbul)`
+[Instagram](https://www.google.com/search?q=site%3Ainstagram.com+Basilica+Cistern)`
   },
   {
     id: 'ist26-0923-7',
-    summary: '[IST26] Dönerci Celal Usta — yaprak döner',
-    location: 'Hocapaşa Mah. Ankara Cd. No:30/A, Sirkeci, 34112 Fatih/İstanbul',
+    summary: '[IST26] Grand Bazaar',
+    location: 'Beyazıt, 34126 Fatih/İstanbul',
     start: { dateTime: '2026-09-23T14:10:00+03:00' },
     end: { dateTime: '2026-09-23T14:45:00+03:00' },
-    description: `type: food
+    description: `type: walk
 fixed: false
-what: Proper yaprak döner with visible whole-meat layers rather than a minced-heavy döner mixture.
-why: This gives you the genuine döner stop without turning lunch into a heavy meal before İsmet Baba.
-do: Order it simply—portion or dürüm, ayran, minimal sauce. Keep it restrained.
-
-[Web](https://www.google.com/search?q=Donerci+Celal+Usta+Sirkeci)
-[Instagram](https://www.google.com/search?q=site%3Ainstagram.com+Donerci+Celal+Usta)
-[Facebook](https://www.facebook.com/search/top?q=Donerci%20Celal%20Usta)
-[X](https://x.com/search?q=Donerci%20Celal%20Usta)
-[Images](https://www.google.com/search?tbm=isch&q=Donerci+Celal+Usta+Sirkeci)`
+what: Historic commercial district of covered streets, bedestens and hans.
+why: The point is Ottoman commercial urbanism, not shopping.
+do: Walk main axes. Look upward. Enter a han if convenient. No serious shopping.`
   },
   {
     id: 'ist26-0923-8',
-    summary: '[IST26] Grand Bazaar',
-    location: 'Beyazıt, 34126 Fatih/İstanbul',
-    start: { dateTime: '2026-09-23T15:00:00+03:00' },
-    end: { dateTime: '2026-09-23T15:45:00+03:00' },
-    description: `type: walk
+    summary: '[IST26] Kokoreççiler Kralı Zülfü Usta',
+    location: 'Mercan / Uzunçarşı, Fatih/İstanbul',
+    start: { dateTime: '2026-09-23T14:45:00+03:00' },
+    end: { dateTime: '2026-09-23T15:15:00+03:00' },
+    description: `type: food
 fixed: false
-what: A vast historic commercial district of covered streets, bedestens and hans.
-why: The point is Ottoman commercial urbanism, not shopping.
-do: Walk the main axes, glance into a han or two, look up at the architecture and keep moving.
+what: Quick kokoreç tasting between the Grand Bazaar and Eminönü.
+why: Adds a classic street-food experience without spoiling dinner.
+food: Half-bread kokoreç is enough. Keep it quick and light.
 
-[Web](https://visit.istanbul/grand-bazaar)
-[Instagram](https://www.google.com/search?q=site%3Ainstagram.com+Grand+Bazaar+Istanbul)
-[Facebook](https://www.facebook.com/search/top?q=Grand%20Bazaar%20Istanbul)
-[X](https://x.com/search?q=Grand%20Bazaar%20Istanbul)
-[Images](https://www.google.com/search?tbm=isch&q=Grand+Bazaar+Istanbul)`
+[Web](https://www.google.com/search?q=Kokorecciler+Krali+Zulfu+Usta)
+[Images](https://www.google.com/search?tbm=isch&q=Kokorecciler+Krali+Zulfu+Usta)`
   },
   {
     id: 'ist26-0923-9',
     summary: '[IST26] Spice Bazaar',
-    location: 'Rüstem Paşa, Erzak Ambarı Sok. No:92, 34116 Fatih',
-    start: { dateTime: '2026-09-23T16:00:00+03:00' },
-    end: { dateTime: '2026-09-23T16:25:00+03:00' },
+    location: 'Rüstem Paşa, Erzak Ambarı Sok. No:92, 34116 Fatih/İstanbul',
+    start: { dateTime: '2026-09-23T15:20:00+03:00' },
+    end: { dateTime: '2026-09-23T15:50:00+03:00' },
     description: `type: walk
 fixed: false
-what: Compact 17th-century market connected to the New Mosque complex.
-why: It shows the relationship between trade, food, medicine and Ottoman urban institutions.
-do: Keep it short, enjoy the smells and visual density, then head straight to the ferry.
-
-[Web](https://visit.istanbul/spice-bazaar)
-[Instagram](https://www.google.com/search?q=site%3Ainstagram.com+Spice+Bazaar+Istanbul)
-[Facebook](https://www.facebook.com/search/top?q=Spice%20Bazaar%20Istanbul)
-[X](https://x.com/search?q=Spice%20Bazaar%20Istanbul)
-[Images](https://www.google.com/search?tbm=isch&q=Spice+Bazaar+Istanbul)`
+what: Compact 17th-century market linked historically to the New Mosque complex.
+why: Shows how food trade, commerce and religious endowments interacted.
+do: Keep it short. Do not turn it into a shopping session.`
   },
   {
     id: 'ist26-0923-10',
-    summary: '[IST26] Eminönü → Üsküdar ferry',
-    location: 'Eminönü Ferry Pier to Üsküdar Pier',
-    start: { dateTime: '2026-09-23T16:40:00+03:00' },
-    end: { dateTime: '2026-09-23T17:00:00+03:00' },
-    description: `type: transport
+    summary: '[IST26] Hotel / Eminönü Rest Buffer',
+    location: 'Sirkeci / Eminönü, Istanbul',
+    start: { dateTime: '2026-09-23T16:00:00+03:00' },
+    end: { dateTime: '2026-09-23T18:30:00+03:00' },
+    description: `type: rest
 fixed: false
-what: Normal public Şehir Hatları transport.
-why: One of the best ways to understand Istanbul’s geography from the water.
-do: Stay outside if weather permits, get tea, look back at the Historic Peninsula skyline.
-
-[Şehir Hatları](https://sehirhatlari.istanbul/)
-[Instagram](https://www.google.com/search?q=site%3Ainstagram.com+Sehir+Hatlari)
-[Facebook](https://www.facebook.com/search/top?q=Sehir%20Hatlari)
-[X](https://x.com/search?q=Sehir%20Hatlari)
-[Images](https://www.google.com/search?tbm=isch&q=Istanbul+Sehir+Hatlari+ferry)`
+what: Flexible rest window before dinner.
+why: Prevents the first major sightseeing day from becoming exhausting.
+notes: Rest, recharge devices, relax at the hotel or enjoy an easy tea by the waterfront.`
   },
   {
     id: 'ist26-0923-11',
-    summary: '[IST26] Üsküdar + Kuzguncuk',
-    location: 'Kuzguncuk, Üsküdar, Istanbul',
-    start: { dateTime: '2026-09-23T17:00:00+03:00' },
-    end: { dateTime: '2026-09-23T18:40:00+03:00' },
-    description: `type: walk
-fixed: false
-what: A relaxed Asian-side neighborhood transition after the dense historic morning.
-why: Kuzguncuk adds human-scale residential Istanbul with Muslim, Jewish, Greek and Armenian layers.
-do: Wander side streets, notice wooden houses and neighborhood architecture, and avoid cramming in extra sights.
-
-[Web](https://www.google.com/search?q=Kuzguncuk+Istanbul+history)
-[Instagram](https://www.google.com/search?q=site%3Ainstagram.com+Kuzguncuk+Istanbul)
-[Facebook](https://www.facebook.com/search/top?q=Kuzguncuk%20Istanbul)
-[X](https://x.com/search?q=Kuzguncuk%20Istanbul)
-[Images](https://www.google.com/search?tbm=isch&q=Kuzguncuk+Istanbul)`
-  },
-  {
-    id: 'ist26-0923-12',
-    summary: '[IST26] İsmet Baba',
-    location: 'Kuzguncuk, Çarşı Cd. No:1, 34674 Üsküdar/İstanbul',
+    summary: '[IST26] Hamdi Restaurant',
+    location: 'Rüstem Paşa, Kalçın Sk. No:11, 34116 Fatih/İstanbul',
     start: { dateTime: '2026-09-23T19:00:00+03:00' },
     end: { dateTime: '2026-09-23T21:00:00+03:00' },
     description: `type: food
 fixed: true
-what: Classic waterfront fish-house dinner with meze and rakı.
-why: This is the trip’s main Bosphorus fish evening and a social ritual as much as a meal.
-do: Ask what fish is best that day, order a restrained set of cold meze, perhaps one hot seafood dish, then seasonal fish. Get a waterside table if possible and take the full two hours.
+what: Southeastern Turkish kebabs and meze with views over Eminönü, Galata and the Golden Horn.
+why: Strong dinner finale after a Historic Peninsula day.
+food: Request an upper-floor/window table. Keep ordering focused.
+reservation: Reserved
 
-[Website](http://ismetbaba.com/)
-[Instagram](https://www.google.com/search?q=site%3Ainstagram.com+Ismet+Baba+Kuzguncuk)
-[Facebook](https://www.facebook.com/search/top?q=Ismet%20Baba%20Kuzguncuk)
-[X](https://x.com/search?q=Ismet%20Baba%20Istanbul)
-[Images](https://www.google.com/search?tbm=isch&q=Ismet+Baba+Kuzguncuk)`
+[Official](https://www.hamdi.com.tr/)
+[Images](https://www.google.com/search?tbm=isch&q=Hamdi+Restaurant+Istanbul)`
   },
   {
-    id: 'ist26-0923-13',
-    summary: '[IST26] Ferry back to Europe',
-    location: 'Üsküdar Pier to Eminönü/Karaköy Pier',
-    start: { dateTime: '2026-09-23T21:15:00+03:00' },
-    end: { dateTime: '2026-09-23T22:00:00+03:00' },
-    description: `type: transport
+    id: 'ist26-0923-12',
+    summary: '[IST26] Firuzende',
+    location: 'Bereketzade, Büyük Hendek Cd. No:35, 34421 Beyoğlu/İstanbul',
+    start: { dateTime: '2026-09-23T21:30:00+03:00' },
+    end: { dateTime: '2026-09-23T22:30:00+03:00' },
+    description: `type: drink
 fixed: false
-what: Relaxed night crossing after dinner.
-why: Relaxed night crossing after dinner, with the illuminated skyline as the final view of the day.
+what: Rooftop/view drink overlooking Galata.
+why: Low-effort visual finale to the day.
+do: One drink. Ask for a Galata-facing table. No second dinner.
+ig: firuzendegalata
 
-[Şehir Hatları](https://sehirhatlari.istanbul/)
-[Images](https://www.google.com/search?tbm=isch&q=Istanbul+Bosphorus+ferry+night)`
+[Images](https://www.google.com/search?tbm=isch&q=Firuzende+Galata)`
   },
 
   // =========================================================================
-  // 🟩 24 SEPTEMBER 2026 (Thursday) — HISTORIC URBAN ROUTE + PERA
+  // 🟩 24 SEPTEMBER 2026 (Thursday) — HISTORIC URBAN ROUTE + KARIYE + PERA
   // =========================================================================
   {
     id: 'ist26-0924-1',
-    summary: '[IST26] Namlı Gurme breakfast',
-    location: 'Kemankeş Karamustafa Paşa, Rıhtım Cd. No:1/1, Karaköy',
+    summary: '[IST26] Namlı Gurme Breakfast',
+    location: 'Kemankeş Karamustafa Paşa, Rıhtım Cd. No:1/1, 34425 Beyoğlu/İstanbul',
     start: { dateTime: '2026-09-24T08:00:00+03:00' },
     end: { dateTime: '2026-09-24T08:45:00+03:00' },
     description: `type: food
 fixed: false
-what: The trip’s one substantial Turkish breakfast.
-why: A product-focused breakfast explains Turkish breakfast culture better than an oversized tourist spread.
-
-food: Select several cheeses, olives, honey-kaymak, tomato/cucumber and eggs or menemen. Optional: Add sucuk if wanted.
-notes: Avoid: Keep portions under control because this is the heaviest walking day.`
+what: The trip’s one proper Turkish breakfast.
+why: High-quality breakfast products instead of a giant tourist spread.
+food: Artisanal cheeses, olives, honey-kaymak and eggs. Keep to 45 minutes.`
   },
   {
     id: 'ist26-0924-2',
     summary: '[IST26] Rüstem Paşa Mosque',
-    location: 'Rüstem Paşa, Hasırcılar Cd. No:62, 34116 Fatih',
+    location: 'Rüstem Paşa, Hasırcılar Cd. No:62, 34116 Fatih/İstanbul',
     start: { dateTime: '2026-09-24T09:00:00+03:00' },
     end: { dateTime: '2026-09-24T09:30:00+03:00' },
     description: `type: visit
 fixed: false
-what: Compact Sinan mosque raised above the market streets.
-why: Perhaps the best İznik-tile experience in Istanbul and one of the city’s best architectural surprises.
-
-facts:
-- Masterpiece of Mimar Sinan built for Grand Vizier Rüstem Pasha in 1563.
-- Densely covered in the finest ruby-red floral and geometric İznik tiles.
-
-notes: Notice the modest approach from street level, then focus on the tile-covered interior.`
+what: Compact Sinan mosque hidden above market streets.
+why: One of Istanbul’s finest İznik-tile interiors.
+do: Focus on the extraordinary variety of İznik floral tiles and the market-approach elevation.`
   },
   {
     id: 'ist26-0924-3',
     summary: '[IST26] Tahtakale & Uzunçarşı',
-    location: 'Tahtakale & Uzunçarşı Cd., Fatih',
+    location: 'Tahtakale, Fatih/İstanbul',
     start: { dateTime: '2026-09-24T09:35:00+03:00' },
     end: { dateTime: '2026-09-24T10:15:00+03:00' },
     description: `type: walk
 fixed: false
-what: Old working commercial streets of wholesalers, hans and specialist trades.
-why: They show that historic Istanbul is not just preserved architecture; it is a commercial city that never stopped functioning.
-
-notes: Observe porters, shopfronts and old courtyards. Look for: The continuity between historic trade routes and today’s commerce. Avoid: Long shopping detours.`
+what: Working historic market streets with hans, wholesalers and specialist trades.
+why: Shows commercial Istanbul as a living system.
+do: Look into historic hans, observe wholesale commerce, and avoid tourist detours.`
   },
   {
     id: 'ist26-0924-4',
     summary: '[IST26] Süleymaniye Mosque',
-    location: 'Süleymaniye, Prof. Sıddık Sami Onar Cd. No:1, 34116 Fatih',
+    location: 'Süleymaniye, Prof. Sıddık Sami Onar Cd. No:1, 34116 Fatih/İstanbul',
     start: { dateTime: '2026-09-24T10:40:00+03:00' },
     end: { dateTime: '2026-09-24T11:20:00+03:00' },
     description: `type: visit
 fixed: false
-what: Sinan’s great imperial mosque complex for Süleyman the Magnificent.
-why: One of the clearest expressions of classical Ottoman architecture and state-sponsored urbanism.
-web: https://visit.istanbul/suleymaniye-mosque
-
-facts:
-- Built between 1550 and 1557 by master architect Mimar Sinan.
-- Unrivaled panoramic view overlooking the Golden Horn and Bosphorus.
-
-notes: Enter through the courtyard and understand the complex as a whole before focusing on the prayer hall. Look for: Dome proportions and comparison with Hagia Sophia. Finish with: Golden Horn terrace and panorama.`
+what: Sinan’s monumental imperial complex for Süleyman the Magnificent.
+why: One of the clearest expressions of classical Ottoman architecture.
+do: Courtyard → interior → Golden Horn terrace. Compare the dome concept with Hagia Sophia.`
   },
   {
     id: 'ist26-0924-5',
-    summary: '[IST26] Şehzadebaşı + Vefa',
-    location: 'Kalenderhane, Şehzadebaşı Cd. No:44, Fatih',
-    start: { dateTime: '2026-09-24T11:40:00+03:00' },
-    end: { dateTime: '2026-09-24T12:55:00+03:00' },
-    description: `type: walk
-fixed: false
-what: Şehzade Mosque, neighborhood streets and Vefa.
-why: Şehzade shows an earlier stage in Sinan’s development while Vefa shifts the focus back toward lived urban culture.
-
-notes: Keep the mosque relatively brief and then walk the neighborhood rather than jumping by taxi. Look for: Change in street texture and local scale. Includes tasting stop at Vefa Bozacısı.`
-  },
-  {
-    id: 'ist26-0924-6',
-    summary: '[IST26] Vefa Bozacısı',
-    location: 'Mollagürani, Katip Çelebi Cd. No:104, 34093 Fatih',
-    start: { dateTime: '2026-09-24T12:55:00+03:00' },
-    end: { dateTime: '2026-09-24T13:30:00+03:00' },
-    description: `type: food
-fixed: false
-what: Historic boza producer established in 1876.
-why: One of the best examples of history surviving through continuously practiced food culture.
-web: https://vefa.com.tr/
-
-food: Order a small boza. Add: Cinnamon and roasted chickpeas (leblebi).
-notes: Historic shop interior with Atatürk's drinking glass preserved. Avoid: Treat it as a tasting stop, not a long café break.`
-  },
-  {
-    id: 'ist26-0924-7',
     summary: '[IST26] Zeyrek / Pantokrator',
-    location: 'Zeyrek, Fazilet Sk. No:42, 34083 Fatih',
-    start: { dateTime: '2026-09-24T13:35:00+03:00' },
-    end: { dateTime: '2026-09-24T14:10:00+03:00' },
+    location: 'Zeyrek, Fazilet Sk. No:8, 34083 Fatih/İstanbul',
+    start: { dateTime: '2026-09-24T11:40:00+03:00' },
+    end: { dateTime: '2026-09-24T12:20:00+03:00' },
     description: `type: visit
 fixed: false
 what: Major 12th-century Byzantine monastic complex later converted into a mosque.
-why: One of the best places to understand Byzantine Constantinople surviving inside Ottoman and modern Istanbul.
-
-facts:
-- Founded by Empress Irene Comnena and Emperor John II Comnenus in 1118-1136.
-- Second largest surviving Byzantine religious edifice after Hagia Sophia.
-
-notes: Study the brickwork and interconnected building volumes. Look for: Steep surrounding topography and Golden Horn relationship.`
+why: Shows Byzantine Constantinople embedded directly into later Istanbul.
+do: Examine brickwork, triple-church structure and neighborhood topography.`
+  },
+  {
+    id: 'ist26-0924-6',
+    summary: '[IST26] Tarihi Malta Esnaf Lokantası',
+    location: 'Fatih / Zeyrek, Istanbul',
+    start: { dateTime: '2026-09-24T12:45:00+03:00' },
+    end: { dateTime: '2026-09-24T13:25:00+03:00' },
+    description: `type: food
+fixed: false
+what: Light esnaf-lokantası lunch.
+why: Keeps the day local, fast and light before the evening meyhane.
+food: Prefer soup + zeytinyağlı / vegetable dish + yogurt or cacık. Avoid heavy meat and large portions.`
+  },
+  {
+    id: 'ist26-0924-7',
+    summary: '[IST26] Transfer to Fener / Balat',
+    location: 'Zeyrek to Fener/Balat, Istanbul',
+    start: { dateTime: '2026-09-24T13:25:00+03:00' },
+    end: { dateTime: '2026-09-24T13:45:00+03:00' },
+    description: `type: transport
+fixed: false
+what: Transfer down toward the Golden Horn waterfront neighborhoods.
+notes: Short downhill walk or taxi transfer.`
   },
   {
     id: 'ist26-0924-8',
-    summary: '[IST26] Quick local lunch (Esnaf Lokantası)',
-    location: 'Fatih, Istanbul',
-    start: { dateTime: '2026-09-24T14:15:00+03:00' },
-    end: { dateTime: '2026-09-24T14:45:00+03:00' },
-    description: `type: food
+    summary: '[IST26] Fener / Balat',
+    location: 'Balat, Fatih/İstanbul',
+    start: { dateTime: '2026-09-24T13:45:00+03:00' },
+    end: { dateTime: '2026-09-24T14:40:00+03:00' },
+    description: `type: walk
 fixed: false
-what: Simple esnaf-lokantası-style food.
-why: Not every meal should be a destination restaurant; this shows everyday Istanbul cooking.
-
-food: Choose a busy place with trays of cooked dishes visible. Order: One vegetable/olive-oil dish, one stew or meat dish, plus rice/bulgur and yogurt.
-notes: Avoid: Keep it to about 30 minutes.`
+what: Historic neighborhoods with Greek, Jewish, Armenian and Ottoman layers.
+why: Strong neighborhood-scale view of Istanbul’s cultural diversity.
+do: Spend 45–60 minutes. Focus on street character, schools, churches and façades. Do not turn it into a photo shoot.`
   },
   {
     id: 'ist26-0924-9',
-    summary: '[IST26] Rest buffer',
-    location: 'Fatih / Golden Horn, Istanbul',
-    start: { dateTime: '2026-09-24T14:45:00+03:00' },
-    end: { dateTime: '2026-09-24T15:15:00+03:00' },
-    description: `type: rest
+    summary: '[IST26] Transfer to Kariye',
+    location: 'Fener/Balat to Kariye, Edirnekapı',
+    start: { dateTime: '2026-09-24T14:40:00+03:00' },
+    end: { dateTime: '2026-09-24T15:00:00+03:00' },
+    description: `type: transport
 fixed: false
-what: Genuine downtime.
-why: This is the hardest walking day and a proper pause improves the second half significantly.
-
-notes: Sit, hydrate and charge phones. Avoid: Do nothing culturally productive.`
+what: Uphill transfer from Golden Horn shore to Edirnekapı.
+notes: Short taxi recommended.`
   },
   {
     id: 'ist26-0924-10',
-    summary: '[IST26] Fatih → Çarşamba → Fener/Balat',
-    location: 'Fener & Balat, Fatih',
-    start: { dateTime: '2026-09-24T15:15:00+03:00' },
-    end: { dateTime: '2026-09-24T16:15:00+03:00' },
-    description: `type: walk
-fixed: false
-what: A compressed journey through neighborhoods with visibly different identities.
-why: One of the best ways to understand Istanbul’s cultural geography.
-
-notes: Keep Çarşamba brief and observational, then descend toward Fener/Balat. Look for: Change in architecture, churches, schools and historical minority presence. Avoid: Do not turn Balat into an Instagram-photo session.`
-  },
-  {
-    id: 'ist26-0924-11',
-    summary: '[IST26] Ayvansaray → Edirnekapı / City Walls',
-    location: 'Theodosian Land Walls, Edirnekapı, Fatih',
-    start: { dateTime: '2026-09-24T16:15:00+03:00' },
-    end: { dateTime: '2026-09-24T17:00:00+03:00' },
-    description: `type: visit
-fixed: false
-what: Surviving sections of the Theodosian land-wall system.
-why: These defenses protected Constantinople for roughly a millennium, which makes the Ottoman conquest of 1453 much more meaningful.
-web: https://whc.unesco.org/en/list/356/
-
-notes: Find a point where the layered walls and towers are visually legible. Avoid: Do not continue to Yedikule; it was intentionally removed to save several hours.`
-  },
-  {
-    id: 'ist26-0924-12',
     summary: '[IST26] Kariye / Chora',
-    location: 'Dervişali, Kariye Cami Sk. No:18, 34087 Fatih',
-    start: { dateTime: '2026-09-24T17:00:00+03:00' },
-    end: { dateTime: '2026-09-24T17:50:00+03:00' },
+    location: 'Dervişali, Kariye Cami Sk. No:18, 34087 Fatih/İstanbul',
+    start: { dateTime: '2026-09-24T15:00:00+03:00' },
+    end: { dateTime: '2026-09-24T16:00:00+03:00' },
     description: `type: visit
 fixed: false
 what: Late Byzantine church famous for extraordinary 14th-century mosaics and frescoes.
-why: Arguably the trip’s best Byzantine art experience.
-
-notes: Follow image sequences rather than jumping randomly between individual scenes. Look for: Anastasis fresco if accessible. Important: Recheck mosque-use access shortly before the trip. Key idea: Hagia Sophia is about space; Kariye is about narrative image and detail.`
+why: Probably the strongest Byzantine art stop of the trip.
+do: Follow narrative sequences. Prioritize the Anastasis fresco if accessible. Recheck access shortly before travel.`
+  },
+  {
+    id: 'ist26-0924-11',
+    summary: '[IST26] Transfer to Pera',
+    location: 'Edirnekapı to Beyoğlu, Istanbul',
+    start: { dateTime: '2026-09-24T16:00:00+03:00' },
+    end: { dateTime: '2026-09-24T16:30:00+03:00' },
+    description: `type: transport
+fixed: false
+what: Practical jump across the Golden Horn to Beyoğlu.
+notes: Taxi if sensible; otherwise public transit.`
+  },
+  {
+    id: 'ist26-0924-12',
+    summary: '[IST26] Pera / İstiklal Walk',
+    location: 'İstiklal Caddesi, Beyoğlu/İstanbul',
+    start: { dateTime: '2026-09-24T16:30:00+03:00' },
+    end: { dateTime: '2026-09-24T18:30:00+03:00' },
+    description: `type: walk
+fixed: false
+what: Relaxed walk through Pera and İstiklal before dinner.
+why: Introduces the 19th-century cosmopolitan European quarter.
+do: Include St. Antoine before it closes. Include Avrupa Pasajı. Include Çiçek Pasajı. Allow a short coffee or rest. Focus on façades and building types.`
   },
   {
     id: 'ist26-0924-13',
-    summary: '[IST26] Transfer to Pera',
-    location: 'Edirnekapı to Pera, Beyoğlu',
-    start: { dateTime: '2026-09-24T17:50:00+03:00' },
-    end: { dateTime: '2026-09-24T18:15:00+03:00' },
-    description: `type: transport
-fixed: false
-what: Logistics jump from the outer Historic Peninsula to Beyoğlu.
-
-notes: Take a taxi if traffic is reasonable; otherwise use public transport. Avoid: Treat this as transfer time, not sightseeing.`
-  },
-  {
-    id: 'ist26-0924-14',
-    summary: '[IST26] Pera / Asmalımescit walk',
-    location: 'Asmalı Mescit, Beyoğlu',
-    start: { dateTime: '2026-09-24T18:15:00+03:00' },
-    end: { dateTime: '2026-09-24T18:50:00+03:00' },
-    description: `type: walk
-fixed: false
-what: Transition into the 19th-century cosmopolitan European quarter.
-why: The city suddenly changes from mosque-complex urbanism to embassies, apartment blocks, churches, hotels and nightlife.
-
-notes: Look up at façades and building types. Key idea: Think of this as entering a different version of the same imperial capital.`
-  },
-  {
-    id: 'ist26-0924-15',
     summary: '[IST26] Asmalı Cavit',
-    location: 'Asmalı Mescit, Asmalı Mescit Cd. 16/D, 34430 Beyoğlu',
+    location: 'Asmalı Mescit, Asmalı Mescit Cd. 16/D, 34430 Beyoğlu/İstanbul',
     start: { dateTime: '2026-09-24T19:00:00+03:00' },
     end: { dateTime: '2026-09-24T21:00:00+03:00' },
     description: `type: food
 fixed: true
 what: Classic Beyoğlu meyhane.
-why: Meyhane culture is fundamentally about pacing, meze, rakı and conversation rather than one signature dish.
-
-food: Start with about 5–6 cold meze, add 1–2 hot dishes, and only then consider fish or meat.
-drink: Rakı slowly with water.
-notes: Reserve ahead. Avoid: Do not rush the meal.`
+why: The main meze + rakı social dining experience.
+food: Start with a restrained set of cold meze. Add hot dishes gradually. Drink rakı slowly with water.
+reservation: Reserved`
   },
   {
-    id: 'ist26-0924-16',
-    summary: '[IST26] İstiklal + historic passages',
-    location: 'İstiklal Cd., Beyoğlu',
-    start: { dateTime: '2026-09-24T21:15:00+03:00' },
+    id: 'ist26-0924-14',
+    summary: '[IST26] Short Night Walk / Return to Hotel',
+    location: 'Beyoğlu to Sirkeci, Istanbul',
+    start: { dateTime: '2026-09-24T21:00:00+03:00' },
     end: { dateTime: '2026-09-24T22:00:00+03:00' },
-    description: `type: walk
+    description: `type: optional
 fixed: false
-what: The old Grande Rue de Péra, including Çiçek Pasajı, Avrupa Pasajı and St. Antoine.
-why: The strongest surviving public axis of late Ottoman cosmopolitan modernity.
-
-notes: Look above storefronts and enter the passages. Optional: Step into St. Antoine if open. Avoid: Do not judge İstiklal only by today’s chain stores.`
-  },
-  {
-    id: 'ist26-0924-17',
-    summary: '[IST26] Firuzende',
-    location: 'Bereketzade, Büyük Hendek Cd. No:72, Anemon Hotel Galata',
-    start: { dateTime: '2026-09-24T22:10:00+03:00' },
-    end: { dateTime: '2026-09-24T23:00:00+03:00' },
-    description: `type: drink
-fixed: false
-what: Rooftop/view drink.
-why: A visual decompression after the longest historical day.
-ig: firuzendegalata
-
-notes: Request the best Galata-facing table and order one drink. Look for: Roofscape, tower and vertical density of Galata. Avoid: Do not turn it into a second dinner.`
+what: Flexible end to the evening.
+why: Keeps the day from becoming over-programmed.
+notes: Easy stroll across Galata Bridge or return directly to Sirkeci.`
   },
 
   // =========================================================================
-  // 🟧 25 SEPTEMBER 2026 (Friday) — GALATA + BOSPHORUS + MODERN ISTANBUL
+  // 🟧 25 SEPTEMBER 2026 (Friday) — DOLMABAHÇE + PERA + BOSPHORUS + ORTAKÖY + BOMONTI + GEVENDE
   // =========================================================================
   {
     id: 'ist26-0925-1',
-    summary: '[IST26] Simit / börek / tea',
-    location: 'Galata, Beyoğlu, Istanbul',
-    start: { dateTime: '2026-09-25T09:00:00+03:00' },
-    end: { dateTime: '2026-09-25T09:20:00+03:00' },
-    description: `type: food
+    summary: '[IST26] Arrive at Dolmabahçe Entrance',
+    location: 'Dolmabahçe Palace, Beşiktaş/İstanbul',
+    start: { dateTime: '2026-09-25T08:45:00+03:00' },
+    end: { dateTime: '2026-09-25T09:00:00+03:00' },
+    description: `type: transport
 fixed: false
-what: Quick local breakfast.
-why: Keeps the morning light and leaves room for Pera Palace and baklava later.
-
-food: Choose either simit or börek with Turkish tea.
-notes: Avoid: No large breakfast.`
+what: Arrive before opening.
+why: Enter as soon as the palace opens to minimize queues.`
   },
   {
     id: 'ist26-0925-2',
-    summary: '[IST26] Galata neighborhood',
-    location: 'Galata, Beyoğlu, Istanbul',
-    start: { dateTime: '2026-09-25T09:20:00+03:00' },
-    end: { dateTime: '2026-09-25T10:00:00+03:00' },
-    description: `type: walk
+    summary: '[IST26] Dolmabahçe Palace',
+    location: 'Vişnezade, Dolmabahçe Cd., 34357 Beşiktaş/İstanbul',
+    start: { dateTime: '2026-09-25T09:00:00+03:00' },
+    end: { dateTime: '2026-09-25T10:45:00+03:00' },
+    description: `type: visit
 fixed: false
-what: Old Genoese port quarter later shaped by Jewish, Levantine, Ottoman and European communities.
-why: Galata explains Istanbul’s long integration into Mediterranean and European trade.
-
-notes: Walk side streets and notice the steep grades and masonry architecture. Look for: Views back toward the Historic Peninsula. Avoid: Do not make the Galata Tower queue the main objective.`
+what: 19th-century Ottoman imperial palace representing the westernizing court.
+why: Complements Topkapı by showing how Ottoman power and aesthetics changed in the 19th century.
+do: Focus on Selamlık / main palace. Prioritize the grand staircase, reception rooms and Ceremonial Hall. Do not over-invest in secondary sections.`
   },
   {
     id: 'ist26-0925-3',
-    summary: '[IST26] Galata Mevlevihanesi',
-    location: 'Şahkulu, Galip Dede Cd. No:15, 34420 Beyoğlu',
-    start: { dateTime: '2026-09-25T10:00:00+03:00' },
-    end: { dateTime: '2026-09-25T10:35:00+03:00' },
-    description: `type: visit
+    summary: '[IST26] Transfer to Galata / Pera',
+    location: 'Dolmabahçe to Galata/Pera, Istanbul',
+    start: { dateTime: '2026-09-25T10:45:00+03:00' },
+    end: { dateTime: '2026-09-25T11:10:00+03:00' },
+    description: `type: transport
 fixed: false
-what: Historic Mevlevi Sufi lodge.
-why: It corrects the simplistic idea that Mevlevi culture is only “whirling dervishes.”
-
-facts:
-- Oldest Mevlevi lodge in Istanbul, founded in 1491.
-- Focus on musical instruments, manuscripts and institutional Sufi culture.
-
-notes: Key idea: Sema is a structured spiritual ritual, not simply entertainment.`
+what: Transfer uphill from Dolmabahçe to Galata/Pera.`
   },
   {
     id: 'ist26-0925-4',
-    summary: '[IST26] İstiklal & Pera by daylight',
-    location: 'İstiklal Cd. & Pera, Beyoğlu',
-    start: { dateTime: '2026-09-25T10:40:00+03:00' },
-    end: { dateTime: '2026-09-25T11:30:00+03:00' },
-    description: `type: walk
+    summary: '[IST26] Galata Mevlevihanesi',
+    location: 'Şahkulu, Galip Dede Cd. No:15, 34420 Beyoğlu/İstanbul',
+    start: { dateTime: '2026-09-25T11:10:00+03:00' },
+    end: { dateTime: '2026-09-25T11:40:00+03:00' },
+    description: `type: visit
 fixed: false
-what: Daytime architectural reading of Beyoğlu.
-why: The previous evening was about atmosphere; this visit is about façades, balconies, passages and apartment buildings.
-
-notes: Look up and read the architecture. Avoid: Do not repeat every stop from the previous night.`
+what: Historic Mevlevi Sufi lodge.
+why: Shows Mevlevi culture as music, poetry, learning and spiritual discipline—not only whirling dervishes.
+do: Keep visit focused on the semahane, classical instruments and institutional history.`
   },
   {
     id: 'ist26-0925-5',
-    summary: '[IST26] Pera Palace Hotel',
-    location: 'Evliya Çelebi, Meşrutiyet Caddesi No:52, 34430 Tepebaşı/Beyoğlu',
-    start: { dateTime: '2026-09-25T11:30:00+03:00' },
-    end: { dateTime: '2026-09-25T12:15:00+03:00' },
+    summary: '[IST26] Pera Palace',
+    location: 'Evliya Çelebi, Meşrutiyet Cd. No:52, 34430 Beyoğlu/İstanbul',
+    start: { dateTime: '2026-09-25T11:40:00+03:00' },
+    end: { dateTime: '2026-09-25T12:20:00+03:00' },
     description: `type: visit
 fixed: false
-what: 1895 Belle Époque hotel built for the era of Orient Express travel.
-why: One of the clearest symbols of late Ottoman modernization—electricity, elevators, international travel and luxury hospitality.
-web: https://perapalace.com/en/
-
-notes: Have tea or coffee and inspect the historic elevator, staircase and public rooms. Key context: The modernization story matters more than the Agatha Christie mythology.`
+what: 1895 Belle Époque hotel associated with Orient Express travelers.
+why: Strong example of late-Ottoman modernization, international travel and luxury hospitality.
+do: Tea or coffee only. See the historic elevator, staircase and public rooms.`
   },
   {
     id: 'ist26-0925-6',
-    summary: '[IST26] Karaköy Güllüoğlu',
-    location: 'Kemankeş Karamustafa Paşa, Kemankeş Cd. No:67, Karaköy',
-    start: { dateTime: '2026-09-25T12:45:00+03:00' },
-    end: { dateTime: '2026-09-25T13:05:00+03:00' },
-    description: `type: food
+    summary: '[IST26] Free Transition / Buffer to Eminönü',
+    location: 'Pera to Eminönü Piers, Istanbul',
+    start: { dateTime: '2026-09-25T12:20:00+03:00' },
+    end: { dateTime: '2026-09-25T13:00:00+03:00' },
+    description: `type: rest
 fixed: false
-what: Dedicated specialist baklava stop.
-why: Better to experience serious baklava once than average baklava repeatedly.
-web: https://www.karakoygulluoglu.com/
-
-food: Order small portions. Start with: Classic pistachio baklava.
-notes: Look for: Crispness, extremely thin pastry, butter aroma and syrup balance. Avoid: Do not overeat before the ferry.`
+what: Unprogrammed transfer and breathing room before the ferry.
+notes: Stroll down Galata hill or cross Galata Bridge to Eminönü at an easy pace.`
   },
   {
     id: 'ist26-0925-7',
-    summary: '[IST26] ~90-minute Şehir Hatları Bosphorus ride',
-    location: 'Karaköy Ferry Terminal to Bosphorus Strait',
-    start: { dateTime: '2026-09-25T13:20:00+03:00' },
-    end: { dateTime: '2026-09-25T14:50:00+03:00' },
+    summary: '[IST26] Şehir Hatları Bosphorus Ride',
+    location: 'Eminönü Ferry Pier, 34111 Fatih/İstanbul',
+    start: { dateTime: '2026-09-25T13:00:00+03:00' },
+    end: { dateTime: '2026-09-25T14:30:00+03:00' },
     description: `type: transport
 fixed: false
-what: Regular public ferry rather than a tourist cruise.
-why: Probably the best geographic lesson of the entire trip.
-web: https://sehirhatlari.istanbul/
-
-notes: Sit outside, move between sides of the deck and drink tea. Look for: Waterfront palaces, mosques, yalıs, bridges, Ortaköy, Arnavutköy/Bebek and the relationship between Europe and Asia.`
+what: Approximately 90 minutes on regular public City Lines ferries, not a tourist cruise.
+why: Probably the best geographic lesson of the trip.
+do: Board from Eminönü. Sit outside if weather permits. Drink tea onboard. Exact September 2026 sailing still TBD.
+web: https://sehirhatlari.istanbul/`
   },
   {
     id: 'ist26-0925-8',
-    summary: '[IST26] Nişantaşı → Bomonti',
-    location: 'Nişantaşı to Bomonti, Şişli',
-    start: { dateTime: '2026-09-25T15:00:00+03:00' },
-    end: { dateTime: '2026-09-25T17:30:00+03:00' },
-    description: `type: walk
+    summary: '[IST26] Ortaköy',
+    location: 'Ortaköy Meydanı, Beşiktaş/İstanbul',
+    start: { dateTime: '2026-09-25T14:40:00+03:00' },
+    end: { dateTime: '2026-09-25T15:20:00+03:00' },
+    description: `type: visit
 fixed: false
-what: Modern Istanbul section.
-why: After several days of Byzantium and Ottoman history, this shows contemporary residential, fashion, café and creative life.
-
-notes: Walk rather than chase landmarks. Look for: Apartment architecture, boutiques, street life and the transition toward Bomonti’s industrial heritage.`
+what: Büyük Mecidiye Mosque, waterfront square and Bosphorus Bridge composition.
+why: One of Istanbul’s defining Bosphorus urban scenes.
+do: Experience the waterfront square, mosque interior and bridge view.`
   },
   {
     id: 'ist26-0925-9',
-    summary: '[IST26] Bomonti / free time',
-    location: 'Bomonti, Şişli, Istanbul',
-    start: { dateTime: '2026-09-25T17:30:00+03:00' },
-    end: { dateTime: '2026-09-25T18:45:00+03:00' },
+    summary: '[IST26] Bebek or Nişantaşı — Choose One',
+    location: 'Bebek or Nişantaşı, Istanbul',
+    start: { dateTime: '2026-09-25T15:30:00+03:00' },
+    end: { dateTime: '2026-09-25T17:30:00+03:00' },
     description: `type: optional
 fixed: false
-what: Breathing room before the concert night.
-why: Prevents the second half of the day from feeling rushed.
+what: Two-hour flexible neighborhood block.
+why: Bebek for waterfront Bosphorus life; Nişantaşı for contemporary upscale urban Istanbul.
 
-notes: Walk, sit, have coffee or rest. Avoid: Do not add another major attraction.`
+facts:
+- Option A (Bebek): Waterfront promenade, bay, cafés, boats and affluent Bosphorus residential life.
+- Option B (Nişantaşı): Upscale residential streets, fashion, cafés and contemporary Istanbul.
+
+notes: Choose only one on the day. Do not squeeze both in.`
   },
   {
     id: 'ist26-0925-10',
-    summary: '[IST26] Dönerci Aydın 1979',
-    location: 'Cumhuriyet, Silahşör Cd. No:63, 34380 Şişli',
-    start: { dateTime: '2026-09-25T19:00:00+03:00' },
-    end: { dateTime: '2026-09-25T20:00:00+03:00' },
-    description: `type: food
+    summary: '[IST26] Transfer / Buffer to Bomonti',
+    location: 'Bebek / Nişantaşı to Bomonti, Şişli',
+    start: { dateTime: '2026-09-25T17:30:00+03:00' },
+    end: { dateTime: '2026-09-25T18:15:00+03:00' },
+    description: `type: transport
 fixed: false
-what: Dedicated yaprak döner meal using visible slices of whole meat rather than a heavily minced mixture.
-why: Gives the trip its proper döner experience and contrasts nicely with the horizontal cağ kebabı from night one.
-
-food: Visually check the spit and order simply.
-notes: Avoid: Heavy sauces and oversized sides. Tip: Keep portions moderate because the concert and kokoreç follow.`
+what: Repositioning toward the concert neighborhood.
+notes: Taxi preferred if traffic is reasonable.`
   },
   {
     id: 'ist26-0925-11',
+    summary: '[IST26] Dinner — Kolcuoğlu or Restohan',
+    location: 'Bomonti, Şişli/İstanbul',
+    start: { dateTime: '2026-09-25T18:15:00+03:00' },
+    end: { dateTime: '2026-09-25T19:30:00+03:00' },
+    description: `type: food
+fixed: false
+what: Pre-concert kebab / ocakbaşı dinner.
+why: Adds a proper kebab/ocakbaşı experience instead of repeating döner.
+
+facts:
+- Option A: Kolcuoğlu Bomonti Ocakbaşı Kebap (More classic ocakbaşı/kebab experience).
+- Option B: Restohan Kebap Bomonti (Larger, more restaurant-style alternative).
+
+food: Choose on the day based on appetite, reservation and vibe.`
+  },
+  {
+    id: 'ist26-0925-12',
+    summary: '[IST26] Short Free Time / Transition',
+    location: 'Bomonti, Şişli/İstanbul',
+    start: { dateTime: '2026-09-25T19:30:00+03:00' },
+    end: { dateTime: '2026-09-25T20:00:00+03:00' },
+    description: `type: rest
+fixed: false
+what: Short downtime and stroll into Bomontiada.`
+  },
+  {
+    id: 'ist26-0925-13',
     summary: '[IST26] Bomontiada',
-    location: 'Merkez, Silahşör Cad. Birahane Sok. No:1, 34384 Şişli',
+    location: 'Merkez, Silahşör Caddesi, Birahane Sk. No:1, 34384 Şişli/İstanbul',
     start: { dateTime: '2026-09-25T20:00:00+03:00' },
     end: { dateTime: '2026-09-25T21:00:00+03:00' },
     description: `type: drink
 fixed: false
-what: Former industrial brewery complex reused as a cultural and social destination.
-why: A clear example of contemporary Istanbul repurposing industrial heritage.
-
-notes: Have one drink and rest. Tip: Stay close to Babylon. Avoid: Do not eat another meal.`
+what: Former brewery complex reused as a contemporary cultural destination.
+why: Provides a modern Istanbul counterpoint to the historic-heavy itinerary.
+do: One drink. Rest feet. Stay close to Babylon.`
   },
   {
-    id: 'ist26-0925-12',
+    id: 'ist26-0925-14',
+    summary: '[IST26] Babylon Entry / Buffer',
+    location: 'Babylon Bomontiada, Tarihi Bomonti Bira Fabrikası, Şişli/İstanbul',
+    start: { dateTime: '2026-09-25T21:00:00+03:00' },
+    end: { dateTime: '2026-09-25T21:30:00+03:00' },
+    description: `type: rest
+fixed: true
+what: Buffer to ensure smooth entry and settling in before concert start.
+notes: Doors check, ticketing and securing a comfortable vantage point.`
+  },
+  {
+    id: 'ist26-0925-15',
     summary: '[IST26] Gevende @ Babylon',
-    location: 'Babylon Bomontiada, Merkez Mah. Silahşör Cad. No:1, Şişli',
+    location: 'Babylon Bomontiada, Tarihi Bomonti Bira Fabrikası, Şişli/İstanbul',
     start: { dateTime: '2026-09-25T21:30:00+03:00' },
     end: { dateTime: '2026-09-25T23:30:00+03:00' },
     description: `type: concert
 fixed: true
-what: The trip’s contemporary live-music anchor.
-why: Ensures the visitor experiences Istanbul as a city still producing culture rather than merely preserving its past.
-web: https://www.babylon.com.tr/
-
-notes: Arrive 20–30 minutes early. Important: Treat this as fixed; daytime delays should not jeopardize it. Recheck: Doors/show time shortly before the date.`
+what: Contemporary live-music anchor for the trip.
+why: Shows Istanbul as a city producing contemporary culture, not only preserving historic culture.
+do: Reconfirm doors/show time during the final week.
+ticket: Booked
+web: https://www.babylon.com.tr/`
   },
   {
-    id: 'ist26-0925-13',
-    summary: '[IST26] Kokoreç',
-    location: 'Bomonti / Şişli, Istanbul',
+    id: 'ist26-0925-16',
+    summary: '[IST26] Late-night Kokoreç',
+    location: 'Bomonti / Kurtuluş, Şişli/İstanbul',
     start: { dateTime: '2026-09-25T23:45:00+03:00' },
     end: { dateTime: '2026-09-26T00:30:00+03:00' },
-    description: `type: optional
+    description: `type: food
 fixed: false
-what: Seasoned lamb intestine/offal roasted on a horizontal spit, chopped and served in bread.
-why: Quintessential Turkish late-night food and exactly the right context after a concert.
-
-food: Choose a busy specialist with high turnover. Order: Start with a half bread.
-notes: Important: İşkembe will be handled separately. Status: Venue still TBD.`
+what: Classic Turkish late-night food after the concert.
+why: Ideal context for kokoreç and a distinct street-food experience.
+food: Choose a busy specialist with high turnover. Start with half bread. İşkembe can be handled separately.`
   },
 
   // =========================================================================
-  // 🟪 26 SEPTEMBER 2026 (Saturday) — EASY FINAL DAY + DEPARTURE
+  // 🟪 26 SEPTEMBER 2026 (Saturday) — SLOW FINAL MORNING + AIRPORT
   // =========================================================================
   {
     id: 'ist26-0926-1',
-    summary: '[IST26] Simit / börek / tea',
-    location: 'Sirkeci, Fatih, Istanbul',
+    summary: '[IST26] Light Breakfast',
+    location: 'Sirkeci, Fatih/İstanbul',
     start: { dateTime: '2026-09-26T09:30:00+03:00' },
     end: { dateTime: '2026-09-26T10:00:00+03:00' },
     description: `type: food
 fixed: false
-what: Light breakfast only.
-why: Keeps the morning relaxed and leaves appetite for the farewell lunch at Hamdi.
-do: Grab a fresh simit or warm börek with a glass of tea.`
+what: Simit, börek or tea only.
+why: Keeps the final morning easy and flexible.
+food: Keep very light.`
   },
   {
     id: 'ist26-0926-2',
-    summary: '[IST26] Flexible final walk',
-    location: 'Sirkeci & Eminönü, Istanbul',
+    summary: '[IST26] Flexible Final Walk',
+    location: 'Sirkeci / Eminönü, Fatih/İstanbul',
     start: { dateTime: '2026-09-26T10:00:00+03:00' },
     end: { dateTime: '2026-09-26T11:30:00+03:00' },
     description: `type: walk
 fixed: false
-what: Revisit a favorite area, small shopping stop, coffee, or anything missed.
-why: By this point you know what you personally enjoyed most.
-do: Stay relatively close to Sirkeci/Eminönü. Revisit a favorite spot, take final photos, or pick up Turkish delight/gifts.`
+what: Deliberately unprogrammed final city window.
+why: Allows a revisit, a small gift, photos, or simply sitting somewhere pleasant.
+do: Stay reasonably close to Sirkeci/Eminönü. No major new attraction.`
   },
   {
     id: 'ist26-0926-3',
-    summary: '[IST26] Return toward Eminönü',
-    location: 'Eminönü, Fatih, Istanbul',
+    summary: '[IST26] Move Toward Eminönü',
+    location: 'Sirkeci to Eminönü, Fatih/İstanbul',
     start: { dateTime: '2026-09-26T11:30:00+03:00' },
     end: { dateTime: '2026-09-26T12:00:00+03:00' },
-    description: `type: walk
+    description: `type: transport
 fixed: false
-what: Easy transition to lunch.
-why: Buffer to stroll back through the Spice Bazaar perimeter or Sirkeci alleys to Hamdi.
-notes: Stroll toward Eminönü Square to arrive relaxed for the 12:00 lunch booking.`
+what: Easy stroll toward the waterfront for lunch.`
   },
   {
     id: 'ist26-0926-4',
-    summary: '[IST26] Hamdi Restaurant',
-    location: 'Rüstem Paşa Mah. Kalçın Sk. No:11, Eminönü, Fatih, Istanbul',
+    summary: '[IST26] Open Lunch / Final Meal',
+    location: 'Eminönü / Sirkeci, Istanbul',
     start: { dateTime: '2026-09-26T12:00:00+03:00' },
     end: { dateTime: '2026-09-26T13:30:00+03:00' },
     description: `type: food
-fixed: true
-what: Farewell meal. Southeastern Turkish kebabs and meze with one of the best views over Eminönü, Golden Horn and Galata.
-why: By now your friend will recognize much of the skyline, so the location becomes more meaningful than it would on day one.
-do: Request an upper-floor/window table and order signature kebabs (fıstıklı, haşhaş, or ali nazik) and a selection of cold meze.
-
-[Web](https://www.hamdi.com.tr/)
-[Instagram](https://www.google.com/search?q=site%3Ainstagram.com+Hamdi+Restaurant+Eminonu)
-[Facebook](https://www.facebook.com/search/top?q=Hamdi%20Restaurant%20Eminonu)
-[X](https://x.com/search?q=Hamdi%20Restaurant%20Istanbul)
-[Images](https://www.google.com/search?tbm=isch&q=Hamdi+Restaurant+Eminonu)`
+fixed: false
+what: Final meal slot kept open because Hamdi moved to September 23.
+why: Allows flexibility based on appetite and anything still missing from the food plan.
+food: Prefer quality and proximity over crossing the city.`
   },
   {
     id: 'ist26-0926-5',
-    summary: '[IST26] Eminönü / coffee / short walk',
-    location: 'Eminönü Waterfront, Istanbul',
+    summary: '[IST26] Coffee / Short Eminönü Walk',
+    location: 'Eminönü Square, Fatih/İstanbul',
     start: { dateTime: '2026-09-26T13:30:00+03:00' },
     end: { dateTime: '2026-09-26T14:15:00+03:00' },
     description: `type: rest
 fixed: false
-what: Final relaxed city time.
-why: Low-pressure decompression after lunch rather than rushing.
-do: Have Turkish coffee or tea by the waterfront and enjoy the final panoramic views.`
+what: Final decompression in the city.
+notes: Turkish coffee or tea by the waterfront.`
   },
   {
     id: 'ist26-0926-6',
-    summary: '[IST26] Hotel / luggage',
-    location: 'Sirkeci Hotel, Istanbul',
+    summary: '[IST26] Hotel / Luggage',
+    location: 'Sirkeci Hotel, Fatih/İstanbul',
     start: { dateTime: '2026-09-26T14:15:00+03:00' },
-    end: { dateTime: '2026-09-26T15:15:00+03:00' },
+    end: { dateTime: '2026-09-26T15:00:00+03:00' },
     description: `type: rest
 fixed: true
-what: Pack and collect bags.
-why: Eliminates last-minute airport stress.
-notes: Pack, collect luggage, check travel documents, charge devices and settle hotel checkout.`
+what: Collect bags, check documents, charge devices and settle hotel matters.
+notes: Zero sightseeing pressure.`
   },
   {
     id: 'ist26-0926-7',
-    summary: '[IST26] Leave Sirkeci',
+    summary: '[IST26] Leave Sirkeci for IST',
     location: 'Sirkeci to Istanbul Airport (IST)',
     start: { dateTime: '2026-09-26T15:15:00+03:00' },
     end: { dateTime: '2026-09-26T17:00:00+03:00' },
     description: `type: transport
 fixed: true
-what: Head to IST.
-why: Transfer from Sirkeci to Istanbul Airport (IST), leaving comfortable margin for Istanbul traffic.
-notes: Depart Sirkeci between 15:15–15:30 via private transfer, taxi, or Havaist.`
-  },
-  {
-    id: 'ist26-0926-8',
-    summary: '[IST26] Arrive IST',
-    location: 'Istanbul Airport (IST), Tayakadın, 34283 Arnavutköy/İstanbul',
-    start: { dateTime: '2026-09-26T17:00:00+03:00' },
-    end: { dateTime: '2026-09-26T20:00:00+03:00' },
-    description: `type: transport
-fixed: true
-what: Comfortable international-flight buffer.
-why: Reaching IST around 17:00 gives a stress-free 3-hour window before the 20:00 departure.
-notes: Check luggage, clear passport control & security, duty-free shopping, and proceed to the gate.
+what: Depart the city for Istanbul Airport.
+why: Targets roughly 17:00 arrival at IST for the 20:00 international flight.
+notes: Target roughly 17:00 arrival at IST for a 20:00 international flight.
 web: https://www.istairport.com/en/`
   },
   {
-    id: 'ist26-0926-9',
-    summary: '[IST26] Flight',
+    id: 'ist26-0926-8',
+    summary: '[IST26] International Flight Departure',
     location: 'Istanbul Airport (IST)',
     start: { dateTime: '2026-09-26T20:00:00+03:00' },
     end: { dateTime: '2026-09-26T23:00:00+03:00' },
     description: `type: transport
 fixed: true
-what: Departure.
-why: End of trip. Flight departs at 20:00.
-notes: Board flight and depart Istanbul.`
+what: End of trip.
+why: End of trip.`
   }
 ];

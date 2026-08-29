@@ -12,6 +12,16 @@
 
     <!-- Google Identity Services (GIS) for Google OAuth 2.0 Token Client -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+      // Clear legacy service worker registrations and caches on reload
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for(var i = 0; i < registrations.length; i++) {
+            registrations[i].unregister();
+          }
+        });
+      }
+    </script>
   </head>
   <body class="bg-zinc-950 text-zinc-100 antialiased selection:bg-indigo-500 selection:text-white overscroll-none">
     <div id="root"></div>

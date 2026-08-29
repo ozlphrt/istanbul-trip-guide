@@ -139,9 +139,11 @@ export const EventCard: React.FC<EventCardProps> = ({
         <img
           src={photoUrl}
           alt=""
-          className="w-full h-full object-cover object-center opacity-30 filter grayscale contrast-125 select-none"
+          loading="lazy"
+          decoding="async"
+          className="w-full h-full object-cover object-center opacity-30 grayscale select-none"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#212635] via-[#212635]/65 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#212635] via-[#212635]/75 to-transparent pointer-events-none" />
       </div>
 
       {/* Right Main Card Content */}
